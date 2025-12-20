@@ -1,0 +1,14 @@
+{
+  "name": "@buildora/shared",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/types.ts"
+  },
+  "types": "./src/types.ts",
+  "dependencies": {
+    "buildora": "file:../..",
+    "zod": "^4.2.1"
+  }
+}
