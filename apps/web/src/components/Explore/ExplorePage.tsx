@@ -303,7 +303,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
 
       <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-24">
         <section
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 scroll-mt-24"
           id="explore-hero"
         >
           <div className="lg:col-span-7 space-y-8">
@@ -345,7 +345,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
           </div>
         </section>
 
-        <section className="space-y-8" id="explore-projects">
+        <section className="space-y-8 scroll-mt-24" id="explore-projects">
           <div className="flex items-end justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
@@ -432,7 +432,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         </section>
 
         <section
-          className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-6"
+          className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-6 scroll-mt-24"
           id="explore-pulse"
         >
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -467,7 +467,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         </section>
 
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-6" id="explore-teams">
+          <div className="space-y-6 scroll-mt-24" id="explore-teams">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
                 Teams forming
@@ -495,7 +495,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
             </div>
           </div>
 
-          <div className="space-y-6" id="explore-stacks">
+          <div className="space-y-6 scroll-mt-24" id="explore-stacks">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
                 Trending stacks
@@ -529,7 +529,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         </section>
 
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-6" id="explore-builders">
+          <div className="space-y-6 scroll-mt-24" id="explore-builders">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
                 Top builders
@@ -586,7 +586,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
             </div>
           </div>
 
-          <div className="space-y-6" id="explore-signals">
+          <div className="space-y-6 scroll-mt-24" id="explore-signals">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
                 Signals
@@ -630,7 +630,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         </section>
 
         <section
-          className="rounded-[2.5rem] border border-white/10 bg-gradient-to-r from-indigo-600/20 via-transparent to-cyan-500/20 p-10"
+          className="rounded-[2.5rem] border border-white/10 bg-gradient-to-r from-indigo-600/20 via-transparent to-cyan-500/20 p-10 scroll-mt-24"
           id="explore-showcase"
         >
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
