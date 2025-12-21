@@ -1,8 +1,8 @@
+import { User } from "@buildora/shared";
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import GlobalNav from "../UI/GlobalNav";
-import { User } from "@buildora/shared";
 
 type Project = {
   id: string;
@@ -311,7 +311,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               Buildora Explorer
             </div>
             <h1 className="text-5xl lg:text-7xl font-geist font-black text-white leading-[0.95] tracking-tight">
-              Discover builders, projects, and teams shaping what comes next.
+              Discover builders, projects, and teams shaping the future.
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
               Explore the Buildora ecosystem. Track launches, follow standout

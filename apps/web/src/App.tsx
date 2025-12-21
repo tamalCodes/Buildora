@@ -13,6 +13,7 @@ import PrivacyPolicyPage from "./components/Legal/PrivacyPolicyPage";
 import TermsOfUsePage from "./components/Legal/TermsOfUsePage";
 import CodeOfConductPage from "./components/Legal/CodeOfConductPage";
 import BrandAssetsPage from "./components/Legal/BrandAssetsPage";
+import SettingsPage from "./components/Settings/SettingsPage";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -67,6 +68,14 @@ const App: React.FC = () => {
     return null;
   }
 
+  const exploreElement = isAuthenticated ? (
+    <ExplorePage user={user} onSignOut={handleSignOut} />
+  ) : (
+    <AuthContainer>
+      <AuthForm onLoginSuccess={handleLoginSuccess} />
+    </AuthContainer>
+  );
+
   return (
     <CustomToastProvider>
       <BrowserRouter>
@@ -74,17 +83,9 @@ const App: React.FC = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              isAuthenticated ? (
-                <ExplorePage user={user} onSignOut={handleSignOut} />
-              ) : (
-                <AuthContainer>
-                  <AuthForm onLoginSuccess={handleLoginSuccess} />
-                </AuthContainer>
-              )
-            }
+            element={exploreElement}
           />
-          <Route path="/explore" element={<Navigate to="/" replace />} />
+          <Route path="/explore" element={exploreElement} />
           <Route
             path="/hackathons"
             element={<HackathonsPage user={user} onSignOut={handleSignOut} />}
@@ -120,6 +121,14 @@ const App: React.FC = () => {
           <Route
             path="/brand-assets"
             element={<BrandAssetsPage user={user} onSignOut={handleSignOut} />}
+          />
+          <Route
+            path="/settings"
+            element={<SettingsPage user={user} onSignOut={handleSignOut} />}
+          />
+          <Route
+            path="/account"
+            element={<Navigate to="/settings" replace />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
