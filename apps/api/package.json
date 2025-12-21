@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "tsx watch -r tsconfig-paths/register src/server.ts",
+    "dev": "npm run build --prefix ../../packages/shared && tsx watch -r tsconfig-paths/register src/server.ts",
     "build": "npm run build --prefix ../../packages/shared && tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
     "start": "node dist/server.js"
   },
