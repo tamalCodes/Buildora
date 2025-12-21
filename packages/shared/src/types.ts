@@ -1,15 +1,14 @@
-
-import { z } from 'zod';
+import { z } from "zod";
 
 export enum AuthStep {
-  IDENTIFY = 'IDENTIFY',
-  AUTHENTICATE = 'AUTHENTICATE'
+  IDENTIFY = "IDENTIFY",
+  AUTHENTICATE = "AUTHENTICATE",
 }
 
 export enum UserType {
-  PERSONAL = 'PERSONAL',
-  ORGANIZATION = 'ORGANIZATION',
-  UNDETERMINED = 'UNDETERMINED'
+  PERSONAL = "PERSONAL",
+  ORGANIZATION = "ORGANIZATION",
+  UNDETERMINED = "UNDETERMINED",
 }
 
 export interface User {
@@ -29,10 +28,10 @@ export interface Hackathon {
   organizer: string;
   logoUrl: string;
   bannerUrl?: string;
-  location: 'Online' | string;
+  location: "Online" | string;
   startDate: string;
   endDate: string;
-  status: 'Open' | 'Closed' | 'Happening Now';
+  status: "Open" | "Closed" | "Happening Now";
   prizePool?: string;
   tags: string[];
 }
