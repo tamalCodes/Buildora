@@ -72,9 +72,8 @@ const App: React.FC = () => {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Navigate to="/explore" replace />} />
           <Route
-            path="/explore"
+            path="/"
             element={
               isAuthenticated ? (
                 <ExplorePage user={user} onSignOut={handleSignOut} />
@@ -85,6 +84,7 @@ const App: React.FC = () => {
               )
             }
           />
+          <Route path="/explore" element={<Navigate to="/" replace />} />
           <Route
             path="/hackathons"
             element={<HackathonsPage user={user} onSignOut={handleSignOut} />}
@@ -121,7 +121,7 @@ const App: React.FC = () => {
             path="/brand-assets"
             element={<BrandAssetsPage user={user} onSignOut={handleSignOut} />}
           />
-          <Route path="*" element={<Navigate to="/explore" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />
       </BrowserRouter>

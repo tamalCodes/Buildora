@@ -3,19 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/cjs/types.js",
+  "main": "./dist/cjs/types.cjs",
   "module": "./dist/esm/types.js",
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
       "import": "./dist/esm/types.js",
-      "require": "./dist/cjs/types.js"
+      "require": "./dist/cjs/types.cjs"
     }
   },
   "types": "./dist/types.d.ts",
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
-    "build": "npm run clean && tsc -p tsconfig.types.json && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json"
+    "build": "npm run clean && tsc -p tsconfig.types.json && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node -e \"const fs=require('fs'); const from='dist/cjs/types.js'; const to='dist/cjs/types.cjs'; if (fs.existsSync(from)) { fs.renameSync(from, to); }\""
   },
   "dependencies": {
     "buildora": "file:../..",
