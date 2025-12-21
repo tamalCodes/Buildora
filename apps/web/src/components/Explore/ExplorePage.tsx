@@ -1,4 +1,5 @@
-﻿import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import Footer from "../UI/Footer";
 import GlobalNav from "../UI/GlobalNav";
@@ -18,6 +19,43 @@ type Builder = {
   role: string;
   badge: string;
   avatarUrl: string;
+};
+
+type Team = {
+  id: string;
+  name: string;
+  focus: string;
+  members: number;
+  location: string;
+};
+
+type Signal = {
+  id: string;
+  title: string;
+  meta: string;
+};
+
+type ExploreSectionId =
+  | "explore-hero"
+  | "explore-projects"
+  | "explore-teams"
+  | "explore-stacks"
+  | "explore-pulse"
+  | "explore-builders"
+  | "explore-signals"
+  | "explore-showcase";
+
+type ExploreCtaAction =
+  | { type: "scroll"; targetId: ExploreSectionId }
+  | { type: "navigate"; to: string }
+  | { type: "viewProject"; projectId: Project["id"] }
+  | { type: "followBuilder"; builderId: Builder["id"] }
+  | { type: "viewSignal"; signalId: Signal["id"] }
+  | { type: "showcase"; intent: "create" | "highlights" };
+
+type ExploreCta = {
+  label: string;
+  action: ExploreCtaAction;
 };
 
 const FEATURED_PROJECTS: Project[] = [
@@ -74,6 +112,30 @@ const TOP_BUILDERS: Builder[] = [
   },
 ];
 
+const TEAM_SPOTLIGHTS: Team[] = [
+  {
+    id: "t1",
+    name: "Helios Labs",
+    focus: "Spatial analytics for climate response.",
+    members: 7,
+    location: "Nairobi + Remote",
+  },
+  {
+    id: "t2",
+    name: "Kintsugi Systems",
+    focus: "On-chain treasury tools for DAOs.",
+    members: 4,
+    location: "Berlin",
+  },
+  {
+    id: "t3",
+    name: "Threadline",
+    focus: "Story-driven onboarding for AI apps.",
+    members: 6,
+    location: "Austin + Remote",
+  },
+];
+
 const TRENDING_STACKS = [
   "Agents",
   "Rust",
@@ -84,7 +146,146 @@ const TRENDING_STACKS = [
   "Edge",
 ];
 
+const SIGNALS: Signal[] = [
+  {
+    id: "s1",
+    title: "Signal Forge hit 10k teams",
+    meta: "Milestone - 3 hours ago",
+  },
+  {
+    id: "s2",
+    title: "Lume Atlas opens beta waitlist",
+    meta: "Launch - Today",
+  },
+  {
+    id: "s3",
+    title: "Mintstream announces creator grants",
+    meta: "Announcement - Today",
+  },
+];
+
+const EXPLORE_BY: ExploreCta[] = [
+  {
+    label: "Projects",
+    action: { type: "scroll", targetId: "explore-projects" },
+  },
+  {
+    label: "Builders",
+    action: { type: "scroll", targetId: "explore-builders" },
+  },
+  {
+    label: "Teams",
+    action: { type: "scroll", targetId: "explore-teams" },
+  },
+  {
+    label: "Stacks",
+    action: { type: "scroll", targetId: "explore-stacks" },
+  },
+];
+
 const ExplorePage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeProjectId, setActiveProjectId] = useState<Project["id"] | null>(
+    null
+  );
+  const [followedBuilderIds, setFollowedBuilderIds] = useState<
+    Set<Builder["id"]>
+  >(new Set());
+  const [viewedSignalId, setViewedSignalId] = useState<Signal["id"] | null>(
+    null
+  );
+  const [showcaseIntent, setShowcaseIntent] = useState<
+    ExploreCtaAction["intent"] | null
+  >(null);
+
+  const scrollToSection = useCallback((targetId: ExploreSectionId) => {
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  const handleCta = useCallback(
+    (action: ExploreCtaAction) => {
+      switch (action.type) {
+        case "scroll": {
+          const hash = `#${action.targetId}`;
+          if (location.hash === hash) {
+            scrollToSection(action.targetId);
+            return;
+          }
+          navigate(`/explore${hash}`);
+          return;
+        }
+        case "navigate":
+          navigate(action.to);
+          return;
+        case "viewProject": {
+          setActiveProjectId(action.projectId);
+          const hash = "#explore-projects";
+          if (location.hash === hash) {
+            scrollToSection("explore-projects");
+            return;
+          }
+          navigate(`/explore${hash}`);
+          return;
+        }
+        case "followBuilder":
+          setFollowedBuilderIds((prev) => {
+            const next = new Set(prev);
+            if (next.has(action.builderId)) {
+              next.delete(action.builderId);
+            } else {
+              next.add(action.builderId);
+            }
+            return next;
+          });
+          return;
+        case "viewSignal": {
+          setViewedSignalId(action.signalId);
+          const hash = "#explore-signals";
+          if (location.hash === hash) {
+            scrollToSection("explore-signals");
+            return;
+          }
+          navigate(`/explore${hash}`);
+          return;
+        }
+        case "showcase": {
+          setShowcaseIntent(action.intent);
+          const targetId =
+            action.intent === "highlights"
+              ? "explore-projects"
+              : "explore-showcase";
+          const hash = `#${targetId}`;
+          if (location.hash === hash) {
+            scrollToSection(targetId);
+            return;
+          }
+          navigate(`/explore${hash}`);
+          return;
+        }
+        default:
+          return;
+      }
+    },
+    [location.hash, navigate, scrollToSection]
+  );
+
+  useEffect(() => {
+    if (!location.hash) {
+      return;
+    }
+    const targetId = location.hash.replace("#", "") as ExploreSectionId;
+    scrollToSection(targetId);
+  }, [location.hash, scrollToSection]);
+
+  const activeProject = FEATURED_PROJECTS.find(
+    (project) => project.id === activeProjectId
+  );
+  const activeSignal = SIGNALS.find((signal) => signal.id === viewedSignalId);
+
   return (
     <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
       <GlobalNav />
@@ -96,7 +297,10 @@ const ExplorePage: React.FC = () => {
       </div>
 
       <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-24">
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <section
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+          id="explore-hero"
+        >
           <div className="lg:col-span-7 space-y-8">
             <div className="inline-flex items-center gap-3 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-indigo-300">
               Buildora Explorer
@@ -109,17 +313,26 @@ const ExplorePage: React.FC = () => {
               teams, and find collaborators across every stack.
             </p>
             <div className="space-y-5">
-              <Button className="!px-8 !py-4 !rounded-2xl">
+              <Button
+                className="!px-8 !py-4 !rounded-2xl"
+                onClick={() =>
+                  handleCta({
+                    type: "scroll",
+                    targetId: "explore-projects",
+                  })
+                }
+              >
                 Start exploring
               </Button>
               <div className="flex flex-wrap items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">
                 <span>Explore by</span>
-                {["Projects", "Builders", "Teams", "Stacks"].map((item) => (
+                {EXPLORE_BY.map((item) => (
                   <button
-                    key={item}
+                    key={item.label}
                     className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-indigo-500/40 hover:text-white transition"
+                    onClick={() => handleCta(item.action)}
                   >
-                    {item}
+                    {item.label}
                   </button>
                 ))}
               </div>
@@ -127,7 +340,7 @@ const ExplorePage: React.FC = () => {
           </div>
         </section>
 
-        <section className="space-y-8">
+        <section className="space-y-8" id="explore-projects">
           <div className="flex items-end justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
@@ -136,10 +349,21 @@ const ExplorePage: React.FC = () => {
               <h2 className="text-3xl font-geist font-black text-white mt-3">
                 Curated projects from the Buildora ecosystem
               </h2>
+              {activeProject ? (
+                <p className="text-xs text-slate-400 mt-3">
+                  Viewing {activeProject.title} right now.
+                </p>
+              ) : null}
             </div>
             <Button
               variant="outline"
               className="!px-5 !py-2.5 !text-xs !rounded-xl"
+              onClick={() =>
+                handleCta({
+                  type: "scroll",
+                  targetId: "explore-projects",
+                })
+              }
             >
               View all projects
             </Button>
@@ -184,8 +408,16 @@ const ExplorePage: React.FC = () => {
                     <Button
                       variant="secondary"
                       className="!px-4 !py-2 !text-xs !rounded-xl"
+                      onClick={() =>
+                        handleCta({
+                          type: "viewProject",
+                          projectId: project.id,
+                        })
+                      }
                     >
-                      View project
+                      {activeProjectId === project.id
+                        ? "Viewing"
+                        : "View project"}
                     </Button>
                   </div>
                 </div>
@@ -194,7 +426,10 @@ const ExplorePage: React.FC = () => {
           </div>
         </section>
 
-        <section className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-6">
+        <section
+          className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-6"
+          id="explore-pulse"
+        >
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
@@ -227,7 +462,69 @@ const ExplorePage: React.FC = () => {
         </section>
 
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-6">
+          <div className="space-y-6" id="explore-teams">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+                Teams forming
+              </p>
+              <h3 className="text-2xl font-geist font-black text-white mt-3">
+                Collaborations starting this week
+              </h3>
+            </div>
+            <div className="space-y-4">
+              {TEAM_SPOTLIGHTS.map((team) => (
+                <div
+                  key={team.id}
+                  className="glass-card rounded-[1.75rem] border border-white/10 p-6 space-y-4"
+                >
+                  <div>
+                    <p className="text-sm font-bold text-white">{team.name}</p>
+                    <p className="text-xs text-slate-500 mt-1">{team.focus}</p>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                    <span>{team.members} members</span>
+                    <span>{team.location}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-6" id="explore-stacks">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+                Trending stacks
+              </p>
+              <h3 className="text-2xl font-geist font-black text-white mt-3">
+                Where builders are investing next
+              </h3>
+            </div>
+            <div className="glass-card rounded-[2rem] border border-white/10 p-8">
+              <div className="flex flex-wrap gap-3">
+                {TRENDING_STACKS.map((stack) => (
+                  <button
+                    key={stack}
+                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-indigo-500/40 hover:text-white transition"
+                    onClick={() =>
+                      handleCta({
+                        type: "scroll",
+                        targetId: "explore-projects",
+                      })
+                    }
+                  >
+                    {stack}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-slate-500 mt-6">
+                Tap a stack to jump back into the latest launches.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="space-y-6" id="explore-builders">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
                 Top builders
@@ -260,10 +557,23 @@ const ExplorePage: React.FC = () => {
                       {builder.badge}
                     </span>
                     <Button
-                      variant="outline"
+                      variant={
+                        followedBuilderIds.has(builder.id)
+                          ? "secondary"
+                          : "outline"
+                      }
                       className="!px-4 !py-2 !text-xs !rounded-xl"
+                      aria-pressed={followedBuilderIds.has(builder.id)}
+                      onClick={() =>
+                        handleCta({
+                          type: "followBuilder",
+                          builderId: builder.id,
+                        })
+                      }
                     >
-                      Follow
+                      {followedBuilderIds.has(builder.id)
+                        ? "Following"
+                        : "Follow"}
                     </Button>
                   </div>
                 </div>
@@ -271,7 +581,7 @@ const ExplorePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6" id="explore-signals">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
                 Signals
@@ -279,24 +589,16 @@ const ExplorePage: React.FC = () => {
               <h3 className="text-2xl font-geist font-black text-white mt-3">
                 Launches and milestones today
               </h3>
+              {activeSignal ? (
+                <p className="text-xs text-slate-400 mt-3">
+                  Last viewed: {activeSignal.title}.
+                </p>
+              ) : null}
             </div>
             <div className="glass-card rounded-[2.5rem] border border-white/10 p-8 space-y-6">
-              {[
-                {
-                  title: "Signal Forge hit 10k teams",
-                  meta: "Milestone · 3 hours ago",
-                },
-                {
-                  title: "Lume Atlas opens beta waitlist",
-                  meta: "Launch · Today",
-                },
-                {
-                  title: "Mintstream announces creator grants",
-                  meta: "Announcement · Today",
-                },
-              ].map((item) => (
+              {SIGNALS.map((item) => (
                 <div
-                  key={item.title}
+                  key={item.id}
                   className="flex items-center justify-between"
                 >
                   <div>
@@ -306,8 +608,15 @@ const ExplorePage: React.FC = () => {
                   <Button
                     variant="secondary"
                     className="!px-4 !py-2 !text-xs !rounded-xl"
+                    aria-pressed={viewedSignalId === item.id}
+                    onClick={() =>
+                      handleCta({
+                        type: "viewSignal",
+                        signalId: item.id,
+                      })
+                    }
                   >
-                    View
+                    {viewedSignalId === item.id ? "Viewed" : "View"}
                   </Button>
                 </div>
               ))}
@@ -315,7 +624,10 @@ const ExplorePage: React.FC = () => {
           </div>
         </section>
 
-        <section className="rounded-[2.5rem] border border-white/10 bg-gradient-to-r from-indigo-600/20 via-transparent to-cyan-500/20 p-10">
+        <section
+          className="rounded-[2.5rem] border border-white/10 bg-gradient-to-r from-indigo-600/20 via-transparent to-cyan-500/20 p-10"
+          id="explore-showcase"
+        >
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-200">
@@ -328,12 +640,35 @@ const ExplorePage: React.FC = () => {
                 Share your project, highlight your team, and attract
                 collaborators in minutes.
               </p>
+              {showcaseIntent ? (
+                <p className="text-xs text-slate-300 mt-4">
+                  Ready to {showcaseIntent === "create" ? "create" : "explore"}?
+                  We will open the next step here.
+                </p>
+              ) : null}
             </div>
             <div className="flex items-center gap-3">
-              <Button className="!px-6 !py-3 !rounded-xl">
+              <Button
+                className="!px-6 !py-3 !rounded-xl"
+                onClick={() =>
+                  handleCta({
+                    type: "showcase",
+                    intent: "create",
+                  })
+                }
+              >
                 Create a showcase
               </Button>
-              <Button variant="outline" className="!px-6 !py-3 !rounded-xl">
+              <Button
+                variant="outline"
+                className="!px-6 !py-3 !rounded-xl"
+                onClick={() =>
+                  handleCta({
+                    type: "showcase",
+                    intent: "highlights",
+                  })
+                }
+              >
                 Explore highlights
               </Button>
             </div>

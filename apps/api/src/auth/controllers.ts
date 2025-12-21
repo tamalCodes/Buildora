@@ -1,27 +1,27 @@
-import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import {
   AuthenticateRequestSchema,
   ForgotPasswordRequestSchema,
   IdentifyRequestSchema,
   ResetPasswordRequestSchema,
   UserType,
-} from '@buildora/shared';
-import { supabase } from '../lib/supabase';
+} from "@buildora/shared";
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import { supabase } from "../lib/supabase";
 
-const JWT_SECRET = process.env.SUPABASE_JWT_SECRET || '';
-const RESET_REDIRECT_URL = process.env.SUPABASE_RESET_REDIRECT_URL || '';
+const JWT_SECRET = process.env.SUPABASE_JWT_SECRET || "";
+const RESET_REDIRECT_URL = process.env.SUPABASE_RESET_REDIRECT_URL || "";
 
 const PUBLIC_DOMAINS = new Set([
-  'gmail.com',
-  'outlook.com',
-  'yahoo.com',
-  'proton.me',
-  'hotmail.com',
-  'icloud.com',
-  'aol.com',
-  'protonmail.com',
-  'me.com',
+  "gmail.com",
+  "outlook.com",
+  "yahoo.com",
+  "proton.me",
+  "hotmail.com",
+  "icloud.com",
+  "aol.com",
+  "protonmail.com",
+  "me.com",
 ]);
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -42,21 +42,21 @@ export const identifyUser = async (req: Request, res: Response) => {
     const normalizedEmail = normalizeEmail(email);
 
     const { data: profile, error } = await supabase
-      .from('profiles')
-      .select('user_type, organization_name')
-      .eq('email', normalizedEmail)
+      .from("profiles")
+      .select("user_type, organization_name")
+      .eq("email", normalizedEmail)
       .single();
 
-    if (error && error.code !== 'PGRST116') {
+    if (error && error.code !== "PGRST116") {
       throw error;
     }
 
-    const domain = normalizedEmail.split('@')[1] || '';
+    const domain = normalizedEmail.split("@")[1] || "";
     const detectedType = profile
       ? profile.user_type
       : PUBLIC_DOMAINS.has(domain)
-        ? UserType.PERSONAL
-        : UserType.ORGANIZATION;
+      ? UserType.PERSONAL
+      : UserType.ORGANIZATION;
 
     return res.json({
       success: true,
@@ -69,7 +69,7 @@ export const identifyUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     return res.status(400).json({
       success: false,
-      error: error.message || 'Identity check failed.',
+      error: error.message || "Identity check failed.",
     });
   }
 };
@@ -87,7 +87,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
       });
 
     if (signInError) {
-      if (signInError.message.includes('Invalid login credentials')) {
+      if (signInError.message.includes("Invalid login credentials")) {
         const { data: signUpData, error: signUpError } =
           await supabase.auth.admin.createUser({
             email: normalizedEmail,
@@ -96,9 +96,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
           });
 
         if (signUpError) throw signUpError;
-        if (!signUpData.user) throw new Error('User creation failed.');
+        if (!signUpData.user) throw new Error("User creation failed.");
 
-        const { error: profileError } = await supabase.from('profiles').insert({
+        const { error: profileError } = await supabase.from("profiles").insert({
           id: signUpData.user.id,
           email: normalizedEmail,
           user_type: userType,
@@ -124,7 +124,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
               email: normalizedEmail,
               userType,
               organizationName:
-                userType === UserType.ORGANIZATION ? organizationName : undefined,
+                userType === UserType.ORGANIZATION
+                  ? organizationName
+                  : undefined,
             },
             token: newSession.session?.access_token,
           },
@@ -135,9 +137,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
     }
 
     const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', signInData.user.id)
+      .from("profiles")
+      .select("*")
+      .eq("id", signInData.user.id)
       .single();
 
     if (profileError) throw profileError;
@@ -152,7 +154,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     return res.status(400).json({
       success: false,
-      error: error.message || 'Authentication failed.',
+      error: error.message || "Authentication failed.",
     });
   }
 };
@@ -166,7 +168,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
     if (!redirectUrl) {
       return res.status(400).json({
         success: false,
-        error: 'Reset redirect URL not configured.',
+        error: "Reset redirect URL not configured.",
       });
     }
 
@@ -181,15 +183,16 @@ export const forgotPassword = async (req: Request, res: Response) => {
   } catch (error: any) {
     return res.status(400).json({
       success: false,
-      error: error.message || 'Password reset failed.',
+      error: error.message || "Password reset failed.",
     });
   }
 };
 
 export const resetPassword = async (req: Request, res: Response) => {
   try {
-    const { accessToken, newPassword } =
-      ResetPasswordRequestSchema.parse(req.body);
+    const { accessToken, newPassword } = ResetPasswordRequestSchema.parse(
+      req.body
+    );
 
     const { data: userData, error: userError } = await supabase.auth.getUser(
       accessToken
@@ -198,7 +201,7 @@ export const resetPassword = async (req: Request, res: Response) => {
     if (userError || !userData.user) {
       return res.status(401).json({
         success: false,
-        error: 'Reset token is invalid or expired.',
+        error: "Reset token is invalid or expired.",
       });
     }
 
@@ -213,39 +216,41 @@ export const resetPassword = async (req: Request, res: Response) => {
   } catch (error: any) {
     return res.status(400).json({
       success: false,
-      error: error.message || 'Password update failed.',
+      error: error.message || "Password update failed.",
     });
   }
 };
 
 export const getMe = async (req: Request, res: Response) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader?.startsWith('Bearer ')) {
-    return res.status(401).json({ success: false, error: 'Unauthorized' });
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ success: false, error: "Unauthorized" });
   }
 
   if (!JWT_SECRET) {
     return res
       .status(500)
-      .json({ success: false, error: 'JWT secret is not configured.' });
+      .json({ success: false, error: "JWT secret is not configured." });
   }
 
   try {
-    const token = authHeader.split(' ')[1];
+    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, JWT_SECRET) as any;
 
     const { data: profile, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', decoded.sub)
+      .from("profiles")
+      .select("*")
+      .eq("id", decoded.sub)
       .single();
 
     if (error || !profile) {
-      return res.status(401).json({ success: false, error: 'Session invalid.' });
+      return res
+        .status(401)
+        .json({ success: false, error: "Session invalid." });
     }
 
     return res.json({ success: true, data: mapProfile(profile) });
   } catch (error) {
-    return res.status(401).json({ success: false, error: 'Session expired.' });
+    return res.status(401).json({ success: false, error: "Session expired." });
   }
 };
