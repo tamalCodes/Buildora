@@ -18,6 +18,15 @@ app.use(
 );
 app.use(express.json());
 
+app.get("/", (_req, res) => {
+  res.json({
+    name: "Buildora API",
+    status: "ok",
+    health: "/health",
+    auth: "/api/auth",
+  });
+});
+
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
