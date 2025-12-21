@@ -2,6 +2,7 @@
 import GlobalNav from '../UI/GlobalNav';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import { User } from '@buildora/shared';
 
 type Hackathon = {
   id: string;
@@ -360,10 +361,15 @@ const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
   </div>
 );
 
-const HackathonsPage: React.FC = () => {
+interface HackathonsPageProps {
+  user?: User | null;
+  onSignOut?: () => void;
+}
+
+const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
   return (
     <div className="min-h-screen bg-[#06080f] text-slate-100 pb-32 overflow-x-hidden font-inter">
-      <GlobalNav />
+      <GlobalNav user={user} onSignOut={onSignOut} />
 
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -top-40 left-0 h-[500px] w-[500px] rounded-full bg-indigo-600/10 blur-[120px]"></div>

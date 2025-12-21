@@ -1,6 +1,7 @@
-﻿import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "./Logo";
+import { User, UserType } from "@buildora/shared";
 
 type NavItem = {
   label: string;
@@ -13,8 +14,21 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Builders", path: "/builders" },
 ];
 
-const GlobalNav: React.FC = () => {
+interface GlobalNavProps {
+  user?: User | null;
+  onSignOut?: () => void;
+}
+
+const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const userLabel = user?.name || user?.email || "Guest";
+  const roleLabel =
+    user?.userType === UserType.ORGANIZATION ? "Organization" : "Builder";
+  const avatarUrl = useMemo(() => {
+    if (user?.avatarUrl) return user.avatarUrl;
+    const seed = user?.email || "guest";
+    return `https://i.pravatar.cc/150?u=${encodeURIComponent(seed)}`;
+  }, [user?.avatarUrl, user?.email]);
 
   const navLinkClasses = (isActive: boolean) =>
     `text-xs font-black uppercase tracking-[0.2em] transition-all hover:translate-y-[-1px] ${
@@ -46,21 +60,38 @@ const GlobalNav: React.FC = () => {
       </div>
 
       <div className="hidden md:flex items-center gap-6">
-        <button className="flex items-center gap-3 pl-4 border-l border-white/10 hover:opacity-80 transition-opacity">
-          <div className="text-right">
-            <p className="text-[11px] font-black text-white uppercase tracking-tighter">
-              tamalCodes
-            </p>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-              Builder
-            </p>
-          </div>
-          <img
-            src="https://i.pravatar.cc/150?u=tamal"
-            className="w-9 h-9 rounded-xl border-2 border-indigo-500/20 shadow-lg shadow-indigo-500/10"
-            alt="User"
-          />
-        </button>
+        {user ? (
+          <>
+            <button className="flex items-center gap-3 pl-4 border-l border-white/10 hover:opacity-80 transition-opacity">
+              <div className="text-right max-w-[160px]">
+                <p className="text-[11px] font-black text-white uppercase tracking-tighter truncate">
+                  {userLabel}
+                </p>
+                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  {roleLabel}
+                </p>
+              </div>
+              <img
+                src={avatarUrl}
+                className="w-9 h-9 rounded-xl border-2 border-indigo-500/20 shadow-lg shadow-indigo-500/10"
+                alt="User"
+              />
+            </button>
+            <button
+              className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
+              onClick={onSignOut}
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <Link
+            to="/explore"
+            className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
+          >
+            Sign in
+          </Link>
+        )}
       </div>
 
       <button
@@ -103,21 +134,38 @@ const GlobalNav: React.FC = () => {
               </NavLink>
             ))}
             <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
-              <button className="flex items-center gap-3 rounded-xl border border-white/10 px-4 py-2">
-                <img
-                  src="https://i.pravatar.cc/150?u=tamal"
-                  className="w-8 h-8 rounded-xl border border-indigo-500/20"
-                  alt="User"
-                />
-                <div className="text-left">
-                  <p className="text-[11px] font-black text-white uppercase tracking-tighter">
-                    tamalCodes
-                  </p>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    Builder
-                  </p>
-                </div>
-              </button>
+              {user ? (
+                <>
+                  <button className="flex items-center gap-3 rounded-xl border border-white/10 px-4 py-2">
+                    <img
+                      src={avatarUrl}
+                      className="w-8 h-8 rounded-xl border border-indigo-500/20"
+                      alt="User"
+                    />
+                    <div className="text-left max-w-[200px]">
+                      <p className="text-[11px] font-black text-white uppercase tracking-tighter truncate">
+                        {userLabel}
+                      </p>
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                        {roleLabel}
+                      </p>
+                    </div>
+                  </button>
+                  <button
+                    className="text-left text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
+                    onClick={onSignOut}
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/explore"
+                  className="text-left text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
+                >
+                  Sign in
+                </Link>
+              )}
             </div>
           </div>
         </div>

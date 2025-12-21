@@ -1,56 +1,69 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import {
+  FaDiscord,
+  FaGithub,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
 import Logo from "./Logo";
 
-const FOOTER_LINKS = [
+type FooterLink = {
+  label: string;
+  href: string;
+};
+
+const FOOTER_LINKS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Community",
     links: [
-      "Organize a hackathon",
-      "Explore hackathons",
-      "Code of Conduct",
-      "Brand assets",
-      "Documentation",
-      "Careers",
-      "Privacy policy",
+      { label: "Organize a hackathon", href: "#" },
+      { label: "Explore hackathons", href: "#" },
+      { label: "Code of Conduct", href: "/coc" },
+      { label: "Brand assets", href: "/brand-assets" },
+      { label: "Documentation", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Privacy policy", href: "/privacy" },
     ],
   },
   {
     title: "Company",
     links: [
-      "About Buildora",
-      "Leadership",
-      "Press kit",
-      "Open positions",
-      "Security",
-      "Partners",
-      "Terms of service",
+      { label: "About Buildora", href: "#" },
+      { label: "Leadership", href: "#" },
+      { label: "Press kit", href: "#" },
+      { label: "Open positions", href: "#" },
+      { label: "Security", href: "#" },
+      { label: "Partners", href: "#" },
+      { label: "Terms of service", href: "/terms" },
     ],
   },
   {
     title: "Support",
     links: [
-      "Help center",
-      "Contact support",
-      "Report a bug",
-      "Status",
-      "API access",
-      "Community forum",
-      "Trust & safety",
+      { label: "Help center", href: "#" },
+      { label: "Contact support", href: "#" },
+      { label: "Report a bug", href: "#" },
+      { label: "Status", href: "#" },
+      { label: "API access", href: "#" },
+      { label: "Community forum", href: "#" },
+      { label: "Trust & safety", href: "#" },
     ],
   },
 ];
 
 const SOCIALS = [
-  { label: "X", shortLabel: "X", href: "#" },
-  { label: "GitHub", shortLabel: "GH", href: "#" },
-  { label: "Discord", shortLabel: "DC", href: "#" },
-  { label: "YouTube", shortLabel: "YT", href: "#" },
-  { label: "LinkedIn", shortLabel: "IN", href: "#" },
+  { label: "X", href: "#", Icon: FaXTwitter },
+  { label: "GitHub", href: "#", Icon: FaGithub },
+  { label: "Discord", href: "#", Icon: FaDiscord },
+  { label: "YouTube", href: "#", Icon: FaYoutube },
+  { label: "LinkedIn", href: "#", Icon: FaLinkedinIn },
 ];
 
 const Footer: React.FC = () => {
   return (
-    <footer className="mt-24 border-t border-white/10 bg-[#05060c]">
+    <footer className="border-t border-white/10 bg-[#05060c]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5 space-y-8">
@@ -71,9 +84,9 @@ const Footer: React.FC = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="h-11 w-11 rounded-xl border border-white/10 bg-white/5 text-xs font-black uppercase tracking-[0.2em] text-slate-300 flex items-center justify-center hover:border-indigo-500/50 hover:text-white hover:bg-white/10 transition"
+                  className="h-11 w-11 rounded-xl border border-white/10 bg-white/5 text-slate-300 flex items-center justify-center hover:border-indigo-500/50 hover:text-white hover:bg-white/10 transition"
                 >
-                  {social.shortLabel}
+                  <social.Icon className="h-5 w-5" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -86,15 +99,25 @@ const Footer: React.FC = () => {
                   {group.title}
                 </p>
                 <div className="space-y-3">
-                  {group.links.map((link) => (
-                    <a
-                      key={link}
-                      href="#"
-                      className="block text-sm text-slate-500 hover:text-white transition"
-                    >
-                      {link}
-                    </a>
-                  ))}
+                  {group.links.map((link) =>
+                    link.href.startsWith("/") ? (
+                      <Link
+                        key={link.label}
+                        to={link.href}
+                        className="block text-sm text-slate-500 hover:text-white transition"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        className="block text-sm text-slate-500 hover:text-white transition"
+                      >
+                        {link.label}
+                      </a>
+                    )
+                  )}
                 </div>
               </div>
             ))}

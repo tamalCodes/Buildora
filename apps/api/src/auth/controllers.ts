@@ -6,10 +6,8 @@ import {
   UserType,
 } from "@buildora/shared";
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import { supabase } from "../lib/supabase";
 
-const JWT_SECRET = process.env.SUPABASE_JWT_SECRET || "";
 const RESET_REDIRECT_URL = process.env.SUPABASE_RESET_REDIRECT_URL || "";
 
 const PUBLIC_DOMAINS = new Set([
@@ -98,6 +96,14 @@ export const authenticateUser = async (req: Request, res: Response) => {
         if (signUpError) throw signUpError;
         if (!signUpData.user) throw new Error("User creation failed.");
 
+        const { data: newSession, error: sessionError } =
+          await supabase.auth.signInWithPassword({
+            email: normalizedEmail,
+            password,
+          });
+
+        if (sessionError) throw sessionError;
+
         const { error: profileError } = await supabase.from("profiles").insert({
           id: signUpData.user.id,
           email: normalizedEmail,
@@ -107,14 +113,6 @@ export const authenticateUser = async (req: Request, res: Response) => {
         });
 
         if (profileError) throw profileError;
-
-        const { data: newSession, error: sessionError } =
-          await supabase.auth.signInWithPassword({
-            email: normalizedEmail,
-            password,
-          });
-
-        if (sessionError) throw sessionError;
 
         return res.json({
           success: true,
@@ -140,14 +138,42 @@ export const authenticateUser = async (req: Request, res: Response) => {
       .from("profiles")
       .select("*")
       .eq("id", signInData.user.id)
-      .single();
+      .limit(1)
+      .maybeSingle();
 
     if (profileError) throw profileError;
+
+    let resolvedProfile = profile;
+    if (!resolvedProfile) {
+      const { error: insertError } = await supabase.from("profiles").insert({
+        id: signInData.user.id,
+        email: normalizedEmail,
+        user_type: userType,
+        organization_name:
+          userType === UserType.ORGANIZATION ? organizationName : null,
+      });
+
+      if (insertError) throw insertError;
+
+      const { data: createdProfile, error: createdProfileError } =
+        await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", signInData.user.id)
+          .limit(1)
+          .maybeSingle();
+
+      if (createdProfileError || !createdProfile) {
+        throw createdProfileError || new Error("Profile creation failed.");
+      }
+
+      resolvedProfile = createdProfile;
+    }
 
     return res.json({
       success: true,
       data: {
-        user: mapProfile(profile),
+        user: mapProfile(resolvedProfile),
         token: signInData.session?.access_token,
       },
     });
@@ -227,20 +253,22 @@ export const getMe = async (req: Request, res: Response) => {
     return res.status(401).json({ success: false, error: "Unauthorized" });
   }
 
-  if (!JWT_SECRET) {
-    return res
-      .status(500)
-      .json({ success: false, error: "JWT secret is not configured." });
-  }
-
   try {
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const { data: userData, error: userError } = await supabase.auth.getUser(
+      token
+    );
+
+    if (userError || !userData.user) {
+      return res
+        .status(401)
+        .json({ success: false, error: "Session invalid." });
+    }
 
     const { data: profile, error } = await supabase
       .from("profiles")
       .select("*")
-      .eq("id", decoded.sub)
+      .eq("id", userData.user.id)
       .single();
 
     if (error || !profile) {

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
-import Footer from "../UI/Footer";
 import GlobalNav from "../UI/GlobalNav";
+import { User } from "@buildora/shared";
 
 type Project = {
   id: string;
@@ -183,7 +183,12 @@ const EXPLORE_BY: ExploreCta[] = [
   },
 ];
 
-const ExplorePage: React.FC = () => {
+interface ExplorePageProps {
+  user?: User | null;
+  onSignOut?: () => void;
+}
+
+const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeProjectId, setActiveProjectId] = useState<Project["id"] | null>(
@@ -288,7 +293,7 @@ const ExplorePage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
-      <GlobalNav />
+      <GlobalNav user={user} onSignOut={onSignOut} />
 
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]"></div>
@@ -675,7 +680,6 @@ const ExplorePage: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
