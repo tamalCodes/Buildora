@@ -1,15 +1,15 @@
 import { AuthService } from "@/services/authService";
-import { detectUserType, getOrgNameFromEmail } from "@/utils/emailUtils";
+import { detectUserType, getOrgNameFromEmail } from "@/shared/utils/emailUtils";
 import {
   AuthStep,
   AuthenticateRequestSchema,
   IdentifyRequestSchema,
   UserType,
 } from "@buildora/shared";
+import Button from "@shared/components/Button";
+import { useCustomToast } from "@shared/components/CustomToast";
+import Input from "@shared/components/Input";
 import React, { useEffect, useState } from "react";
-import Button from "../../../shared/components/Button";
-import { useCustomToast } from "../../../shared/components/CustomToast";
-import Input from "../../../shared/components/Input";
 
 interface AuthFormProps {
   onLoginSuccess?: () => void;

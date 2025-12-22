@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { User } from "@buildora/shared";
-import Logo from "../../../shared/components/Logo";
+import Logo from "@shared/components/Logo";
 
 interface SettingsTopNavProps {
   user?: User | null;

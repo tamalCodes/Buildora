@@ -1,7 +1,7 @@
+import Button from "@shared/components/Button";
+import GlobalNav from "@shared/components/global-nav/GlobalNav";
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../../shared/components/Button";
-import GlobalNav from "../../shared/components/global-nav/GlobalNav";
 import {
   EXPLORE_BY,
   FEATURED_PROJECTS,
@@ -9,7 +9,7 @@ import {
   TEAM_SPOTLIGHTS,
   TOP_BUILDERS,
   TRENDING_STACKS,
-} from "./constants";
+} from "./constants/constants";
 import type {
   Builder,
   ExploreCtaAction,
@@ -17,7 +17,7 @@ import type {
   ExploreSectionId,
   Project,
   Signal,
-} from "./types";
+} from "./constants/types";
 
 const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
     null
   );
   const [showcaseIntent, setShowcaseIntent] = useState<
-    ExploreCtaAction["intent"] | null
+    Extract<ExploreCtaAction, { type: "showcase" }>["intent"] | null
   >(null);
 
   const scrollToSection = useCallback((targetId: ExploreSectionId) => {
