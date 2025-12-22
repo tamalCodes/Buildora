@@ -15,16 +15,12 @@ import type {
   ExploreCtaAction,
   ExplorePageProps,
   ExploreSectionId,
-  Project,
   Signal,
 } from "./constants/types";
 
 const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeProjectId, setActiveProjectId] = useState<Project["id"] | null>(
-    null
-  );
   const [followedBuilderIds, setFollowedBuilderIds] = useState<
     Set<Builder["id"]>
   >(new Set());
@@ -58,13 +54,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
           navigate(action.to);
           return;
         case "viewProject": {
-          setActiveProjectId(action.projectId);
-          const hash = "#explore-projects";
-          if (location.hash === hash) {
-            scrollToSection("explore-projects");
-            return;
-          }
-          navigate(`/explore${hash}`);
+          navigate(`/projects/${action.projectId}`);
           return;
         }
         case "followBuilder":
@@ -117,9 +107,6 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
     scrollToSection(targetId);
   }, [location.hash, scrollToSection]);
 
-  const activeProject = FEATURED_PROJECTS.find(
-    (project) => project.id === activeProjectId
-  );
   const activeSignal = SIGNALS.find((signal) => signal.id === viewedSignalId);
 
   return (
@@ -185,11 +172,6 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               <h2 className="text-3xl font-geist font-black text-white mt-3">
                 Curated projects from the Buildora ecosystem
               </h2>
-              {activeProject ? (
-                <p className="text-xs text-slate-400 mt-3">
-                  Viewing {activeProject.title} right now.
-                </p>
-              ) : null}
             </div>
             <Button
               variant="outline"
@@ -205,60 +187,140 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
             </Button>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {FEATURED_PROJECTS.map((project) => (
-              <div
-                key={project.id}
-                className="glass-card rounded-[2.5rem] overflow-hidden border border-white/10 group"
-              >
-                <div className="relative">
-                  <img
-                    src={project.coverUrl}
-                    alt={project.title}
-                    className="h-52 w-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#05060c] via-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-xl font-geist font-black text-white">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-slate-300 mt-1">
-                      {project.summary}
-                    </p>
+            {FEATURED_PROJECTS.map((project) => {
+              const stackLabel =
+                project.stack.length > 2
+                  ? `${project.stack.slice(0, 2).join(" / ")} +${
+                      project.stack.length - 2
+                    }`
+                  : project.stack.join(" / ");
+
+              return (
+                <div
+                  key={project.id}
+                  className="group rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_60px_-45px_rgba(15,23,42,0.9)] transition hover:-translate-y-1 hover:border-white/20 cursor-pointer"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() =>
+                    handleCta({ type: "viewProject", projectId: project.id })
+                  }
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      handleCta({
+                        type: "viewProject",
+                        projectId: project.id,
+                      });
+                    }
+                  }}
+                >
+                  <div className="flex items-start gap-5">
+                    <img
+                      src={project.coverUrl}
+                      alt={project.title}
+                      className="h-16 w-16 rounded-2xl object-cover border border-white/10"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="text-xl font-geist font-black text-white">
+                            {project.title}
+                          </h3>
+                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-200 mt-1">
+                            By {project.teamName}
+                          </p>
+                          <p
+                            className="text-sm text-slate-300 mt-2"
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden",
+                            }}
+                          >
+                            {project.summary}
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap justify-end gap-2">
+                          <div className="min-w-[70px] rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
+                            <div className="flex items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.25em] text-slate-400">
+                              <svg
+                                className="h-3 w-3"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" />
+                              </svg>
+                            </div>
+                            <p className="text-sm font-geist font-black text-white sm:text-base md:text-lg">
+                              {project.likes}
+                            </p>
+                          </div>
+                          <div className="min-w-[70px] rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
+                            <div className="flex items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.25em] text-slate-400">
+                              <svg
+                                className="h-3 w-3"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M8 21h8" />
+                                <path d="M12 17v4" />
+                                <path d="M7 4h10" />
+                                <path d="M7 4v5a5 5 0 0 0 10 0V4" />
+                                <path d="M5 6h2" />
+                                <path d="M17 6h2" />
+                              </svg>
+                            </div>
+                            <p className="text-sm font-geist font-black text-white sm:text-base md:text-lg">
+                              {project.awards}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">
+                        <span className="h-1.5 w-1.5 rounded-full bg-indigo-400"></span>
+                        <span>{stackLabel}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6 space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((stack) => (
-                      <span
-                        key={stack}
-                        className="text-[10px] font-black uppercase tracking-widest text-slate-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full"
-                      >
-                        {stack}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-500">
-                      {project.upvotes} upvotes
-                    </span>
-                    <Button
-                      variant="secondary"
-                      className="!px-4 !py-2 !text-xs !rounded-xl"
-                      onClick={() =>
+                  <div className="mt-6 flex items-center justify-between">
+                    <span></span>
+                    <button
+                      className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-indigo-200 transition hover:border-indigo-400/60 hover:text-white"
+                      onClick={(event) => {
+                        event.stopPropagation();
                         handleCta({
                           type: "viewProject",
                           projectId: project.id,
-                        })
-                      }
+                        });
+                      }}
                     >
-                      {activeProjectId === project.id
-                        ? "Viewing"
-                        : "View project"}
-                    </Button>
+                      View project
+                      <svg
+                        className="h-3 w-3"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m13 6 6 6-6 6" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

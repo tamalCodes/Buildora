@@ -4,8 +4,10 @@ export type Project = {
   id: string;
   title: string;
   summary: string;
+  teamName: string;
   stack: string[];
-  upvotes: number;
+  likes: number;
+  awards: number;
   coverUrl: string;
 };
 
