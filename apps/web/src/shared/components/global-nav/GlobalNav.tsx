@@ -2,6 +2,7 @@ import { UserType } from "@buildora/shared";
 import React, { useMemo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../Logo";
+import GlobalSearchBar from "../search/GlobalSearchBar";
 import { NAV_ITEMS } from "./constants";
 import type { GlobalNavProps } from "./types";
 
@@ -53,6 +54,9 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
       </div>
 
       <div className="hidden md:flex items-center gap-6">
+        <div className="w-[280px]">
+          <GlobalSearchBar />
+        </div>
         {user ? (
           <>
             <Link

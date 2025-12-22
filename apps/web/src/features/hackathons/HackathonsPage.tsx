@@ -1,10 +1,17 @@
 import React from "react";
 import Button from "@shared/components/Button";
 import GlobalNav from "@shared/components/global-nav/GlobalNav";
-import Input from "@shared/components/Input";
+import SearchCommandCenter from "@shared/components/search/SearchCommandCenter";
+import {
+  SEARCH_CATEGORIES,
+  SEARCH_COMMANDS,
+  SEARCH_FACETS,
+  SEARCH_GUIDANCE,
+  SEARCH_RESULTS,
+  SEARCH_SHORTCUTS,
+} from "@shared/components/search/mockData";
 import {
   FEATURED_HACKATHONS,
-  FILTERS,
   OPEN_HACKATHONS,
   PAST_HACKATHONS,
   UPCOMING_HACKATHONS,
@@ -240,50 +247,17 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
           </div>
 
           <div className="lg:col-span-5 space-y-6">
-            <div className="glass-card rounded-[2.5rem] p-8 border-white/10">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-black uppercase tracking-widest text-slate-400">
-                  Search
-                </p>
-                <span className="text-[10px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
-                  Updated 3 min ago
-                </span>
-              </div>
-              <div className="pt-6">
-                <Input
-                  placeholder="Search hackathons, organizers, or tech stacks"
-                  leftElement={
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2.5"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                  }
-                />
-              </div>
-              <div className="flex flex-wrap gap-2 pt-6">
-                {FILTERS.map((filter, index) => (
-                  <button
-                    key={filter}
-                    className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all ${
-                      index === 0
-                        ? "bg-white text-slate-950 border-white"
-                        : "bg-white/5 text-slate-400 border-white/10 hover:border-indigo-500/40 hover:text-white"
-                    }`}
-                  >
-                    {filter}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <SearchCommandCenter
+              title="Search"
+              statusLabel="Updated 3 min ago"
+              placeholder="Search hackathons, projects, and builders"
+              categories={SEARCH_CATEGORIES}
+              facets={SEARCH_FACETS}
+              commands={SEARCH_COMMANDS}
+              results={SEARCH_RESULTS}
+              shortcuts={SEARCH_SHORTCUTS}
+              guidance={SEARCH_GUIDANCE}
+            />
 
             <div className="rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-indigo-600/20 via-indigo-600/5 to-transparent p-8">
               <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">

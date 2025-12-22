@@ -9,6 +9,8 @@ import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
 import Footer from "@shared/components/Footer";
 import ScrollToTop from "@shared/components/ScrollToTop";
+import GlobalSearchModal from "@shared/components/search/GlobalSearchModal";
+import { SearchOverlayProvider } from "@shared/components/search/SearchOverlayContext";
 import PrivacyPolicyPage from "./features/legal/PrivacyPolicyPage";
 import TermsOfUsePage from "./features/legal/TermsOfUsePage";
 import CodeOfConductPage from "./features/legal/CodeOfConductPage";
@@ -79,9 +81,11 @@ const App: React.FC = () => {
 
   return (
     <CustomToastProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
+      <SearchOverlayProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <GlobalSearchModal />
+          <Routes>
           <Route
             path="/"
             element={exploreElement}
@@ -137,8 +141,9 @@ const App: React.FC = () => {
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </SearchOverlayProvider>
     </CustomToastProvider>
   );
 };
