@@ -22,6 +22,7 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
     `text-xs font-black uppercase tracking-[0.2em] transition-all hover:translate-y-[-1px] ${
       isActive ? "text-indigo-400" : "text-slate-500 hover:text-white"
     }`;
+
   const handleNavClick = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     setIsMenuOpen(false);

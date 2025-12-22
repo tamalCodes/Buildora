@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import SearchCommandCenter from "./SearchCommandCenter";
 import {
   SEARCH_CATEGORIES,
   SEARCH_COMMANDS,
@@ -8,6 +7,7 @@ import {
   SEARCH_RESULTS,
   SEARCH_SHORTCUTS,
 } from "./mockData";
+import SearchCommandCenter from "./SearchCommandCenter";
 import { useSearchOverlay } from "./SearchOverlayContext";
 
 const GlobalSearchModal: React.FC = () => {
@@ -17,8 +17,7 @@ const GlobalSearchModal: React.FC = () => {
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       const isShortcut =
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "k";
+        (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k";
       if (isShortcut) {
         event.preventDefault();
         openSearch();

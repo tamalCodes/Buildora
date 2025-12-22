@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@shared/components/Button";
 import GlobalNav from "@shared/components/global-nav/GlobalNav";
 import SearchCommandCenter from "@shared/components/search/SearchCommandCenter";
@@ -18,8 +19,25 @@ import {
 } from "./constants/constants";
 import type { Hackathon, HackathonsPageProps } from "./constants/types";
 
-const FeaturedCard = ({ hackathon }: { hackathon: Hackathon }) => (
-  <div className="group relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 min-h-[340px]">
+const FeaturedCard = ({
+  hackathon,
+  onSelect,
+}: {
+  hackathon: Hackathon;
+  onSelect: () => void;
+}) => (
+  <div
+    className="group relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 min-h-[340px] cursor-pointer"
+    onClick={onSelect}
+    onKeyDown={(event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onSelect();
+      }
+    }}
+    role="button"
+    tabIndex={0}
+  >
     <div className="absolute inset-0">
       <img
         src={hackathon.coverUrl}
@@ -82,7 +100,13 @@ const FeaturedCard = ({ hackathon }: { hackathon: Hackathon }) => (
           {hackathon.participants}
         </div>
         <div className="ml-auto">
-          <Button className="!px-6 !py-3 !rounded-xl !text-sm">
+          <Button
+            className="!px-6 !py-3 !rounded-xl !text-sm"
+            onClick={(event) => {
+              event.stopPropagation();
+              onSelect();
+            }}
+          >
             Apply now
           </Button>
         </div>
@@ -91,8 +115,25 @@ const FeaturedCard = ({ hackathon }: { hackathon: Hackathon }) => (
   </div>
 );
 
-const HackathonCard = ({ hackathon }: { hackathon: Hackathon }) => (
-  <div className="group glass-card rounded-[2rem] overflow-hidden border border-white/10 hover:border-indigo-500/40 transition-all duration-500">
+const HackathonCard = ({
+  hackathon,
+  onSelect,
+}: {
+  hackathon: Hackathon;
+  onSelect: () => void;
+}) => (
+  <div
+    className="group glass-card rounded-[2rem] overflow-hidden border border-white/10 hover:border-indigo-500/40 transition-all duration-500 cursor-pointer"
+    onClick={onSelect}
+    onKeyDown={(event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onSelect();
+      }
+    }}
+    role="button"
+    tabIndex={0}
+  >
     <div className="relative">
       <img
         src={hackathon.coverUrl}
@@ -157,6 +198,10 @@ const HackathonCard = ({ hackathon }: { hackathon: Hackathon }) => (
         <Button
           variant="secondary"
           className="!px-4 !py-2 !text-xs !rounded-xl"
+          onClick={(event) => {
+            event.stopPropagation();
+            onSelect();
+          }}
         >
           View details
         </Button>
@@ -165,8 +210,25 @@ const HackathonCard = ({ hackathon }: { hackathon: Hackathon }) => (
   </div>
 );
 
-const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
-  <div className="group flex items-center justify-between gap-6 rounded-[1.5rem] border border-white/10 bg-white/5 px-6 py-5 hover:border-indigo-500/30 transition-all">
+const CompactCard = ({
+  hackathon,
+  onSelect,
+}: {
+  hackathon: Hackathon;
+  onSelect: () => void;
+}) => (
+  <div
+    className="group flex items-center justify-between gap-6 rounded-[1.5rem] border border-white/10 bg-white/5 px-6 py-5 hover:border-indigo-500/30 transition-all cursor-pointer"
+    onClick={onSelect}
+    onKeyDown={(event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onSelect();
+      }
+    }}
+    role="button"
+    tabIndex={0}
+  >
     <div className="flex items-center gap-4">
       <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 p-2">
         <img
@@ -178,7 +240,7 @@ const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
       <div>
         <p className="text-sm font-bold text-white">{hackathon.title}</p>
         <p className="text-xs text-slate-500">
-          {hackathon.location} � {hackathon.dates}
+          {hackathon.location} - {hackathon.dates}
         </p>
       </div>
     </div>
@@ -186,7 +248,14 @@ const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
       <span className="hidden md:inline-flex text-[10px] font-black uppercase tracking-widest text-slate-300 bg-white/10 border border-white/10 px-3 py-1 rounded-full">
         {hackathon.status}
       </span>
-      <Button variant="outline" className="!px-4 !py-2 !text-xs !rounded-xl">
+      <Button
+        variant="outline"
+        className="!px-4 !py-2 !text-xs !rounded-xl"
+        onClick={(event) => {
+          event.stopPropagation();
+          onSelect();
+        }}
+      >
         {hackathon.status === "Past" ? "Recap" : "Notify me"}
       </Button>
     </div>
@@ -194,6 +263,11 @@ const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
 );
 
 const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
+  const navigate = useNavigate();
+  const handleSelect = (id: string) => {
+    navigate(`/hackathons/${id}`);
+  };
+
   return (
     <div className="min-h-screen bg-[#06080f] text-slate-100 pb-32 overflow-x-hidden font-inter">
       <GlobalNav user={user} onSignOut={onSignOut} />
@@ -304,7 +378,11 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
             {FEATURED_HACKATHONS.map((hackathon) => (
-              <FeaturedCard key={hackathon.id} hackathon={hackathon} />
+              <FeaturedCard
+                key={hackathon.id}
+                hackathon={hackathon}
+                onSelect={() => handleSelect(hackathon.id)}
+              />
             ))}
           </div>
         </section>
@@ -333,7 +411,11 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
             {OPEN_HACKATHONS.map((hackathon) => (
-              <HackathonCard key={hackathon.id} hackathon={hackathon} />
+              <HackathonCard
+                key={hackathon.id}
+                hackathon={hackathon}
+                onSelect={() => handleSelect(hackathon.id)}
+              />
             ))}
           </div>
         </section>
@@ -355,7 +437,11 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
             </div>
             <div className="space-y-4">
               {UPCOMING_HACKATHONS.map((hackathon) => (
-                <CompactCard key={hackathon.id} hackathon={hackathon} />
+                <CompactCard
+                  key={hackathon.id}
+                  hackathon={hackathon}
+                  onSelect={() => handleSelect(hackathon.id)}
+                />
               ))}
             </div>
           </div>
@@ -376,7 +462,11 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
             </div>
             <div className="space-y-4">
               {PAST_HACKATHONS.map((hackathon) => (
-                <CompactCard key={hackathon.id} hackathon={hackathon} />
+                <CompactCard
+                  key={hackathon.id}
+                  hackathon={hackathon}
+                  onSelect={() => handleSelect(hackathon.id)}
+                />
               ))}
             </div>
           </div>

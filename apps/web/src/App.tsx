@@ -4,6 +4,7 @@ import AuthContainer from "./features/auth/components/AuthContainer";
 import AuthForm from "./features/auth/components/AuthForm";
 import ExplorePage from "./features/explore/ExplorePage";
 import HackathonsPage from "./features/hackathons/HackathonsPage";
+import HackathonDetailsPage from "./features/hackathons/HackathonDetailsPage";
 import { AuthService } from "./services/authService";
 import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
@@ -94,6 +95,12 @@ const App: React.FC = () => {
           <Route
             path="/hackathons"
             element={<HackathonsPage user={user} onSignOut={handleSignOut} />}
+          />
+          <Route
+            path="/hackathons/:hackathonId"
+            element={
+              <HackathonDetailsPage user={user} onSignOut={handleSignOut} />
+            }
           />
           <Route
             path="/builders"

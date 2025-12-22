@@ -1,4 +1,4 @@
-import type { Hackathon } from "./types";
+import type { Hackathon, HackathonDetail } from "./types";
 
 export const FEATURED_HACKATHONS: Hackathon[] = [
   {
@@ -247,3 +247,181 @@ export const FILTERS = [
   "Solo",
   "Student",
 ];
+
+const BASE_HACKATHON_DETAIL: Omit<HackathonDetail, "id" | "bannerUrl"> = {
+  heroSubtitle: "A flagship build sprint for high-signal student teams.",
+  applicationDeadline: "Jan 30, 2026",
+  statusLabel: "Applications open",
+  mode: "Hybrid",
+  teamSize: "2-4 builders",
+  eligibility: "Students and early-stage builders worldwide.",
+  about: [
+    "Buildora Hack Week is a 48 hour sprint focused on shipping real product moments.",
+    "Teams work with mentors, live demos, and review panels to test ideas fast.",
+    "Finalists present to sponsor partners for prizes, pilots, and hiring calls.",
+  ],
+  tracks: [
+    "AI copilots and workflows",
+    "Fintech and commerce",
+    "Climate and civic impact",
+    "Creator tools and media",
+    "Developer productivity",
+    "Future of education",
+    "Health and wellbeing",
+    "Open data and infrastructure",
+  ],
+  perks: [
+    "Mentor office hours and live reviews",
+    "Perk packs for cloud, AI, and design tools",
+    "Demo day production and streaming support",
+    "Curated recruiting intros",
+    "Founder AMAs and investor panels",
+  ],
+  rules: [
+    "Original work built during the hackathon window.",
+    "Teams must submit a public demo and short pitch.",
+    "Open source encouraged but not required.",
+    "All participants agree to the Buildora code of conduct.",
+  ],
+  prizePool: "$120k total prizes",
+  prizes: [
+    {
+      title: "Grand prize",
+      amount: "$30,000",
+      description: "Best overall product with standout execution.",
+    },
+    {
+      title: "Product craft",
+      amount: "$18,000",
+      description: "Best UX, narrative, and polish.",
+    },
+    {
+      title: "Technical depth",
+      amount: "$18,000",
+      description: "Hardest technical achievement or research.",
+    },
+    {
+      title: "Impact award",
+      amount: "$12,000",
+      description: "Biggest measurable social benefit.",
+    },
+  ],
+  schedule: [
+    {
+      time: "Day 1, 6:00 PM",
+      title: "Kickoff and team formation",
+      description: "Opening ceremony, mentor intros, and idea matchmaking.",
+    },
+    {
+      time: "Day 1, 9:00 PM",
+      title: "Build sprint begins",
+      description: "Repo creation, mentor office hours, and rapid prototyping.",
+    },
+    {
+      time: "Day 2, 1:00 PM",
+      title: "Midpoint demo checks",
+      description: "Lightning demos for feedback and course corrections.",
+    },
+    {
+      time: "Day 2, 10:00 PM",
+      title: "Final submissions",
+      description: "Submit code, demo video, and slide deck.",
+    },
+    {
+      time: "Day 3, 4:00 PM",
+      title: "Finals and awards",
+      description: "Live demos, judging, and prize announcements.",
+    },
+  ],
+  sponsors: [
+    {
+      name: "Nebula Cloud",
+      tier: "Platinum",
+      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=nebula",
+    },
+    {
+      name: "Atlas Labs",
+      tier: "Gold",
+      logoUrl: "https://api.dicebear.com/7.x/shapes/svg?seed=atlas",
+    },
+    {
+      name: "Pulse AI",
+      tier: "Community",
+      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=pulse",
+    },
+  ],
+  faqs: [
+    {
+      question: "Is this hackathon online or in-person?",
+      answer:
+        "It is hybrid. You can build remotely and still demo live, or join the onsite hub for mentor access.",
+    },
+    {
+      question: "Do I need a team before applying?",
+      answer:
+        "No. We host a team matching session during kickoff for solo builders.",
+    },
+    {
+      question: "Are there application fees?",
+      answer: "No application fees. Participation is free for accepted teams.",
+    },
+    {
+      question: "What should I submit?",
+      answer:
+        "You will submit a public repo, a demo video, and a short pitch deck.",
+    },
+    {
+      question: "Can we use existing projects?",
+      answer:
+        "Teams can iterate on existing work, but the core build must happen during the hackathon window.",
+    },
+    {
+      question: "How are winners selected?",
+      answer:
+        "Judges score on impact, execution, and originality with bonus points for live demo quality.",
+    },
+  ],
+  socials: [
+    { label: "Discord", href: "https://discord.com" },
+    { label: "Twitter", href: "https://twitter.com" },
+    { label: "LinkedIn", href: "https://linkedin.com" },
+    { label: "YouTube", href: "https://youtube.com" },
+  ],
+  contactEmail: "hello@buildora.dev",
+};
+
+const HACKATHON_DETAIL_OVERRIDES: Record<
+  string,
+  Partial<Omit<HackathonDetail, "id" | "bannerUrl">>
+> = {
+  "fh-1": {
+    heroSubtitle: "A global sprint for builders shipping AI infrastructure.",
+    applicationDeadline: "Aug 22, 2026",
+    prizePool: "$350k total prizes",
+  },
+  "fh-2": {
+    heroSubtitle: "Deep technical challenges for frontier protocol teams.",
+    applicationDeadline: "Sep 05, 2026",
+    prizePool: "$220k total prizes",
+  },
+};
+
+export const getHackathonDetails = (hackathon: Hackathon): HackathonDetail => {
+  const overrides = HACKATHON_DETAIL_OVERRIDES[hackathon.id] ?? {};
+  const statusLabel =
+    overrides.statusLabel ??
+    (hackathon.status === "Open"
+      ? "Applications open"
+      : hackathon.status === "Upcoming"
+      ? "Applications opening soon"
+      : "Event concluded");
+
+  return {
+    ...BASE_HACKATHON_DETAIL,
+    ...overrides,
+    id: hackathon.id,
+    bannerUrl: hackathon.coverUrl,
+    prizePool: overrides.prizePool ?? hackathon.prize,
+    statusLabel,
+  };
+};
