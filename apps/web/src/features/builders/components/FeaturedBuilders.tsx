@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FEATURED_BUILDERS } from "../constants/constants";
 import type { FeaturedBuilder } from "../constants/types";
 
 const FeaturedBuilderCard = ({ builder }: { builder: FeaturedBuilder }) => {
   const isCta = builder.variant === "cta";
-  return (
+  const card = (
     <div
       className={`relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_30px_60px_-40px_rgba(15,23,42,0.6)] ${
         isCta ? "min-h-[200px]" : "min-h-[240px]"
@@ -52,6 +53,16 @@ const FeaturedBuilderCard = ({ builder }: { builder: FeaturedBuilder }) => {
         )}
       </div>
     </div>
+  );
+
+  if (isCta) {
+    return card;
+  }
+
+  return (
+    <Link to={`/builders/${builder.id}`} className="block">
+      {card}
+    </Link>
   );
 };
 

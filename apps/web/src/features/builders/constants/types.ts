@@ -45,7 +45,46 @@ export type BuilderSortOption = {
   label: string;
 };
 
+export type BuilderProfileStat = {
+  label: string;
+  value: string;
+};
+
+export type BuilderProfileProject = {
+  id: string;
+  title: string;
+  summary: string;
+  tags: string[];
+  likes: number;
+  coverUrl: string;
+};
+
+export type BuilderProfileLink = {
+  label: string;
+  href: string;
+};
+
+export type BuilderProfile = {
+  id: string;
+  name: string;
+  handle: string;
+  avatarUrl: string;
+  role: string;
+  location: string;
+  tags: string[];
+  bio: string[];
+  highlights: string[];
+  stats: BuilderProfileStat[];
+  projects: BuilderProfileProject[];
+  links: BuilderProfileLink[];
+};
+
 export interface BuildersPageProps {
+  user?: User | null;
+  onSignOut?: () => void;
+}
+
+export interface BuilderDetailsPageProps {
   user?: User | null;
   onSignOut?: () => void;
 }

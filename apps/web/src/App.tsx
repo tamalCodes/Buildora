@@ -19,6 +19,7 @@ import BrandAssetsPage from "./features/legal/BrandAssetsPage";
 import SettingsPage from "./features/settings/SettingsPage";
 import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
 import BuildersPage from "./features/builders/BuildersPage";
+import BuilderDetailsPage from "./features/builders/BuilderDetailsPage";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -106,6 +107,10 @@ const App: React.FC = () => {
           <Route
             path="/builders"
             element={<BuildersPage user={user} onSignOut={handleSignOut} />}
+          />
+          <Route
+            path="/builders/:builderId"
+            element={<BuilderDetailsPage user={user} onSignOut={handleSignOut} />}
           />
           <Route
             path="/projects/:projectId"

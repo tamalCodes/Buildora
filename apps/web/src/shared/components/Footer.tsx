@@ -1,13 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  FaDiscord,
-  FaGithub,
-  FaLinkedinIn,
-  FaXTwitter,
-  FaYoutube,
-} from "react-icons/fa6";
+import { FaYoutube } from "react-icons/fa6";
 import Logo from "./Logo";
+import SocialIcon from "./SocialIcon";
+import type { SocialIconType } from "./SocialIcon";
 
 type FooterLink = {
   label: string;
@@ -53,12 +49,17 @@ const FOOTER_LINKS: { title: string; links: FooterLink[] }[] = [
   },
 ];
 
-const SOCIALS = [
-  { label: "X", href: "#", Icon: FaXTwitter },
-  { label: "GitHub", href: "#", Icon: FaGithub },
-  { label: "Discord", href: "#", Icon: FaDiscord },
+const SOCIALS: {
+  label: string;
+  href: string;
+  type?: SocialIconType;
+  Icon?: typeof FaYoutube;
+}[] = [
+  { label: "X", href: "#", type: "X" },
+  { label: "GitHub", href: "#", type: "GitHub" },
+  { label: "Discord", href: "#", type: "Discord" },
   { label: "YouTube", href: "#", Icon: FaYoutube },
-  { label: "LinkedIn", href: "#", Icon: FaLinkedinIn },
+  { label: "LinkedIn", href: "#", type: "LinkedIn" },
 ];
 
 const Footer: React.FC = () => {
@@ -86,7 +87,13 @@ const Footer: React.FC = () => {
                   aria-label={social.label}
                   className="h-11 w-11 rounded-xl border border-white/10 bg-white/5 text-slate-300 flex items-center justify-center hover:border-indigo-500/50 hover:text-white hover:bg-white/10 transition"
                 >
-                  <social.Icon className="h-5 w-5" aria-hidden="true" />
+                  {social.type ? (
+                    <SocialIcon type={social.type} className="h-5 w-5" />
+                  ) : (
+                    social.Icon && (
+                      <social.Icon className="h-5 w-5" aria-hidden="true" />
+                    )
+                  )}
                 </a>
               ))}
             </div>

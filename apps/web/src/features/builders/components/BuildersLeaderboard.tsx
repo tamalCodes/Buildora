@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { LEADERBOARD_BUILDERS } from "../constants/constants";
 import type { BuilderStatKey, LeaderboardBuilder } from "../constants/types";
 
@@ -122,6 +123,12 @@ const LeaderboardRow = ({ builder }: { builder: LeaderboardBuilder }) => (
         variant="prizes"
       />
     </div>
+    <Link
+      to={`/builders/${builder.id}`}
+      className="text-xs font-black uppercase tracking-widest text-indigo-300 hover:text-indigo-200"
+    >
+      View profile
+    </Link>
   </div>
 );
 
