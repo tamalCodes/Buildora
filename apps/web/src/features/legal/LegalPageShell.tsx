@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalNav from "../UI/GlobalNav";
+import GlobalNav from "../../shared/components/global-nav/GlobalNav";
 import { User } from "@buildora/shared";
 
 type Accent = "indigo" | "emerald" | "amber";

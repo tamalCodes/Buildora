@@ -1,247 +1,15 @@
-﻿import React from 'react';
-import GlobalNav from '../UI/GlobalNav';
-import Input from '../UI/Input';
-import Button from '../UI/Button';
-import { User } from '@buildora/shared';
-
-type Hackathon = {
-  id: string;
-  title: string;
-  organizer: string;
-  location: string;
-  dates: string;
-  status: 'Open' | 'Upcoming' | 'Past';
-  tags: string[];
-  prize: string;
-  participants: string;
-  coverUrl: string;
-  logoUrl: string;
-  sponsor?: string;
-};
-
-const FEATURED_HACKATHONS: Hackathon[] = [
-  {
-    id: 'fh-1',
-    title: 'Atlas Ascend 2026',
-    organizer: 'Buildora x Atlas Labs',
-    location: 'Global',
-    dates: 'Sep 12 - Oct 21, 2026',
-    status: 'Open',
-    tags: ['AI', 'Infra', 'Open Source'],
-    prize: '$350k prizes',
-    participants: '7.5k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2400&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/shapes/svg?seed=atlas',
-    sponsor: 'Sponsored by Neon'
-  },
-  {
-    id: 'fh-2',
-    title: 'Orbital Frontier Sprint',
-    organizer: 'Orbital Network',
-    location: 'Singapore + Remote',
-    dates: 'Oct 04 - Nov 09, 2026',
-    status: 'Open',
-    tags: ['ZK', 'DeFi', 'Security'],
-    prize: '$220k prizes',
-    participants: '4.2k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2400&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=orbital',
-    sponsor: 'Sponsored by Sable'
-  }
-];
-
-const OPEN_HACKATHONS: Hackathon[] = [
-  {
-    id: 'oh-1',
-    title: 'GenAI Forge Week',
-    organizer: 'Buildora Labs',
-    location: 'Online',
-    dates: 'Aug 18 - Sep 08, 2026',
-    status: 'Open',
-    tags: ['GenAI', 'Agents', 'Product'],
-    prize: '$95k prizes',
-    participants: '2.1k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=forge'
-  },
-  {
-    id: 'oh-2',
-    title: 'CloudCraft Horizons',
-    organizer: 'Nimbus Cloud',
-    location: 'Bengaluru, India',
-    dates: 'Aug 22 - Sep 12, 2026',
-    status: 'Open',
-    tags: ['Cloud', 'DevOps', 'SRE'],
-    prize: '$80k prizes',
-    participants: '1.7k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=cloud'
-  },
-  {
-    id: 'oh-3',
-    title: 'Rustline Circuit',
-    organizer: 'Ferris Collective',
-    location: 'Berlin, DE',
-    dates: 'Aug 30 - Sep 17, 2026',
-    status: 'Open',
-    tags: ['Rust', 'Systems', 'Tooling'],
-    prize: '$60k prizes',
-    participants: '980 builders',
-    coverUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=rust'
-  },
-  {
-    id: 'oh-4',
-    title: 'Civic Stackathon',
-    organizer: 'OpenGov',
-    location: 'New Delhi, IN',
-    dates: 'Sep 05 - Sep 19, 2026',
-    status: 'Open',
-    tags: ['Civic', 'Data', 'Impact'],
-    prize: '$50k prizes',
-    participants: '1.2k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=civic'
-  },
-  {
-    id: 'oh-5',
-    title: 'Chaincraft 3.0',
-    organizer: 'Northbridge',
-    location: 'Remote + Dubai',
-    dates: 'Sep 10 - Oct 01, 2026',
-    status: 'Open',
-    tags: ['Web3', 'Gaming', 'NFT'],
-    prize: '$140k prizes',
-    participants: '3.4k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=chain'
-  },
-  {
-    id: 'oh-6',
-    title: 'Vision Lab: Spatial',
-    organizer: 'Parallax Studio',
-    location: 'Seoul, KR',
-    dates: 'Sep 14 - Oct 02, 2026',
-    status: 'Open',
-    tags: ['XR', 'Media', 'Design'],
-    prize: '$70k prizes',
-    participants: '860 builders',
-    coverUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=vision'
-  }
-];
-
-const UPCOMING_HACKATHONS: Hackathon[] = [
-  {
-    id: 'uh-1',
-    title: 'ETHMumbai 2027',
-    organizer: 'ETH Global Guild',
-    location: 'Mumbai, IN',
-    dates: 'Nov 08 - Nov 11, 2026',
-    status: 'Upcoming',
-    tags: ['Ethereum', 'DeFi', 'Infra'],
-    prize: '$180k prizes',
-    participants: '3.8k expected',
-    coverUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=eth'
-  },
-  {
-    id: 'uh-2',
-    title: 'Binary 4.0',
-    organizer: 'Binary Labs',
-    location: 'San Francisco, US',
-    dates: 'Nov 16 - Nov 30, 2026',
-    status: 'Upcoming',
-    tags: ['AI', 'Search', 'Infra'],
-    prize: '$120k prizes',
-    participants: '2.6k expected',
-    coverUrl: 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=binary'
-  },
-  {
-    id: 'uh-3',
-    title: 'Cartographers 2.0',
-    organizer: 'Mapstack',
-    location: 'Amsterdam, NL',
-    dates: 'Dec 02 - Dec 18, 2026',
-    status: 'Upcoming',
-    tags: ['Maps', 'Web', 'Open Data'],
-    prize: '$55k prizes',
-    participants: '900 expected',
-    coverUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=map'
-  },
-  {
-    id: 'uh-4',
-    title: 'HealthOps Buildout',
-    organizer: 'CareOS',
-    location: 'Austin, US',
-    dates: 'Dec 05 - Dec 20, 2026',
-    status: 'Upcoming',
-    tags: ['Health', 'Data', 'Automation'],
-    prize: '$65k prizes',
-    participants: '1.1k expected',
-    coverUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=health'
-  }
-];
-
-const PAST_HACKATHONS: Hackathon[] = [
-  {
-    id: 'ph-1',
-    title: 'Dawn Protocol S1',
-    organizer: 'Dawn Labs',
-    location: 'Remote',
-    dates: 'Jun 01 - Jun 24, 2026',
-    status: 'Past',
-    tags: ['DeFi', 'Security', 'Research'],
-    prize: '$90k prizes',
-    participants: '1.4k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=dawn'
-  },
-  {
-    id: 'ph-2',
-    title: 'Buildora Summit Jam',
-    organizer: 'Buildora',
-    location: 'Lisbon, PT',
-    dates: 'May 12 - May 15, 2026',
-    status: 'Past',
-    tags: ['Community', 'Product', 'Design'],
-    prize: '$40k prizes',
-    participants: '720 builders',
-    coverUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=buildora'
-  },
-  {
-    id: 'ph-3',
-    title: 'Aurora AI Sprint',
-    organizer: 'Aurora Group',
-    location: 'Toronto, CA',
-    dates: 'Apr 05 - Apr 19, 2026',
-    status: 'Past',
-    tags: ['AI', 'Ops', 'B2B'],
-    prize: '$70k prizes',
-    participants: '1.9k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1472289065668-ce650ac443d2?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=aurora'
-  },
-  {
-    id: 'ph-4',
-    title: 'GreenTech Relay',
-    organizer: 'Sustain Labs',
-    location: 'Copenhagen, DK',
-    dates: 'Mar 01 - Mar 18, 2026',
-    status: 'Past',
-    tags: ['Climate', 'IoT', 'Energy'],
-    prize: '$55k prizes',
-    participants: '1.1k builders',
-    coverUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1800&auto=format&fit=crop',
-    logoUrl: 'https://api.dicebear.com/7.x/identicon/svg?seed=green'
-  }
-];
-
-const FILTERS = ['All', 'Open', 'Online', 'Onsite', 'Teams', 'Solo', 'Student'];
+import React from "react";
+import Button from "../../shared/components/Button";
+import GlobalNav from "../../shared/components/global-nav/GlobalNav";
+import Input from "../../shared/components/Input";
+import {
+  FEATURED_HACKATHONS,
+  FILTERS,
+  OPEN_HACKATHONS,
+  PAST_HACKATHONS,
+  UPCOMING_HACKATHONS,
+} from "./constants";
+import type { Hackathon, HackathonsPageProps } from "./types";
 
 const FeaturedCard = ({ hackathon }: { hackathon: Hackathon }) => (
   <div className="group relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 min-h-[340px]">
@@ -347,7 +115,7 @@ const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
       </div>
       <div>
         <p className="text-sm font-bold text-white">{hackathon.title}</p>
-        <p className="text-xs text-slate-500">{hackathon.location} · {hackathon.dates}</p>
+        <p className="text-xs text-slate-500">{hackathon.location} � {hackathon.dates}</p>
       </div>
     </div>
     <div className="flex items-center gap-4">
@@ -360,11 +128,6 @@ const CompactCard = ({ hackathon }: { hackathon: Hackathon }) => (
     </div>
   </div>
 );
-
-interface HackathonsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
 
 const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
   return (
@@ -542,3 +305,5 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
 };
 
 export default HackathonsPage;
+
+

@@ -1,192 +1,23 @@
-import { User } from "@buildora/shared";
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../UI/Button";
-import GlobalNav from "../UI/GlobalNav";
-
-type Project = {
-  id: string;
-  title: string;
-  summary: string;
-  stack: string[];
-  upvotes: number;
-  coverUrl: string;
-};
-
-type Builder = {
-  id: string;
-  name: string;
-  role: string;
-  badge: string;
-  avatarUrl: string;
-};
-
-type Team = {
-  id: string;
-  name: string;
-  focus: string;
-  members: number;
-  location: string;
-};
-
-type Signal = {
-  id: string;
-  title: string;
-  meta: string;
-};
-
-type ExploreSectionId =
-  | "explore-hero"
-  | "explore-projects"
-  | "explore-teams"
-  | "explore-stacks"
-  | "explore-pulse"
-  | "explore-builders"
-  | "explore-signals"
-  | "explore-showcase";
-
-type ExploreCtaAction =
-  | { type: "scroll"; targetId: ExploreSectionId }
-  | { type: "navigate"; to: string }
-  | { type: "viewProject"; projectId: Project["id"] }
-  | { type: "followBuilder"; builderId: Builder["id"] }
-  | { type: "viewSignal"; signalId: Signal["id"] }
-  | { type: "showcase"; intent: "create" | "highlights" };
-
-type ExploreCta = {
-  label: string;
-  action: ExploreCtaAction;
-};
-
-const FEATURED_PROJECTS: Project[] = [
-  {
-    id: "p1",
-    title: "Lume Atlas",
-    summary: "Visual ops layer for shipping open data pipelines in days.",
-    stack: ["Next.js", "Vector", "Postgres"],
-    upvotes: 824,
-    coverUrl:
-      "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    id: "p2",
-    title: "Signal Forge",
-    summary: "Realtime insights for distributed engineering teams.",
-    stack: ["Rust", "Kafka", "WebGL"],
-    upvotes: 563,
-    coverUrl:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    id: "p3",
-    title: "Mintstream",
-    summary: "Creator economy rails for communities and on-chain clubs.",
-    stack: ["Solidity", "ZK", "React"],
-    upvotes: 417,
-    coverUrl:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop",
-  },
-];
-
-const TOP_BUILDERS: Builder[] = [
-  {
-    id: "b1",
-    name: "Anya Dsouza",
-    role: "Product Engineer",
-    badge: "Top 1% Builder",
-    avatarUrl: "https://i.pravatar.cc/150?u=anya",
-  },
-  {
-    id: "b2",
-    name: "Rahil K",
-    role: "Protocol Designer",
-    badge: "Hackathon Winner",
-    avatarUrl: "https://i.pravatar.cc/150?u=rahil",
-  },
-  {
-    id: "b3",
-    name: "Meera Das",
-    role: "AI Engineer",
-    badge: "Community Lead",
-    avatarUrl: "https://i.pravatar.cc/150?u=meera",
-  },
-];
-
-const TEAM_SPOTLIGHTS: Team[] = [
-  {
-    id: "t1",
-    name: "Helios Labs",
-    focus: "Spatial analytics for climate response.",
-    members: 7,
-    location: "Nairobi + Remote",
-  },
-  {
-    id: "t2",
-    name: "Kintsugi Systems",
-    focus: "On-chain treasury tools for DAOs.",
-    members: 4,
-    location: "Berlin",
-  },
-  {
-    id: "t3",
-    name: "Threadline",
-    focus: "Story-driven onboarding for AI apps.",
-    members: 6,
-    location: "Austin + Remote",
-  },
-];
-
-const TRENDING_STACKS = [
-  "Agents",
-  "Rust",
-  "Solidity",
-  "RAG",
-  "Design Systems",
-  "ZK",
-  "Edge",
-];
-
-const SIGNALS: Signal[] = [
-  {
-    id: "s1",
-    title: "Signal Forge hit 10k teams",
-    meta: "Milestone - 3 hours ago",
-  },
-  {
-    id: "s2",
-    title: "Lume Atlas opens beta waitlist",
-    meta: "Launch - Today",
-  },
-  {
-    id: "s3",
-    title: "Mintstream announces creator grants",
-    meta: "Announcement - Today",
-  },
-];
-
-const EXPLORE_BY: ExploreCta[] = [
-  {
-    label: "Projects",
-    action: { type: "scroll", targetId: "explore-projects" },
-  },
-  {
-    label: "Builders",
-    action: { type: "scroll", targetId: "explore-builders" },
-  },
-  {
-    label: "Teams",
-    action: { type: "scroll", targetId: "explore-teams" },
-  },
-  {
-    label: "Stacks",
-    action: { type: "scroll", targetId: "explore-stacks" },
-  },
-];
-
-interface ExplorePageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
+import Button from "../../shared/components/Button";
+import GlobalNav from "../../shared/components/global-nav/GlobalNav";
+import {
+  EXPLORE_BY,
+  FEATURED_PROJECTS,
+  SIGNALS,
+  TEAM_SPOTLIGHTS,
+  TOP_BUILDERS,
+  TRENDING_STACKS,
+} from "./constants";
+import type {
+  Builder,
+  ExploreCtaAction,
+  ExplorePageProps,
+  ExploreSectionId,
+  Project,
+  Signal,
+} from "./types";
 
 const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
   const navigate = useNavigate();

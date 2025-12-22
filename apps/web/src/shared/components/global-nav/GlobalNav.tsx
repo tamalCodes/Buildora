@@ -1,29 +1,16 @@
+import { UserType } from "@buildora/shared";
 import React, { useMemo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "./Logo";
-import { User, UserType } from "@buildora/shared";
-
-type NavItem = {
-  label: string;
-  path: string;
-};
-
-const NAV_ITEMS: NavItem[] = [
-  { label: "Discover", path: "/explore" },
-  { label: "Hackathons", path: "/hackathons" },
-  { label: "Builders", path: "/builders" },
-];
-
-interface GlobalNavProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
+import Logo from "../Logo";
+import { NAV_ITEMS } from "./constants";
+import type { GlobalNavProps } from "./types";
 
 const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const userLabel = user?.name || user?.email || "Guest";
   const roleLabel =
     user?.userType === UserType.ORGANIZATION ? "Organization" : "Builder";
+
   const avatarUrl = useMemo(() => {
     if (user?.avatarUrl) return user.avatarUrl;
     const seed = user?.email || "guest";
@@ -130,16 +117,16 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
         <div className="md:hidden absolute top-20 left-0 right-0 border-b border-white/10 bg-[#05060c]/95 backdrop-blur-xl">
           <div className="px-6 py-6 space-y-4">
             {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.label}
-              to={item.path}
-              end
-              onClick={handleNavClick}
-              className={({ isActive }) =>
-                `w-full text-left text-xs font-black uppercase tracking-[0.2em] transition-all ${
-                  isActive ? "text-indigo-400" : "text-slate-400"
-                }`
-              }
+              <NavLink
+                key={item.label}
+                to={item.path}
+                end
+                onClick={handleNavClick}
+                className={({ isActive }) =>
+                  `w-full text-left text-xs font-black uppercase tracking-[0.2em] transition-all ${
+                    isActive ? "text-indigo-400" : "text-slate-400"
+                  }`
+                }
               >
                 {item.label}
               </NavLink>

@@ -7,9 +7,9 @@ import {
   UserType,
 } from "@buildora/shared";
 import React, { useEffect, useState } from "react";
-import Button from "../UI/Button";
-import { useCustomToast } from "../UI/CustomToast";
-import Input from "../UI/Input";
+import Button from "../../../shared/components/Button";
+import { useCustomToast } from "../../../shared/components/CustomToast";
+import Input from "../../../shared/components/Input";
 
 interface AuthFormProps {
   onLoginSuccess?: () => void;

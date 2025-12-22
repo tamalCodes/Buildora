@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import AuthContainer from "./components/Auth/AuthContainer";
-import AuthForm from "./components/Auth/AuthForm";
-import ExplorePage from "./components/Explore/ExplorePage";
-import HackathonsPage from "./components/Hackathons/HackathonsPage";
+import AuthContainer from "./features/auth/components/AuthContainer";
+import AuthForm from "./features/auth/components/AuthForm";
+import ExplorePage from "./features/explore/ExplorePage";
+import HackathonsPage from "./features/hackathons/HackathonsPage";
 import { AuthService } from "./services/authService";
 import { User } from "@buildora/shared";
-import { CustomToastProvider } from "./components/UI/CustomToast";
-import Footer from "./components/UI/Footer";
-import ScrollToTop from "./components/UI/ScrollToTop";
-import PrivacyPolicyPage from "./components/Legal/PrivacyPolicyPage";
-import TermsOfUsePage from "./components/Legal/TermsOfUsePage";
-import CodeOfConductPage from "./components/Legal/CodeOfConductPage";
-import BrandAssetsPage from "./components/Legal/BrandAssetsPage";
-import SettingsPage from "./components/Settings/SettingsPage";
+import { CustomToastProvider } from "./shared/components/CustomToast";
+import Footer from "./shared/components/Footer";
+import ScrollToTop from "./shared/components/ScrollToTop";
+import PrivacyPolicyPage from "./features/legal/PrivacyPolicyPage";
+import TermsOfUsePage from "./features/legal/TermsOfUsePage";
+import CodeOfConductPage from "./features/legal/CodeOfConductPage";
+import BrandAssetsPage from "./features/legal/BrandAssetsPage";
+import SettingsPage from "./features/settings/SettingsPage";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
