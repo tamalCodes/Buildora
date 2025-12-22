@@ -20,6 +20,7 @@ import SettingsPage from "./features/settings/SettingsPage";
 import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
 import BuildersPage from "./features/builders/BuildersPage";
 import BuilderDetailsPage from "./features/builders/BuilderDetailsPage";
+import ProfilePage from "./features/profile/ProfilePage";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -147,6 +148,10 @@ const App: React.FC = () => {
           <Route
             path="/settings"
             element={<SettingsPage user={user} onSignOut={handleSignOut} />}
+          />
+          <Route
+            path="/profile"
+            element={<ProfilePage user={user} onSignOut={handleSignOut} />}
           />
           <Route
             path="/account"
