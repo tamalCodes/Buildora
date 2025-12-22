@@ -1,5 +1,3 @@
-import { User } from "@buildora/shared";
-
 export type FeaturedBuilder = {
   id: string;
   name: string;
@@ -78,13 +76,3 @@ export type BuilderProfile = {
   projects: BuilderProfileProject[];
   links: BuilderProfileLink[];
 };
-
-export interface BuildersPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
-
-export interface BuilderDetailsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}

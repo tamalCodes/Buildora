@@ -1,26 +1,5 @@
 import React from "react";
-
-export type SettingsSectionId =
-  | "account"
-  | "notifications"
-  | "wallets"
-  | "beta"
-  | "kyc"
-  | "mcp"
-  | "security";
-
-export type SettingsNavItem = {
-  id: SettingsSectionId;
-  label: string;
-  icon: React.ReactNode;
-};
-
-interface SettingsSidebarProps {
-  items: SettingsNavItem[];
-  activeId: SettingsSectionId;
-  onSelect: (id: SettingsSectionId) => void;
-  onLogout: () => void;
-}
+import type { SettingsSidebarProps } from "../constants/interfaces";
 
 const SettingsSidebar: React.FC<SettingsSidebarProps> = ({
   items,

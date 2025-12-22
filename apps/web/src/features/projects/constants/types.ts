@@ -1,5 +1,3 @@
-import { User } from "@buildora/shared";
-
 export type ProjectMetric = {
   label: string;
   value: string;
@@ -76,8 +74,3 @@ export type ProjectDetail = {
   gallery: string[];
   snapshot: ProjectSnapshot[];
 };
-
-export interface ProjectDetailsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}

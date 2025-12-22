@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { User } from "@buildora/shared";
 import GlobalNav from "@shared/components/global-nav/GlobalNav";
 import ProfileSidebar from "./components/ProfileSidebar";
 import ProfileHeader from "./components/ProfileHeader";
@@ -9,16 +8,13 @@ import ProfileLinksSection from "./components/ProfileLinksSection";
 import ProfileEducationSection from "./components/ProfileEducationSection";
 import ProfileExperienceSection from "./components/ProfileExperienceSection";
 import ProfileContactSection from "./components/ProfileContactSection";
-import type { ProfileSectionId } from "./constants";
-
-interface ProfilePageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
+import { ProfileSectionId } from "./constants/enums";
+import type { ProfilePageProps } from "./constants/interfaces";
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
-  const [activeSection, setActiveSection] =
-    useState<ProfileSectionId>("about");
+  const [activeSection, setActiveSection] = useState<ProfileSectionId>(
+    ProfileSectionId.About
+  );
   const userLabel = user?.name || "tamalCodes";
   const userEmail = user?.email || "tamalcodes@gmail.com";
 
@@ -60,11 +56,19 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
               onChange={setActiveSection}
             />
 
-            {activeSection === "about" && <ProfileAboutSection />}
-            {activeSection === "links" && <ProfileLinksSection />}
-            {activeSection === "education" && <ProfileEducationSection />}
-            {activeSection === "experience" && <ProfileExperienceSection />}
-            {activeSection === "contact" && (
+            {activeSection === ProfileSectionId.About && (
+              <ProfileAboutSection />
+            )}
+            {activeSection === ProfileSectionId.Links && (
+              <ProfileLinksSection />
+            )}
+            {activeSection === ProfileSectionId.Education && (
+              <ProfileEducationSection />
+            )}
+            {activeSection === ProfileSectionId.Experience && (
+              <ProfileExperienceSection />
+            )}
+            {activeSection === ProfileSectionId.Contact && (
               <ProfileContactSection userEmail={userEmail} />
             )}
           </div>

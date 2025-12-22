@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FEATURED_BUILDERS } from "../constants/constants";
-import type { FeaturedBuilder } from "../constants/types";
+import type { FeaturedBuilderCardProps } from "../constants/interfaces";
 
-const FeaturedBuilderCard = ({ builder }: { builder: FeaturedBuilder }) => {
+const FeaturedBuilderCard: React.FC<FeaturedBuilderCardProps> = ({ builder }) => {
   const isCta = builder.variant === "cta";
   const card = (
     <div

@@ -1,11 +1,6 @@
 import React from "react";
 import Button from "@shared/components/Button";
-import type { Hackathon, HackathonDetail } from "../constants/types";
-
-type HackathonInfoCardProps = {
-  hackathon: Hackathon;
-  detail: HackathonDetail;
-};
+import type { HackathonInfoCardProps } from "../constants/interfaces";
 
 const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
   hackathon,

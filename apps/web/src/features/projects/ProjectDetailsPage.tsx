@@ -14,7 +14,7 @@ import ProjectStack from "./components/ProjectStack";
 import ProjectTeam from "./components/ProjectTeam";
 import ProjectUpdates from "./components/ProjectUpdates";
 import { PROJECT_DETAILS } from "./constants/constants";
-import type { ProjectDetailsPageProps } from "./constants/types";
+import type { ProjectDetailsPageProps } from "./constants/interfaces";
 
 const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
   user,

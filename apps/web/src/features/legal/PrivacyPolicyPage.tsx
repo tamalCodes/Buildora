@@ -1,6 +1,6 @@
 import React from "react";
-import { User } from "@buildora/shared";
 import LegalPageShell from "./LegalPageShell";
+import type { PrivacyPolicyPageProps } from "./constants/interfaces";
 
 const DATA_COLLECTION = [
   {
@@ -43,11 +43,6 @@ const RIGHTS = [
   "Export a copy of your data in a portable format.",
   "Opt out of marketing messages at any time.",
 ];
-
-interface PrivacyPolicyPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
 
 const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({
   user,

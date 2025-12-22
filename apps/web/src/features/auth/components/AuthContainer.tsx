@@ -1,9 +1,6 @@
 
-import React from 'react';
-
-interface AuthContainerProps {
-  children: React.ReactNode;
-}
+import React from "react";
+import type { AuthContainerProps } from "../constants/interfaces";
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
   return (

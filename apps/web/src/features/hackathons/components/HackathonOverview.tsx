@@ -1,9 +1,5 @@
 import React from "react";
-import type { HackathonDetail } from "../constants/types";
-
-type HackathonOverviewProps = {
-  detail: HackathonDetail;
-};
+import type { HackathonOverviewProps } from "../constants/interfaces";
 
 const HackathonOverview: React.FC<HackathonOverviewProps> = ({ detail }) => {
   return (

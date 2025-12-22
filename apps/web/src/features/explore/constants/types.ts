@@ -1,5 +1,3 @@
-import { User } from "@buildora/shared";
-
 export type Project = {
   id: string;
   title: string;
@@ -55,8 +53,3 @@ export type ExploreCta = {
   label: string;
   action: ExploreCtaAction;
 };
-
-export interface ExplorePageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}

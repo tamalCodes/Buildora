@@ -1,6 +1,6 @@
 import React from "react";
-import { User } from "@buildora/shared";
 import LegalPageShell from "./LegalPageShell";
+import type { CodeOfConductPageProps } from "./constants/interfaces";
 
 const EXPECTATIONS = [
   "Be respectful and inclusive across all Buildora spaces.",
@@ -27,11 +27,6 @@ const CONSEQUENCES = [
   "Removal from sessions, events, or the platform.",
   "Account suspension or permanent bans when necessary.",
 ];
-
-interface CodeOfConductPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
 
 const CodeOfConductPage: React.FC<CodeOfConductPageProps> = ({
   user,

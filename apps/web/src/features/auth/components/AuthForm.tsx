@@ -10,10 +10,8 @@ import Button from "@shared/components/Button";
 import { useCustomToast } from "@shared/components/CustomToast";
 import Input from "@shared/components/Input";
 import React, { useEffect, useState } from "react";
-
-interface AuthFormProps {
-  onLoginSuccess?: () => void;
-}
+import type { AuthFormProps } from "../constants/interfaces";
+import type { AuthFieldErrors, AuthFieldErrorKey } from "../constants/types";
 
 const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
@@ -23,20 +21,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
   const [userType, setUserType] = useState<UserType>(UserType.UNDETERMINED);
   const [isNewUser, setIsNewUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [fieldErrors, setFieldErrors] = useState<{
-    email?: string;
-    password?: string;
-    organizationName?: string;
-  }>({});
+  const [fieldErrors, setFieldErrors] = useState<AuthFieldErrors>({});
   const { pushToast } = useCustomToast();
 
   useEffect(() => {
     setUserType(detectUserType(email));
   }, [email]);
 
-  const clearFieldError = (
-    field: "email" | "password" | "organizationName"
-  ) => {
+  const clearFieldError = (field: AuthFieldErrorKey) => {
     setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 

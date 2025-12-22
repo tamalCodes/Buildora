@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { User } from "@buildora/shared";
 import SettingsCard from "./components/SettingsCard";
-import SettingsSidebar, { SettingsSectionId } from "./components/SettingsSidebar";
+import SettingsSidebar from "./components/SettingsSidebar";
 import GlobalNav from "@shared/components/global-nav/GlobalNav";
 import {
   SettingsButton,
@@ -10,12 +9,9 @@ import {
   SettingsToggle,
 } from "./components/SettingsControls";
 import Modal from "@shared/components/Modal";
-import { SETTINGS_NAV_ITEMS } from "./constants";
-
-interface SettingsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
+import { SETTINGS_NAV_ITEMS } from "./constants/constants";
+import type { SettingsPageProps } from "./constants/interfaces";
+import type { SettingsSectionId } from "./constants/types";
 
 const SettingsPage: React.FC<SettingsPageProps> = ({ user, onSignOut }) => {
   const [activeSection, setActiveSection] =

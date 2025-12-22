@@ -1,5 +1,3 @@
-import { User } from "@buildora/shared";
-
 export type Hackathon = {
   id: string;
   title: string;
@@ -14,11 +12,6 @@ export type Hackathon = {
   logoUrl: string;
   sponsor?: string;
 };
-
-export interface HackathonsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
 
 export type HackathonPrize = {
   title: string;
@@ -69,8 +62,3 @@ export type HackathonDetail = {
   socials: HackathonSocialLink[];
   contactEmail: string;
 };
-
-export interface HackathonDetailsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}

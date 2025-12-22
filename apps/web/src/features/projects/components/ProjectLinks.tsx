@@ -1,9 +1,5 @@
 import React from "react";
-import type { ProjectLink } from "../constants/types";
-
-type ProjectLinksProps = {
-  links: ProjectLink[];
-};
+import type { ProjectLinksProps } from "../constants/interfaces";
 
 const toneStyles: Record<ProjectLink["tone"], string> = {
   primary:
@@ -22,7 +18,9 @@ const ProjectLinks: React.FC<ProjectLinksProps> = ({ links }) => {
         <a
           key={link.label}
           href={link.href}
-          className={`flex items-center justify-between rounded-2xl px-4 py-3 text-xs font-black uppercase tracking-widest transition ${toneStyles[link.tone]}`}
+          className={`flex items-center justify-between rounded-2xl px-4 py-3 text-xs font-black uppercase tracking-widest transition ${
+            toneStyles[link.tone]
+          }`}
         >
           <span>{link.label}</span>
           <span className="text-[10px] font-semibold uppercase tracking-widest text-white/60">

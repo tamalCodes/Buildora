@@ -1,8 +1,8 @@
 import React from "react";
 import { BUILDER_PANELS } from "../constants/constants";
-import type { BuilderPanel } from "../constants/types";
+import type { HighlightPanelProps } from "../constants/interfaces";
 
-const HighlightPanel = ({ panel }: { panel: BuilderPanel }) => (
+const HighlightPanel: React.FC<HighlightPanelProps> = ({ panel }) => (
   <div
     className="relative overflow-hidden rounded-[2.5rem] p-8 text-white border border-white/10 bg-white/5 backdrop-blur-2xl"
     style={{ backgroundImage: panel.gradient }}

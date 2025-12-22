@@ -1,9 +1,5 @@
 import React from "react";
-import type { ProjectTeamMember } from "../constants/types";
-
-type ProjectTeamProps = {
-  team: ProjectTeamMember[];
-};
+import type { ProjectTeamProps } from "../constants/interfaces";
 
 const ProjectTeam: React.FC<ProjectTeamProps> = ({ team }) => {
   return (

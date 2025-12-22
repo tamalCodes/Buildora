@@ -1,11 +1,7 @@
 import React from "react";
-import type { ProfileSectionId } from "../constants";
-import { PROFILE_NAV_ITEMS } from "../constants";
-
-interface ProfileMobileNavProps {
-  activeSection: ProfileSectionId;
-  onChange: (value: ProfileSectionId) => void;
-}
+import type { ProfileSectionId } from "../constants/enums";
+import { PROFILE_NAV_ITEMS } from "../constants/enums";
+import type { ProfileMobileNavProps } from "../constants/interfaces";
 
 const ProfileMobileNav: React.FC<ProfileMobileNavProps> = ({
   activeSection,

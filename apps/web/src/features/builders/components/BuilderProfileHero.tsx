@@ -1,12 +1,8 @@
 import Button from "@shared/components/Button";
 import React from "react";
-import type { BuilderProfile } from "../constants/types";
 import SocialIcon from "@shared/components/SocialIcon";
 import type { SocialIconType } from "@shared/components/SocialIcon";
-
-type BuilderProfileHeroProps = {
-  profile: BuilderProfile;
-};
+import type { BuilderProfileHeroProps } from "../constants/interfaces";
 
 const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
   return (

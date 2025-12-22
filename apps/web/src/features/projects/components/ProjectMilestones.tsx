@@ -1,9 +1,5 @@
 import React from "react";
-import type { ProjectMilestone } from "../constants/types";
-
-type ProjectMilestonesProps = {
-  milestones: ProjectMilestone[];
-};
+import type { ProjectMilestonesProps } from "../constants/interfaces";
 
 const statusStyles: Record<ProjectMilestone["status"], string> = {
   done: "bg-emerald-400",

@@ -1,9 +1,5 @@
 import React from "react";
-import type { ProjectStackItem } from "../constants/types";
-
-type ProjectStackProps = {
-  stack: ProjectStackItem[];
-};
+import type { ProjectStackProps } from "../constants/interfaces";
 
 const ProjectStack: React.FC<ProjectStackProps> = ({ stack }) => {
   return (

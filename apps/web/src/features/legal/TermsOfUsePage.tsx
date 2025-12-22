@@ -1,6 +1,6 @@
 import React from "react";
-import { User } from "@buildora/shared";
 import LegalPageShell from "./LegalPageShell";
+import type { TermsOfUsePageProps } from "./constants/interfaces";
 
 const TERMS_SECTIONS = [
   {
@@ -52,11 +52,6 @@ const TERMS_SECTIONS = [
     body: "We may update these terms from time to time. Continued use of Buildora means you accept the revised terms.",
   },
 ];
-
-interface TermsOfUsePageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
 
 const TermsOfUsePage: React.FC<TermsOfUsePageProps> = ({
   user,

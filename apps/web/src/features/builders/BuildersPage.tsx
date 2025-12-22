@@ -5,7 +5,8 @@ import BuildersHero from "./components/BuildersHero";
 import BuildersLeaderboard from "./components/BuildersLeaderboard";
 import BuildersSortBar from "./components/BuildersSortBar";
 import FeaturedBuilders from "./components/FeaturedBuilders";
-import type { BuilderStatKey, BuildersPageProps } from "./constants/types";
+import type { BuilderStatKey } from "./constants/types";
+import type { BuildersPageProps } from "./constants/interfaces";
 
 const BuildersPage: React.FC<BuildersPageProps> = ({ user, onSignOut }) => {
   const [activeSort, setActiveSort] = useState<BuilderStatKey>("hackathons");

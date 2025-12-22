@@ -4,10 +4,7 @@ import {
   SettingsButton,
   SettingsInput,
 } from "../../settings/components/SettingsControls";
-
-interface ProfileContactSectionProps {
-  userEmail: string;
-}
+import type { ProfileContactSectionProps } from "../constants/interfaces";
 
 const ProfileContactSection: React.FC<ProfileContactSectionProps> = ({
   userEmail,

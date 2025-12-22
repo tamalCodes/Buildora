@@ -1,5 +1,5 @@
 import React from "react";
-import type { SettingsNavItem } from "./components/SettingsSidebar";
+import type { SettingsNavItem } from "./types";
 
 export const SETTINGS_NAV_ITEMS: SettingsNavItem[] = [
   {

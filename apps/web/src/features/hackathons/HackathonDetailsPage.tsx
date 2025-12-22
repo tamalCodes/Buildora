@@ -17,7 +17,7 @@ import {
   UPCOMING_HACKATHONS,
   getHackathonDetails,
 } from "./constants/constants";
-import type { HackathonDetailsPageProps } from "./constants/types";
+import type { HackathonDetailsPageProps } from "./constants/interfaces";
 
 const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
   user,

@@ -1,10 +1,5 @@
 import React from "react";
-import type { ProjectHighlight, ProjectMetric } from "../constants/types";
-
-type ProjectMetricsProps = {
-  metrics: ProjectMetric[];
-  highlights: ProjectHighlight[];
-};
+import type { ProjectMetricsProps } from "../constants/interfaces";
 
 const trendStyles = {
   up: "text-emerald-300",

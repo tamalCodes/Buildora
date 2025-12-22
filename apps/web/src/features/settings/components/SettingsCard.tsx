@@ -1,12 +1,5 @@
 import React from "react";
-
-interface SettingsCardProps {
-  title: string;
-  description?: string;
-  action?: React.ReactNode;
-  children: React.ReactNode;
-  className?: string;
-}
+import type { SettingsCardProps } from "../constants/interfaces";
 
 const SettingsCard: React.FC<SettingsCardProps> = ({
   title,

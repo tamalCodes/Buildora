@@ -1,17 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { LEADERBOARD_BUILDERS } from "../constants/constants";
-import type { BuilderStatKey, LeaderboardBuilder } from "../constants/types";
+import type { BuilderStatKey } from "../constants/types";
+import type {
+  LeaderboardRowProps,
+  StatPillProps,
+} from "../constants/interfaces";
 
-const StatPill = ({
-  label,
-  value,
-  variant,
-}: {
-  label: string;
-  value: number;
-  variant: BuilderStatKey;
-}) => {
+const StatPill: React.FC<StatPillProps> = ({ label, value, variant }) => {
   const styles: Record<
     BuilderStatKey,
     { bg: string; text: string; icon: JSX.Element }
@@ -88,7 +84,7 @@ const StatPill = ({
   );
 };
 
-const LeaderboardRow = ({ builder }: { builder: LeaderboardBuilder }) => (
+const LeaderboardRow: React.FC<LeaderboardRowProps> = ({ builder }) => (
   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
     <div className="flex items-center gap-4">
       <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center text-sm font-black">

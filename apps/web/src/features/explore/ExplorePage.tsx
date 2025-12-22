@@ -13,10 +13,10 @@ import {
 import type {
   Builder,
   ExploreCtaAction,
-  ExplorePageProps,
   ExploreSectionId,
   Signal,
 } from "./constants/types";
+import type { ExplorePageProps } from "./constants/interfaces";
 
 const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
   const navigate = useNavigate();

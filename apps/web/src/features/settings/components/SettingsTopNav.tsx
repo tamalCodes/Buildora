@@ -1,12 +1,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { User } from "@buildora/shared";
 import Logo from "@shared/components/Logo";
-
-interface SettingsTopNavProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
+import type { SettingsTopNavProps } from "../constants/interfaces";
 
 const SettingsTopNav: React.FC<SettingsTopNavProps> = ({ user, onSignOut }) => {
   const userLabel = user?.name || user?.email || "Guest";

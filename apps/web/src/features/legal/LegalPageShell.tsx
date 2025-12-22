@@ -1,11 +1,10 @@
 import React from "react";
 import GlobalNav from "@shared/components/global-nav/GlobalNav";
-import { User } from "@buildora/shared";
-
-type Accent = "indigo" | "emerald" | "amber";
+import type { LegalPageShellProps } from "./constants/interfaces";
+import type { LegalAccent } from "./constants/types";
 
 const ACCENTS: Record<
-  Accent,
+  LegalAccent,
   { badge: string; heading: string; glowA: string; glowB: string; glowC: string }
 > = {
   indigo: {
@@ -30,17 +29,6 @@ const ACCENTS: Record<
     glowC: "bg-rose-500/10",
   },
 };
-
-interface LegalPageShellProps {
-  user?: User | null;
-  onSignOut?: () => void;
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  meta?: string[];
-  accent?: Accent;
-  children: React.ReactNode;
-}
 
 const LegalPageShell: React.FC<LegalPageShellProps> = ({
   user,

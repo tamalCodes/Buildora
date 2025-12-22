@@ -1,11 +1,6 @@
 import React from "react";
 import { BUILDER_SORTS } from "../constants/constants";
-import type { BuilderStatKey } from "../constants/types";
-
-type BuildersSortBarProps = {
-  activeSort: BuilderStatKey;
-  onChange: (next: BuilderStatKey) => void;
-};
+import type { BuildersSortBarProps } from "../constants/interfaces";
 
 const BuildersSortBar: React.FC<BuildersSortBarProps> = ({
   activeSort,

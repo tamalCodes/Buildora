@@ -1,9 +1,5 @@
 import React from "react";
-import type { ProjectUpdate } from "../constants/types";
-
-type ProjectUpdatesProps = {
-  updates: ProjectUpdate[];
-};
+import type { ProjectUpdatesProps } from "../constants/interfaces";
 
 const ProjectUpdates: React.FC<ProjectUpdatesProps> = ({ updates }) => {
   return (

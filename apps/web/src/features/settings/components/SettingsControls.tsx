@@ -1,11 +1,11 @@
 import React from "react";
-
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "danger";
-
-interface SettingsButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-}
+import type {
+  SettingsButtonProps,
+  SettingsCheckboxProps,
+  SettingsInputProps,
+  SettingsToggleProps,
+} from "../constants/interfaces";
+import type { ButtonVariant } from "../constants/types";
 
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   primary:
@@ -32,11 +32,6 @@ export const SettingsButton: React.FC<SettingsButtonProps> = ({
   );
 };
 
-interface SettingsInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-}
-
 export const SettingsInput: React.FC<SettingsInputProps> = ({
   label,
   className = "",
@@ -57,12 +52,6 @@ export const SettingsInput: React.FC<SettingsInputProps> = ({
     </label>
   );
 };
-
-interface SettingsCheckboxProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  description?: string;
-}
 
 export const SettingsCheckbox: React.FC<SettingsCheckboxProps> = ({
   label,
@@ -86,11 +75,6 @@ export const SettingsCheckbox: React.FC<SettingsCheckboxProps> = ({
     </label>
   );
 };
-
-interface SettingsToggleProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-}
 
 export const SettingsToggle: React.FC<SettingsToggleProps> = ({
   label,

@@ -1,6 +1,6 @@
 import React from "react";
-import { User } from "@buildora/shared";
 import LegalPageShell from "./LegalPageShell";
+import type { BrandAssetsPageProps } from "./constants/interfaces";
 
 const COLORS = [
   { name: "Buildora Indigo", hex: "#6366F1", className: "bg-indigo-500" },
@@ -22,11 +22,6 @@ const DONT_LIST = [
   "Do not place the logo on busy imagery.",
   "Do not use the wordmark as part of your own logo.",
 ];
-
-interface BrandAssetsPageProps {
-  user?: User | null;
-  onSignOut?: () => void;
-}
 
 const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
   user,

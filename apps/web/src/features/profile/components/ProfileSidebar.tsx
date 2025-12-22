@@ -1,11 +1,6 @@
 import React from "react";
-import type { ProfileSectionId } from "../constants";
-import { PROFILE_NAV_ITEMS } from "../constants";
-
-interface ProfileSidebarProps {
-  activeId: ProfileSectionId;
-  onSelect: (id: ProfileSectionId) => void;
-}
+import { PROFILE_NAV_ITEMS } from "../constants/enums";
+import type { ProfileSidebarProps } from "../constants/interfaces";
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   activeId,

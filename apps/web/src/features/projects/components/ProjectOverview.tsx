@@ -1,9 +1,5 @@
 import React from "react";
-import type { ProjectDetail } from "../constants/types";
-
-type ProjectOverviewProps = {
-  details: ProjectDetail;
-};
+import type { ProjectOverviewProps } from "../constants/interfaces";
 
 const ProjectOverview: React.FC<ProjectOverviewProps> = ({ details }) => {
   return (

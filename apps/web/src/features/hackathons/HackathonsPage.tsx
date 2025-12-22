@@ -17,7 +17,8 @@ import {
   PAST_HACKATHONS,
   UPCOMING_HACKATHONS,
 } from "./constants/constants";
-import type { Hackathon, HackathonsPageProps } from "./constants/types";
+import type { Hackathon } from "./constants/types";
+import type { HackathonsPageProps } from "./constants/interfaces";
 
 const FeaturedCard = ({
   hackathon,

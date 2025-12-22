@@ -7,7 +7,7 @@ import BuilderProfileHero from "./components/BuilderProfileHero";
 import BuilderProfileProjects from "./components/BuilderProfileProjects";
 import BuilderProfileStats from "./components/BuilderProfileStats";
 import { BUILDER_PROFILES } from "./constants/profiles";
-import type { BuilderDetailsPageProps } from "./constants/types";
+import type { BuilderDetailsPageProps } from "./constants/interfaces";
 
 const BuilderDetailsPage: React.FC<BuilderDetailsPageProps> = ({
   user,
