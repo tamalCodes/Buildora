@@ -34,6 +34,9 @@ export interface HackathonFaqsProps {
 export interface HackathonHeroProps {
   hackathon: Hackathon;
   detail: HackathonDetail;
+  activeTab?: string;
+  disabledTabs?: string[];
+  onNavigate?: (tabId: string) => void;
 }
 
 export interface HackathonInfoCardProps {

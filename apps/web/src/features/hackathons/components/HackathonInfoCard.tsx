@@ -1,11 +1,20 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@shared/components/Button";
 import type { HackathonInfoCardProps } from "../constants/interfaces";
+import { isOnlineHackathon } from "../constants/utils";
 
 const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
   hackathon,
   detail,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const basePath = location.pathname.startsWith("/hackathons/")
+    ? "/hackathons"
+    : "";
+  const isOnline = isOnlineHackathon(hackathon, detail);
+
   return (
     <aside className="rounded-[2rem] border border-white/10 bg-white/5 p-6 space-y-6 sticky top-28">
       <div className="space-y-3">
@@ -19,8 +28,16 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
           Deadline: {detail.applicationDeadline}
         </p>
         <div className="flex gap-3">
-          <Button className="!px-5 !py-3 !rounded-xl !text-sm">
-            Apply now
+          <Button
+            className="!px-5 !py-3 !rounded-xl !text-sm"
+            onClick={() => {
+              if (isOnline) {
+                navigate(`${basePath}/${hackathon.id}/application`);
+              }
+            }}
+            disabled={!isOnline}
+          >
+            {isOnline ? "Apply now" : "Onsite apply"}
           </Button>
           <Button
             variant="outline"
@@ -29,6 +46,25 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
             Share
           </Button>
         </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 text-xs">
+        {[
+          { label: "Dates", value: hackathon.dates },
+          { label: "Location", value: hackathon.location },
+          { label: "Prize pool", value: detail.prizePool },
+          { label: "Builders", value: hackathon.participants },
+        ].map((item) => (
+          <div
+            key={item.label}
+            className="rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+          >
+            <p className="text-[10px] uppercase tracking-widest text-slate-500">
+              {item.label}
+            </p>
+            <p className="text-slate-100 mt-1">{item.value}</p>
+          </div>
+        ))}
       </div>
 
       <div className="grid grid-cols-2 gap-4 text-xs font-bold text-slate-300">

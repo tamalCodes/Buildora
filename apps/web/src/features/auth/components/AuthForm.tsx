@@ -16,6 +16,7 @@ import type { AuthFieldErrors, AuthFieldErrorKey } from "../constants/types";
 const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [orgName, setOrgName] = useState("");
   const [step, setStep] = useState<AuthStep>(AuthStep.IDENTIFY);
   const [userType, setUserType] = useState<UserType>(UserType.UNDETERMINED);
@@ -293,7 +294,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
 
               <Input
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => {
@@ -302,6 +303,32 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                 }}
                 required
                 error={fieldErrors.password}
+                inputRightElement={
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="p-1 rounded-full hover:text-indigo-300 transition-colors"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <svg className="w-4 h-4" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M12 5c4.55 0 8.8 2.35 11 6-2.2 3.65-6.45 6-11 6s-8.8-2.35-11-6c2.2-3.65 6.45-6 11-6zm0 2c-3.63 0-6.97 1.74-9 4.99C5.03 15.26 8.37 17 12 17s6.97-1.74 9-5.01C18.97 8.74 15.63 7 12 7zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5z"
+                        />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M2.1 3.51 3.51 2.1l18.39 18.39-1.41 1.41-3.02-3.02A11.9 11.9 0 0 1 12 20c-4.55 0-8.8-2.35-11-6a12.6 12.6 0 0 1 3.6-4.08L2.1 3.51zm6.23 6.23 1.73 1.73A2.5 2.5 0 0 0 12.5 14.5l1.73 1.73A4.5 4.5 0 0 1 8.33 9.74zm10.2 6.62-3.1-3.1c.38-.36.69-.8.9-1.3a2.5 2.5 0 0 0-3.29-3.29l-3.05-3.05A10.2 10.2 0 0 1 12 4c4.55 0 8.8 2.35 11 6a12.4 12.4 0 0 1-4.47 4.36z"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                }
                 rightElement={
                   !isNewUser && (
                     <button

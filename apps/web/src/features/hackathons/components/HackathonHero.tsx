@@ -1,8 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@shared/components/Button";
 import type { HackathonHeroProps } from "../constants/interfaces";
+import { isOnlineHackathon } from "../constants/utils";
+import HackathonTabs from "./HackathonTabs";
 
-const HackathonHero: React.FC<HackathonHeroProps> = ({ hackathon, detail }) => {
+const HackathonHero: React.FC<HackathonHeroProps> = ({
+  hackathon,
+  detail,
+  activeTab = "overview",
+  disabledTabs = [],
+  onNavigate,
+}) => {
+  const navigate = useNavigate();
+  const isOnline = isOnlineHackathon(hackathon, detail);
+  const combinedDisabled = isOnline
+    ? disabledTabs
+    : [...new Set([...disabledTabs, "application"])];
+
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">
       <div className="lg:col-span-7 space-y-6">
@@ -29,59 +44,40 @@ const HackathonHero: React.FC<HackathonHeroProps> = ({ hackathon, detail }) => {
             {detail.heroSubtitle}
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {hackathon.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] font-black uppercase tracking-widest text-indigo-200 bg-indigo-500/20 border border-indigo-500/30 px-3 py-1.5 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: "Dates", value: hackathon.dates },
-            { label: "Location", value: hackathon.location },
-            { label: "Prize pool", value: detail.prizePool },
-            { label: "Builders", value: hackathon.participants },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4"
-            >
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                {item.label}
-              </p>
-              <p className="text-sm font-bold text-white mt-2">{item.value}</p>
-            </div>
-          ))}
-        </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Button className="!px-8 !py-4 !rounded-2xl">
-            Apply now
-          </Button>
-          <Button variant="secondary" className="!px-8 !py-4 !rounded-2xl">
-            Download brief
+          <Button
+            className="!px-8 !py-4 !rounded-2xl"
+            onClick={() => {
+              if (isOnline) {
+                if (onNavigate) {
+                  onNavigate("application");
+                  return;
+                }
+                navigate(`/hackathons/${hackathon.id}/application`);
+              }
+            }}
+            disabled={!isOnline}
+          >
+            {isOnline ? "Apply now" : "Onsite apply"}
           </Button>
         </div>
-        <nav className="flex flex-wrap gap-4 pt-4 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-          {[
-            { label: "Overview", href: "#overview" },
-            { label: "Prizes", href: "#prizes" },
-            { label: "Schedule", href: "#schedule" },
-            { label: "Sponsors", href: "#sponsors" },
-            { label: "FAQs", href: "#faqs" },
-          ].map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="hover:text-indigo-300 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <HackathonTabs
+          activeTab={activeTab}
+          disabledTabs={combinedDisabled}
+          onNavigate={(tabId) => {
+            if (onNavigate) {
+              onNavigate(tabId);
+              return;
+            }
+            if (tabId === "application") {
+              if (isOnline) {
+                navigate(`/hackathons/${hackathon.id}/application`);
+              }
+              return;
+            }
+            navigate(`/hackathons/${hackathon.id}/${tabId}`);
+          }}
+        />
       </div>
       <div className="lg:col-span-5">
         <div className="relative rounded-[2.5rem] border border-white/10 bg-white/5 overflow-hidden min-h-[320px]">
@@ -93,7 +89,7 @@ const HackathonHero: React.FC<HackathonHeroProps> = ({ hackathon, detail }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-[#05060c] via-[#05060c]/50 to-transparent"></div>
           <div className="relative z-10 p-8 flex items-end h-full">
             <div className="rounded-2xl border border-white/10 bg-[#05060c]/70 px-4 py-3 text-xs font-bold text-slate-200">
-              {hackathon.dates} - {hackathon.location}
+              {hackathon.dates} · {hackathon.location}
             </div>
           </div>
         </div>

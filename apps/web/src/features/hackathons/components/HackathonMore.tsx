@@ -25,7 +25,7 @@ const HackathonMore: React.FC<HackathonMoreProps> = ({ hackathons }) => {
         {hackathons.map((hackathon) => (
           <Link
             key={hackathon.id}
-            to={`/hackathons/${hackathon.id}`}
+            to={`/hackathons/${hackathon.id}/overview`}
             className="rounded-[1.5rem] border border-white/10 bg-white/5 p-6 space-y-4 hover:border-indigo-500/40 transition-all"
           >
             <div className="flex items-center gap-4">

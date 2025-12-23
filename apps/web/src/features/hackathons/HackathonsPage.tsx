@@ -266,7 +266,7 @@ const CompactCard = ({
 const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
   const navigate = useNavigate();
   const handleSelect = (id: string) => {
-    navigate(`/hackathons/${id}`);
+    navigate(`/hackathons/${id}/overview`);
   };
 
   return (

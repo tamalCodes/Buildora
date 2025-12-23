@@ -86,6 +86,22 @@ export const authenticateUser = async (req: Request, res: Response) => {
 
     if (signInError) {
       if (signInError.message.includes("Invalid login credentials")) {
+        const { data: existingProfile, error: profileLookupError } =
+          await supabase
+            .from("profiles")
+            .select("id")
+            .eq("email", normalizedEmail)
+            .maybeSingle();
+
+        if (profileLookupError) throw profileLookupError;
+
+        if (existingProfile) {
+          return res.status(401).json({
+            success: false,
+            error: "Invalid login credentials.",
+          });
+        }
+
         const { data: signUpData, error: signUpError } =
           await supabase.auth.admin.createUser({
             email: normalizedEmail,
@@ -93,7 +109,21 @@ export const authenticateUser = async (req: Request, res: Response) => {
             email_confirm: true,
           });
 
-        if (signUpError) throw signUpError;
+        if (signUpError) {
+          if (
+            signUpError.message
+              .toLowerCase()
+              .includes("already been registered") ||
+            signUpError.message.toLowerCase().includes("already registered")
+          ) {
+            return res.status(401).json({
+              success: false,
+              error: "Invalid login credentials.",
+            });
+          }
+
+          throw signUpError;
+        }
         if (!signUpData.user) throw new Error("User creation failed.");
 
         const { data: newSession, error: sessionError } =

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 import AuthContainer from "./features/auth/components/AuthContainer";
 import AuthForm from "./features/auth/components/AuthForm";
 import ExplorePage from "./features/explore/ExplorePage";
 import HackathonsPage from "./features/hackathons/HackathonsPage";
 import HackathonDetailsPage from "./features/hackathons/HackathonDetailsPage";
+import HackathonApplicationPage from "./features/hackathons/HackathonApplicationPage";
 import { AuthService } from "./services/authService";
 import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
@@ -21,6 +22,14 @@ import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
 import BuildersPage from "./features/builders/BuildersPage";
 import BuilderDetailsPage from "./features/builders/BuilderDetailsPage";
 import ProfilePage from "./features/profile/ProfilePage";
+
+const HackathonDetailsRedirect = () => {
+  const { hackathonId } = useParams();
+  if (!hackathonId) {
+    return <Navigate to="/hackathons" replace />;
+  }
+  return <Navigate to={`/hackathons/${hackathonId}/overview`} replace />;
+};
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -101,6 +110,34 @@ const App: React.FC = () => {
           />
           <Route
             path="/hackathons/:hackathonId"
+            element={<HackathonDetailsRedirect />}
+          />
+          <Route
+            path="/hackathons/:hackathonId/:tabId"
+            element={
+              <HackathonDetailsPage user={user} onSignOut={handleSignOut} />
+            }
+          />
+          <Route
+            path="/hackathons/:hackathonId/application"
+            element={
+              <HackathonApplicationPage user={user} onSignOut={handleSignOut} />
+            }
+          />
+          <Route
+            path="/hackathons/:hackathonId/apply"
+            element={
+              <HackathonApplicationPage user={user} onSignOut={handleSignOut} />
+            }
+          />
+          <Route
+            path="/:hackathonId/application"
+            element={
+              <HackathonApplicationPage user={user} onSignOut={handleSignOut} />
+            }
+          />
+          <Route
+            path="/:hackathonId/:tabId"
             element={
               <HackathonDetailsPage user={user} onSignOut={handleSignOut} />
             }
