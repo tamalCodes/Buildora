@@ -1,10 +1,12 @@
-import React from "react";
-import { Trash2 } from "lucide-react";
 import Button from "@shared/components/Button";
+import { Trash2 } from "lucide-react";
+import React from "react";
 import { applicationClasses } from "../constants/classes";
 import type { ApplicationLinksFormProps } from "../constants/interfaces";
 
-const ApplicationLinksForm: React.FC<ApplicationLinksFormProps> = ({ links }) => {
+const ApplicationLinksForm: React.FC<ApplicationLinksFormProps> = ({
+  links,
+}) => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">

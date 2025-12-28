@@ -1,6 +1,6 @@
-import React from "react";
-import { X } from "lucide-react";
 import Button from "@shared/components/Button";
+import { X } from "lucide-react";
+import React from "react";
 import { applicationClasses } from "../constants/classes";
 import type { ApplicationExperienceFormProps } from "../constants/interfaces";
 
@@ -44,10 +44,7 @@ const ApplicationExperienceForm: React.FC<ApplicationExperienceFormProps> = ({
 
       <div className="space-y-3">
         <p className={applicationClasses.label}>Add up to 5 skills</p>
-        <input
-          className={applicationClasses.input}
-          placeholder="E.g. React"
-        />
+        <input className={applicationClasses.input} placeholder="E.g. React" />
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
             <span

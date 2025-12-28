@@ -1,8 +1,8 @@
-import React from "react";
 import { Info } from "lucide-react";
+import React from "react";
 import { applicationClasses } from "../constants/classes";
-import { applicationTheme } from "../constants/themes";
 import type { ApplicationNoticeProps } from "../constants/interfaces";
+import { applicationTheme } from "../constants/themes";
 
 const ApplicationNotice: React.FC<ApplicationNoticeProps> = ({
   message,

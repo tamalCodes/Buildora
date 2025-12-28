@@ -1,8 +1,8 @@
-import React from "react";
 import { AlertTriangle, CheckCircle2, Clock4 } from "lucide-react";
+import React from "react";
 import { applicationClasses } from "../constants/classes";
-import { applicationTheme } from "../constants/themes";
 import type { ApplicationSectionCardProps } from "../constants/interfaces";
+import { applicationTheme } from "../constants/themes";
 
 const statusStyles = {
   completed: "bg-emerald-500/20 text-emerald-200 border-emerald-500/30",

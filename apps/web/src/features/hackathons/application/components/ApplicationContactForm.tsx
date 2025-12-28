@@ -1,5 +1,5 @@
-import React from "react";
 import Button from "@shared/components/Button";
+import React from "react";
 import { applicationClasses } from "../constants/classes";
 import type { ApplicationContactFormProps } from "../constants/interfaces";
 

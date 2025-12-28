@@ -1,8 +1,8 @@
 import React from "react";
-import { applicationClasses } from "../constants/classes";
-import { applicationTheme } from "../constants/themes";
-import type { ApplicationHeroProps } from "../constants/interfaces";
 import HackathonTabs from "../../components/HackathonTabs";
+import { applicationClasses } from "../constants/classes";
+import type { ApplicationHeroProps } from "../constants/interfaces";
+import { applicationTheme } from "../constants/themes";
 
 const ApplicationHero: React.FC<ApplicationHeroProps> = ({
   hackathon,
@@ -33,7 +33,9 @@ const ApplicationHero: React.FC<ApplicationHeroProps> = ({
             </p>
           </div>
         </div>
-        <div className={`${applicationClasses.badge} ${applicationTheme.accent}`}>
+        <div
+          className={`${applicationClasses.badge} ${applicationTheme.accent}`}
+        >
           Application in progress
         </div>
       </div>

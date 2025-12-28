@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
 import Button from "@shared/components/Button";
+import React, { useEffect, useMemo, useState } from "react";
 import { applicationClasses } from "../constants/classes";
-import { applicationTheme } from "../constants/themes";
 import type { ApplicationSidebarProps } from "../constants/interfaces";
+import { applicationTheme } from "../constants/themes";
 
 const formatCountdown = (targetMs: number) => {
   const now = Date.now();
@@ -118,7 +118,9 @@ const ApplicationSidebar: React.FC<ApplicationSidebarProps> = ({
           {countdown}
         </p>
         <p className="text-xs text-slate-400 mt-2">
-          {isOnline ? "Virtual participation confirmed." : "In-person steps required."}
+          {isOnline
+            ? "Virtual participation confirmed."
+            : "In-person steps required."}
         </p>
       </div>
 

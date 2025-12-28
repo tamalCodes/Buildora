@@ -1,5 +1,5 @@
-import React from "react";
 import Button from "@shared/components/Button";
+import React from "react";
 import { applicationClasses } from "../constants/classes";
 import type { ApplicationAboutFormProps } from "../constants/interfaces";
 
@@ -15,7 +15,10 @@ const ApplicationAboutForm: React.FC<ApplicationAboutFormProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <label className="space-y-2">
           <span className={applicationClasses.label}>First name</span>
-          <input className={applicationClasses.input} defaultValue={firstName} />
+          <input
+            className={applicationClasses.input}
+            defaultValue={firstName}
+          />
         </label>
         <label className="space-y-2">
           <span className={applicationClasses.label}>Last name</span>

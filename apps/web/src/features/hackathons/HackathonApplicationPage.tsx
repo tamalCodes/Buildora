@@ -1,15 +1,15 @@
+import Button from "@shared/components/Button";
+import GlobalNav from "@shared/components/global-nav/GlobalNav";
 import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import GlobalNav from "@shared/components/global-nav/GlobalNav";
-import Button from "@shared/components/Button";
+import ApplicationAboutForm from "./application/components/ApplicationAboutForm";
+import ApplicationContactForm from "./application/components/ApplicationContactForm";
+import ApplicationExperienceForm from "./application/components/ApplicationExperienceForm";
 import ApplicationHero from "./application/components/ApplicationHero";
+import ApplicationLinksForm from "./application/components/ApplicationLinksForm";
 import ApplicationNotice from "./application/components/ApplicationNotice";
 import ApplicationSectionCard from "./application/components/ApplicationSectionCard";
 import ApplicationSidebar from "./application/components/ApplicationSidebar";
-import ApplicationAboutForm from "./application/components/ApplicationAboutForm";
-import ApplicationExperienceForm from "./application/components/ApplicationExperienceForm";
-import ApplicationLinksForm from "./application/components/ApplicationLinksForm";
-import ApplicationContactForm from "./application/components/ApplicationContactForm";
 import {
   APPLICATION_CONTACT_FIELDS,
   APPLICATION_LINKS,
@@ -19,6 +19,7 @@ import {
   APPLICATION_SKILLS,
   buildApplicationMetrics,
 } from "./application/constants/data";
+import type { HackathonApplicationPageProps } from "./application/constants/interfaces";
 import { applicationTheme } from "./application/constants/themes";
 import {
   FEATURED_HACKATHONS,
@@ -28,7 +29,6 @@ import {
   getHackathonDetails,
 } from "./constants/constants";
 import { isOnlineHackathon } from "./constants/utils";
-import type { HackathonApplicationPageProps } from "./application/constants/interfaces";
 
 const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
   user,
@@ -48,7 +48,8 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
   ];
   const hackathon = allHackathons.find((item) => item.id === hackathonId);
   const detail = hackathon ? getHackathonDetails(hackathon) : undefined;
-  const isOnline = hackathon && detail ? isOnlineHackathon(hackathon, detail) : false;
+  const isOnline =
+    hackathon && detail ? isOnlineHackathon(hackathon, detail) : false;
 
   if (!hackathon || !detail) {
     return (

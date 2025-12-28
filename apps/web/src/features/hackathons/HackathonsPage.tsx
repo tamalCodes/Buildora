@@ -20,13 +20,12 @@ import {
 import type { Hackathon } from "./constants/types";
 import type { HackathonsPageProps } from "./constants/interfaces";
 
-const FeaturedCard = ({
-  hackathon,
-  onSelect,
-}: {
+type HackathonCardProps = React.Attributes & {
   hackathon: Hackathon;
   onSelect: () => void;
-}) => (
+};
+
+const FeaturedCard = ({ hackathon, onSelect }: HackathonCardProps) => (
   <div
     className="group relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 min-h-[340px] cursor-pointer"
     onClick={onSelect}
@@ -116,13 +115,7 @@ const FeaturedCard = ({
   </div>
 );
 
-const HackathonCard = ({
-  hackathon,
-  onSelect,
-}: {
-  hackathon: Hackathon;
-  onSelect: () => void;
-}) => (
+const HackathonCard = ({ hackathon, onSelect }: HackathonCardProps) => (
   <div
     className="group glass-card rounded-[2rem] overflow-hidden border border-white/10 hover:border-indigo-500/40 transition-all duration-500 cursor-pointer"
     onClick={onSelect}
@@ -211,13 +204,7 @@ const HackathonCard = ({
   </div>
 );
 
-const CompactCard = ({
-  hackathon,
-  onSelect,
-}: {
-  hackathon: Hackathon;
-  onSelect: () => void;
-}) => (
+const CompactCard = ({ hackathon, onSelect }: HackathonCardProps) => (
   <div
     className="group flex items-center justify-between gap-6 rounded-[1.5rem] border border-white/10 bg-white/5 px-6 py-5 hover:border-indigo-500/30 transition-all cursor-pointer"
     onClick={onSelect}
