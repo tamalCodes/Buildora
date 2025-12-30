@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
-import AuthContainer from "./features/auth/components/AuthContainer";
-import AuthForm from "./features/auth/components/AuthForm";
-import ExplorePage from "./features/explore/ExplorePage";
-import HackathonsPage from "./features/hackathons/HackathonsPage";
-import HackathonDetailsPage from "./features/hackathons/HackathonDetailsPage";
-import HackathonApplicationPage from "./features/hackathons/HackathonApplicationPage";
+import React, { Suspense, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthService } from "./services/authService";
 import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
@@ -13,23 +7,11 @@ import Footer from "@shared/components/Footer";
 import ScrollToTop from "@shared/components/ScrollToTop";
 import GlobalSearchModal from "@shared/components/search/GlobalSearchModal";
 import { SearchOverlayProvider } from "@shared/components/search/SearchOverlayContext";
-import PrivacyPolicyPage from "./features/legal/PrivacyPolicyPage";
-import TermsOfUsePage from "./features/legal/TermsOfUsePage";
-import CodeOfConductPage from "./features/legal/CodeOfConductPage";
-import BrandAssetsPage from "./features/legal/BrandAssetsPage";
-import SettingsPage from "./features/settings/SettingsPage";
-import ProjectDetailsPage from "./features/projects/ProjectDetailsPage";
-import BuildersPage from "./features/builders/BuildersPage";
-import BuilderDetailsPage from "./features/builders/BuilderDetailsPage";
-import ProfilePage from "./features/profile/ProfilePage";
-
-const HackathonDetailsRedirect = () => {
-  const { hackathonId } = useParams();
-  if (!hackathonId) {
-    return <Navigate to="/hackathons" replace />;
-  }
-  return <Navigate to={`/hackathons/${hackathonId}/overview`} replace />;
-};
+import { createGuestRoutes } from "./routes/guestRoutes";
+import { createPrivateRoutes } from "./routes/privateRoutes";
+import { createPublicRoutes } from "./routes/publicRoutes";
+import RouteErrorBoundary from "./routes/RouteErrorBoundary";
+import { RouteErrorFallback, RouteLoadingFallback } from "./routes/RouteFallbacks";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,13 +66,18 @@ const App: React.FC = () => {
     return null;
   }
 
-  const exploreElement = isAuthenticated ? (
-    <ExplorePage user={user} onSignOut={handleSignOut} />
-  ) : (
-    <AuthContainer>
-      <AuthForm onLoginSuccess={handleLoginSuccess} />
-    </AuthContainer>
-  );
+  const routeContext = {
+    user,
+    isAuthenticated,
+    onSignOut: handleSignOut,
+    onLoginSuccess: handleLoginSuccess,
+  };
+
+  const routes = [
+    ...createGuestRoutes(routeContext),
+    ...createPrivateRoutes(routeContext),
+    ...createPublicRoutes(routeContext),
+  ];
 
   return (
     <CustomToastProvider>
@@ -98,104 +85,19 @@ const App: React.FC = () => {
         <BrowserRouter>
           <ScrollToTop />
           <GlobalSearchModal />
-          <Routes>
-          <Route
-            path="/"
-            element={exploreElement}
-          />
-          <Route path="/explore" element={exploreElement} />
-          <Route
-            path="/hackathons"
-            element={<HackathonsPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/hackathons/:hackathonId"
-            element={<HackathonDetailsRedirect />}
-          />
-          <Route
-            path="/hackathons/:hackathonId/:tabId"
-            element={
-              <HackathonDetailsPage user={user} onSignOut={handleSignOut} />
-            }
-          />
-          <Route
-            path="/hackathons/:hackathonId/application"
-            element={
-              <HackathonApplicationPage user={user} onSignOut={handleSignOut} />
-            }
-          />
-          <Route
-            path="/hackathons/:hackathonId/apply"
-            element={
-              <HackathonApplicationPage user={user} onSignOut={handleSignOut} />
-            }
-          />
-          <Route
-            path="/:hackathonId/application"
-            element={
-              <HackathonApplicationPage user={user} onSignOut={handleSignOut} />
-            }
-          />
-          <Route
-            path="/:hackathonId/:tabId"
-            element={
-              <HackathonDetailsPage user={user} onSignOut={handleSignOut} />
-            }
-          />
-          <Route
-            path="/builders"
-            element={<BuildersPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/builders/:builderId"
-            element={<BuilderDetailsPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/projects/:projectId"
-            element={<ProjectDetailsPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/privacy-policy"
-            element={<PrivacyPolicyPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/privacy"
-            element={<PrivacyPolicyPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/terms"
-            element={<TermsOfUsePage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/terms-of-use"
-            element={<TermsOfUsePage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/coc"
-            element={<CodeOfConductPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/code-of-conduct"
-            element={<CodeOfConductPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/brand-assets"
-            element={<BrandAssetsPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/settings"
-            element={<SettingsPage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/profile"
-            element={<ProfilePage user={user} onSignOut={handleSignOut} />}
-          />
-          <Route
-            path="/account"
-            element={<Navigate to="/settings" replace />}
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+          <Suspense fallback={<RouteLoadingFallback />}>
+            <RouteErrorBoundary fallback={<RouteErrorFallback />}>
+              <Routes>
+                {routes.map((route) => (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={route.element}
+                  />
+                ))}
+              </Routes>
+            </RouteErrorBoundary>
+          </Suspense>
           <Footer />
         </BrowserRouter>
       </SearchOverlayProvider>

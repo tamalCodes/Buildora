@@ -5,7 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
     "useDefineForClassFields": false,
     "allowJs": true,
     "isolatedModules": true,
