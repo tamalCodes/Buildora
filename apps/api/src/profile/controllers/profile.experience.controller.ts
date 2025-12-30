@@ -1,7 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { mapProfileExperience } from "@/profile/mappers/profile.experience.mapper";
-import { buildProfileExperiencePayload } from "@/profile/services/profile.experience.service";
 import {
   ProfileExperienceCreateSchema,
   ProfileExperienceUpdateSchema,
@@ -9,7 +8,29 @@ import {
 import type { Request, Response } from "express";
 
 const mapExperience = mapProfileExperience;
-const buildExperiencePayload = buildProfileExperiencePayload;
+const buildExperiencePayload = (input: {
+  company?: string;
+  title?: string;
+  location?: string;
+  startDate?: string;
+  endDate?: string;
+  isCurrent?: boolean;
+  description?: string;
+}) => {
+  const payload: Record<string, unknown> = {
+    company: input.company,
+    title: input.title,
+    location: input.location,
+    start_date: input.startDate,
+    end_date: input.endDate,
+    is_current: input.isCurrent,
+    description: input.description,
+  };
+
+  return Object.fromEntries(
+    Object.entries(payload).filter(([, value]) => value !== undefined)
+  );
+};
 
 /**
  * GET /api/profile/me/experiences

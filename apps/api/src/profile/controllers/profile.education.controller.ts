@@ -1,7 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { mapProfileEducation } from "@/profile/mappers/profile.education.mapper";
-import { buildProfileEducationPayload } from "@/profile/services/profile.education.service";
 import {
   ProfileEducationCreateSchema,
   ProfileEducationUpdateSchema,
@@ -9,7 +8,27 @@ import {
 import type { Request, Response } from "express";
 
 const mapEducation = mapProfileEducation;
-const buildEducationPayload = buildProfileEducationPayload;
+const buildEducationPayload = (input: {
+  degreeType?: string;
+  institution?: string;
+  fieldOfStudy?: string;
+  isCurrent?: boolean;
+  graduationMonth?: number;
+  graduationYear?: number;
+}) => {
+  const payload: Record<string, unknown> = {
+    degree_type: input.degreeType,
+    institution: input.institution,
+    field_of_study: input.fieldOfStudy,
+    is_current: input.isCurrent,
+    graduation_month: input.graduationMonth,
+    graduation_year: input.graduationYear,
+  };
+
+  return Object.fromEntries(
+    Object.entries(payload).filter(([, value]) => value !== undefined)
+  );
+};
 
 /**
  * GET /api/profile/me/educations

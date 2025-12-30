@@ -1,11 +1,32 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { mapProfileCore } from "@/profile/mappers/profile.core.mapper";
-import { buildProfileCoreUpdate } from "@/profile/services/profile.core.service";
 import { ProfileUpdateSchema } from "@/profile/validators/profile.core.validators";
 import type { Request, Response } from "express";
+import { ProfileUpdateInput } from "../types/profile.core.types";
 
 const mapProfile = mapProfileCore;
+const buildProfileUpdate = (input: ProfileUpdateInput) => {
+  const update: Record<string, unknown> = {
+    first_name: input.firstName,
+    last_name: input.lastName,
+    gender: input.gender,
+    tshirt_size: input.tshirtSize,
+    city: input.city,
+    bio: input.bio,
+    readme: input.readme,
+    contact_email: input.contactEmail,
+    phone_country: input.phoneCountry,
+    phone_number: input.phoneNumber,
+    emergency_name: input.emergencyName,
+    emergency_phone: input.emergencyPhone,
+    no_formal_education: input.noFormalEducation,
+  };
+
+  return Object.fromEntries(
+    Object.entries(update).filter(([, value]) => value !== undefined)
+  );
+};
 
 /**
  * GET /api/profile/me
@@ -51,7 +72,7 @@ export const updateProfile = async (req: Request, res: Response) => {
 
   try {
     const updateInput = ProfileUpdateSchema.parse(req.body);
-    const updates = buildProfileCoreUpdate(updateInput);
+    const updates = buildProfileUpdate(updateInput);
 
     if (Object.keys(updates).length === 0) {
       return res.status(400).json({
