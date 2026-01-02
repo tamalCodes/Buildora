@@ -36,7 +36,7 @@ const buildExperiencePayload = (input: {
  * GET /api/profile/me/experiences
  * Returns experience entries for the authenticated user.
  */
-export const getExperiences = async (req: Request, res: Response) => {
+export const listExperiences = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {
     return res.status(401).json({ success: false, error });

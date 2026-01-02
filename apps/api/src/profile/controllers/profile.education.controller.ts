@@ -34,7 +34,7 @@ const buildEducationPayload = (input: {
  * GET /api/profile/me/educations
  * Returns education entries for the authenticated user.
  */
-export const getEducations = async (req: Request, res: Response) => {
+export const listEducations = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {
     return res.status(401).json({ success: false, error });

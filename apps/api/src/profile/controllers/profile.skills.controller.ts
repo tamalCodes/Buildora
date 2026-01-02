@@ -16,7 +16,7 @@ const buildSkillsPayload = (skills: string[], profileId: string) =>
  * GET /api/profile/me/skills
  * Returns the top skills for the authenticated user.
  */
-export const getSkills = async (req: Request, res: Response) => {
+export const listSkills = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {
     return res.status(401).json({ success: false, error });

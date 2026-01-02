@@ -59,7 +59,7 @@ This document explains how the Profile API is structured in the backend and how 
 
 ## Request flow (example: POST /api/profile/me/educations)
 
-1. Route: `routes.ts` sends the request to `profile.education.controller.ts`.
+1. Route: `routes.ts` sends the request to `profile.education.controller.ts` (list/create/update/delete handlers).
 2. Controller: validates input with `profile.education.validators.ts`.
 3. Controller: builds a DB payload (inline).
 4. Supabase: insert into `profile_educations`.

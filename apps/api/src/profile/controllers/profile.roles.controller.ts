@@ -15,7 +15,7 @@ const buildRolesPayload = (roles: string[], profileId: string) =>
  * GET /api/profile/me/roles
  * Returns role labels for the authenticated user.
  */
-export const getRoles = async (req: Request, res: Response) => {
+export const listRoles = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {
     return res.status(401).json({ success: false, error });

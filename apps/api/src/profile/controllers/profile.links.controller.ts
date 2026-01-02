@@ -17,7 +17,7 @@ const buildLinkPayload = (input: { label: string; url: string }) => ({
  * GET /api/profile/me/links
  * Returns profile links for the authenticated user.
  */
-export const getLinks = async (req: Request, res: Response) => {
+export const listLinks = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {
     return res.status(401).json({ success: false, error });
