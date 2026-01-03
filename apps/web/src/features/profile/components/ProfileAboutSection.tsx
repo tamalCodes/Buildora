@@ -4,8 +4,11 @@ import {
   SettingsButton,
   SettingsInput,
 } from "../../settings/components/SettingsControls";
+import type { ProfileAboutSectionProps } from "../constants/interfaces";
 
-const ProfileAboutSection: React.FC = () => {
+const ProfileAboutSection: React.FC<ProfileAboutSectionProps> = ({
+  profile,
+}) => {
   return (
     <>
       <SettingsCard
@@ -14,13 +17,23 @@ const ProfileAboutSection: React.FC = () => {
         action={<SettingsButton>Save</SettingsButton>}
       >
         <div className="grid gap-4 md:grid-cols-2">
-          <SettingsInput label="First name" defaultValue="Tamal" />
-          <SettingsInput label="Last name" defaultValue="Das" />
+          <SettingsInput
+            label="First name"
+            defaultValue={profile?.firstName || ""}
+          />
+          <SettingsInput
+            label="Last name"
+            defaultValue={profile?.lastName || ""}
+          />
           <label className="block text-sm text-slate-400">
             <span className="mb-2 block text-[10px] font-black uppercase tracking-widest text-slate-500">
               Identify as
             </span>
-            <select className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100">
+            <select
+              defaultValue={profile?.gender || ""}
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100"
+            >
+              <option value="">Select</option>
               <option>Male</option>
               <option>Female</option>
               <option>Prefer not to say</option>
@@ -30,14 +43,22 @@ const ProfileAboutSection: React.FC = () => {
             <span className="mb-2 block text-[10px] font-black uppercase tracking-widest text-slate-500">
               T-shirt size
             </span>
-            <select className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100">
+            <select
+              defaultValue={profile?.tshirtSize || ""}
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100"
+            >
+              <option value="">Select</option>
               <option>S</option>
               <option>M</option>
               <option>L</option>
               <option>XL</option>
             </select>
           </label>
-          <SettingsInput label="City" placeholder="e.g. Bangalore" />
+          <SettingsInput
+            label="City"
+            placeholder="e.g. Bangalore"
+            defaultValue={profile?.city || ""}
+          />
         </div>
       </SettingsCard>
 
@@ -54,6 +75,7 @@ const ProfileAboutSection: React.FC = () => {
             <textarea
               className="h-24 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600"
               placeholder="Add a short bio."
+              defaultValue={profile?.bio || ""}
             />
           </label>
           <label className="block text-sm text-slate-400">
@@ -63,6 +85,7 @@ const ProfileAboutSection: React.FC = () => {
             <textarea
               className="h-40 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600"
               placeholder="Write your story, goals, and past wins."
+              defaultValue={profile?.readme || ""}
             />
             <p className="mt-2 text-xs text-slate-500">
               Markdown supported. Keep it concise and skimmable.

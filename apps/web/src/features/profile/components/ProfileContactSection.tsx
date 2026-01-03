@@ -8,6 +8,7 @@ import type { ProfileContactSectionProps } from "../constants/interfaces";
 
 const ProfileContactSection: React.FC<ProfileContactSectionProps> = ({
   userEmail,
+  profile,
 }) => {
   return (
     <>
@@ -34,7 +35,11 @@ const ProfileContactSection: React.FC<ProfileContactSectionProps> = ({
                 <option>UK</option>
               </select>
             </label>
-            <SettingsInput label="Phone number" placeholder="+91" />
+            <SettingsInput
+              label="Phone number"
+              placeholder="+91"
+              defaultValue={profile?.phoneNumber || ""}
+            />
           </div>
         </div>
       </SettingsCard>
@@ -45,8 +50,15 @@ const ProfileContactSection: React.FC<ProfileContactSectionProps> = ({
         action={<SettingsButton>Save</SettingsButton>}
       >
         <div className="grid gap-4 md:grid-cols-[1fr_1fr]">
-          <SettingsInput label="Contact name" defaultValue="Tamal" />
-          <SettingsInput label="Contact number" placeholder="+82 824 041 5709" />
+          <SettingsInput
+            label="Contact name"
+            defaultValue={profile?.emergencyName || ""}
+          />
+          <SettingsInput
+            label="Contact number"
+            placeholder="+82 824 041 5709"
+            defaultValue={profile?.emergencyPhone || ""}
+          />
         </div>
       </SettingsCard>
     </>

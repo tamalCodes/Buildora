@@ -10,21 +10,35 @@ import ProfileExperienceSection from "./components/ProfileExperienceSection";
 import ProfileContactSection from "./components/ProfileContactSection";
 import { ProfileSectionId } from "./constants/enums";
 import type { ProfilePageProps } from "./constants/interfaces";
+import { useProfileMe, useProfileSummary } from "./hooks/useProfile";
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
   const [activeSection, setActiveSection] = useState<ProfileSectionId>(
     ProfileSectionId.About
   );
-  const userLabel = user?.name || "tamalCodes";
-  const userEmail = user?.email || "tamalcodes@gmail.com";
+  const { data: summaryResponse } = useProfileSummary();
+  const { data: profileResponse } = useProfileMe();
+  const summary = summaryResponse?.success ? summaryResponse.data : undefined;
+  const profile = profileResponse?.success ? profileResponse.data : undefined;
+
+  const userLabel = summary?.profile?.name || profile?.name || user?.name || "tamalCodes";
+  const userEmail =
+    profile?.contactEmail ||
+    profile?.email ||
+    user?.email ||
+    "tamalcodes@gmail.com";
 
   const avatarUrl = useMemo(() => {
+    if (summary?.profile?.avatarUrl) return summary.profile.avatarUrl;
+    if (profile?.avatarUrl) return profile.avatarUrl;
     if (user?.avatarUrl) return user.avatarUrl;
     const seed = user?.email || "guest";
     return `https://i.pravatar.cc/160?u=${encodeURIComponent(seed)}`;
-  }, [user?.avatarUrl, user?.email]);
+  }, [summary?.profile?.avatarUrl, profile?.avatarUrl, user?.avatarUrl, user?.email]);
 
-  const profileSkills = ["React", "TypeScript", "Solana", "UI/UX"];
+  const profileSkills = summary?.skills?.length
+    ? summary.skills
+    : ["React", "TypeScript", "Solana", "UI/UX"];
 
   return (
     <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
@@ -57,7 +71,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
             />
 
             {activeSection === ProfileSectionId.About && (
-              <ProfileAboutSection />
+              <ProfileAboutSection profile={profile} />
             )}
             {activeSection === ProfileSectionId.Links && (
               <ProfileLinksSection />
@@ -69,7 +83,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
               <ProfileExperienceSection />
             )}
             {activeSection === ProfileSectionId.Contact && (
-              <ProfileContactSection userEmail={userEmail} />
+              <ProfileContactSection userEmail={userEmail} profile={profile} />
             )}
           </div>
         </div>
