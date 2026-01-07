@@ -7,8 +7,10 @@ import type { Request, Response } from "express";
 const mapProfile = mapProfileCore;
 
 /**
- * GET /api/profile/me/summary
- * Returns header + About fields for initial profile render.
+ * Route: GET /api/profile/me/summary
+ * Purpose: Provide a quick summary payload for the profile header and About section.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/summary", getProfileSummary)); `apps/web/src/services/profileService.ts` (ProfileService.getSummary).
+ * How it works: Authenticates the user, loads the profile row, fetches top-ranked skills, and returns a `ProfileSummary` payload.
  */
 export const getProfileSummary = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

@@ -33,8 +33,10 @@ const buildExperiencePayload = (input: {
 };
 
 /**
- * GET /api/profile/me/experiences
- * Returns experience entries for the authenticated user.
+ * Route: GET /api/profile/me/experiences
+ * Purpose: List experience entries for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/experiences", listExperiences)).
+ * How it works: Authenticates the request, queries `profile_experiences` by profile id, and maps each row.
  */
 export const listExperiences = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -64,8 +66,10 @@ export const listExperiences = async (req: Request, res: Response) => {
 };
 
 /**
- * POST /api/profile/me/experiences
- * Creates a new experience entry for the authenticated user.
+ * Route: POST /api/profile/me/experiences
+ * Purpose: Create a new experience entry for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.post("/me/experiences", createExperience)).
+ * How it works: Validates the body with `ProfileExperienceCreateSchema`, builds a payload, inserts it, and returns the mapped row.
  */
 export const createExperience = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -105,8 +109,10 @@ export const createExperience = async (req: Request, res: Response) => {
 };
 
 /**
- * PATCH /api/profile/me/experiences/:id
- * Updates an experience entry owned by the authenticated user.
+ * Route: PATCH /api/profile/me/experiences/:id
+ * Purpose: Update an existing experience entry owned by the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.patch("/me/experiences/:id", updateExperience)).
+ * How it works: Validates the body, builds an update payload, updates the row by id + profile id, and maps the result.
  */
 export const updateExperience = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -146,8 +152,10 @@ export const updateExperience = async (req: Request, res: Response) => {
 };
 
 /**
- * DELETE /api/profile/me/experiences/:id
- * Deletes an experience entry owned by the authenticated user.
+ * Route: DELETE /api/profile/me/experiences/:id
+ * Purpose: Delete an experience entry owned by the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.delete("/me/experiences/:id", deleteExperience)).
+ * How it works: Deletes the row by id + profile id and returns the deleted id on success.
  */
 export const deleteExperience = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

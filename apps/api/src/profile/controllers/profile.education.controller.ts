@@ -31,8 +31,10 @@ const buildEducationPayload = (input: {
 };
 
 /**
- * GET /api/profile/me/educations
- * Returns education entries for the authenticated user.
+ * Route: GET /api/profile/me/educations
+ * Purpose: List education entries for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/educations", listEducations)).
+ * How it works: Authenticates the request, queries `profile_educations` by profile id, and maps each row.
  */
 export const listEducations = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -62,8 +64,10 @@ export const listEducations = async (req: Request, res: Response) => {
 };
 
 /**
- * POST /api/profile/me/educations
- * Creates a new education entry for the authenticated user.
+ * Route: POST /api/profile/me/educations
+ * Purpose: Create a new education entry for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.post("/me/educations", createEducation)).
+ * How it works: Validates the body with `ProfileEducationCreateSchema`, builds a payload, inserts it, and returns the mapped row.
  */
 export const createEducation = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -103,8 +107,10 @@ export const createEducation = async (req: Request, res: Response) => {
 };
 
 /**
- * PATCH /api/profile/me/educations/:id
- * Updates an education entry owned by the authenticated user.
+ * Route: PATCH /api/profile/me/educations/:id
+ * Purpose: Update an existing education entry owned by the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.patch("/me/educations/:id", updateEducation)).
+ * How it works: Validates the body, builds an update payload, updates the row by id + profile id, and maps the result.
  */
 export const updateEducation = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -144,8 +150,10 @@ export const updateEducation = async (req: Request, res: Response) => {
 };
 
 /**
- * DELETE /api/profile/me/educations/:id
- * Deletes an education entry owned by the authenticated user.
+ * Route: DELETE /api/profile/me/educations/:id
+ * Purpose: Delete an education entry owned by the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.delete("/me/educations/:id", deleteEducation)).
+ * How it works: Deletes the row by id + profile id and returns the deleted id on success.
  */
 export const deleteEducation = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

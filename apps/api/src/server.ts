@@ -1,4 +1,5 @@
 import authRouter from "@/auth/routes";
+import healthRouter from "@/health/routes";
 import profileRouter from "@/profile/routes";
 import cors from "cors";
 import "dotenv/config";
@@ -24,6 +25,7 @@ app.get("/", (_req, res) => {
     name: "Buildora API",
     status: "ok",
     health: "/health",
+    healthPing: "/health/ping",
     auth: "/api/auth",
   });
 });
@@ -31,6 +33,8 @@ app.get("/", (_req, res) => {
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use("/health", healthRouter);
 
 app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);

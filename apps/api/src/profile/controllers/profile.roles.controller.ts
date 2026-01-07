@@ -12,8 +12,10 @@ const buildRolesPayload = (roles: string[], profileId: string) =>
   }));
 
 /**
- * GET /api/profile/me/roles
- * Returns role labels for the authenticated user.
+ * Route: GET /api/profile/me/roles
+ * Purpose: List role labels for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/roles", listRoles)).
+ * How it works: Authenticates the request, queries `profile_roles` by profile id, and maps each row.
  */
 export const listRoles = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -43,8 +45,10 @@ export const listRoles = async (req: Request, res: Response) => {
 };
 
 /**
- * PUT /api/profile/me/roles
- * Replaces the full set of role labels for the authenticated user.
+ * Route: PUT /api/profile/me/roles
+ * Purpose: Replace the entire set of role labels for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.put("/me/roles", replaceRoles)).
+ * How it works: Validates the payload, deletes existing roles for the profile, inserts the new set, and maps the result.
  */
 export const replaceRoles = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

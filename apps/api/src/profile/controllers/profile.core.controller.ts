@@ -29,8 +29,10 @@ const buildProfileUpdate = (input: ProfileUpdateInput) => {
 };
 
 /**
- * GET /api/profile/me
- * Returns the core profile record for the authenticated user.
+ * Route: GET /api/profile/me
+ * Purpose: Return the core profile record for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me", getProfile)); `apps/web/src/services/profileService.ts` (ProfileService.getMe).
+ * How it works: Authenticates via `getAuthenticatedUser`, fetches the `profiles` row by id, and maps it with `mapProfileCore`.
  */
 export const getProfile = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -61,8 +63,10 @@ export const getProfile = async (req: Request, res: Response) => {
 };
 
 /**
- * PATCH /api/profile/me
- * Updates core profile fields for the authenticated user.
+ * Route: PATCH /api/profile/me
+ * Purpose: Update editable core profile fields for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.patch("/me", updateProfile)).
+ * How it works: Parses the payload with `ProfileUpdateSchema`, builds a partial update, saves it to `profiles`, and returns the mapped row.
  */
 export const updateProfile = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

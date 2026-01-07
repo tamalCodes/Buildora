@@ -11,8 +11,10 @@ const buildResumePayload = (input: { url: string; label?: string }) => ({
 });
 
 /**
- * GET /api/profile/me/resume
- * Returns the resume link for the authenticated user.
+ * Route: GET /api/profile/me/resume
+ * Purpose: Return the resume link for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/resume", getResume)).
+ * How it works: Authenticates the request, fetches the `profile_resumes` row by profile id, and maps the record if it exists.
  */
 export const getResume = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -43,8 +45,10 @@ export const getResume = async (req: Request, res: Response) => {
 };
 
 /**
- * PUT /api/profile/me/resume
- * Upserts the resume link for the authenticated user.
+ * Route: PUT /api/profile/me/resume
+ * Purpose: Upsert the resume link for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.put("/me/resume", upsertResume)).
+ * How it works: Validates the payload, upserts by profile id, and returns the mapped record.
  */
 export const upsertResume = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -80,8 +84,10 @@ export const upsertResume = async (req: Request, res: Response) => {
 };
 
 /**
- * DELETE /api/profile/me/resume
- * Deletes the resume link for the authenticated user.
+ * Route: DELETE /api/profile/me/resume
+ * Purpose: Delete the resume link for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.delete("/me/resume", deleteResume)).
+ * How it works: Deletes the row by profile id and returns the deleted id on success.
  */
 export const deleteResume = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

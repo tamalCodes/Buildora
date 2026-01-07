@@ -14,8 +14,10 @@ const buildLinkPayload = (input: { label: string; url: string }) => ({
 });
 
 /**
- * GET /api/profile/me/links
- * Returns profile links for the authenticated user.
+ * Route: GET /api/profile/me/links
+ * Purpose: List profile links for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/links", listLinks)).
+ * How it works: Authenticates the request, queries `profile_links` by profile id, and maps each row.
  */
 export const listLinks = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -45,8 +47,10 @@ export const listLinks = async (req: Request, res: Response) => {
 };
 
 /**
- * POST /api/profile/me/links
- * Creates a new profile link for the authenticated user.
+ * Route: POST /api/profile/me/links
+ * Purpose: Create a new profile link for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.post("/me/links", createLink)).
+ * How it works: Validates the body with `ProfileLinkCreateSchema`, inserts the row, and returns the mapped record.
  */
 export const createLink = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -79,8 +83,10 @@ export const createLink = async (req: Request, res: Response) => {
 };
 
 /**
- * PATCH /api/profile/me/links/:id
- * Updates a profile link owned by the authenticated user.
+ * Route: PATCH /api/profile/me/links/:id
+ * Purpose: Update a profile link owned by the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.patch("/me/links/:id", updateLink)).
+ * How it works: Validates the body, updates the row by id + profile id, and returns the mapped record.
  */
 export const updateLink = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -119,8 +125,10 @@ export const updateLink = async (req: Request, res: Response) => {
 };
 
 /**
- * DELETE /api/profile/me/links/:id
- * Deletes a profile link owned by the authenticated user.
+ * Route: DELETE /api/profile/me/links/:id
+ * Purpose: Delete a profile link owned by the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.delete("/me/links/:id", deleteLink)).
+ * How it works: Deletes the row by id + profile id and returns the deleted id on success.
  */
 export const deleteLink = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

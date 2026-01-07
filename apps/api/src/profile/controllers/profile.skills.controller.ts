@@ -13,8 +13,10 @@ const buildSkillsPayload = (skills: string[], profileId: string) =>
   }));
 
 /**
- * GET /api/profile/me/skills
- * Returns the top skills for the authenticated user.
+ * Route: GET /api/profile/me/skills
+ * Purpose: List the top skills for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/skills", listSkills)).
+ * How it works: Authenticates the request, queries `profile_skills` by profile id, and maps each row.
  */
 export const listSkills = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
@@ -44,8 +46,10 @@ export const listSkills = async (req: Request, res: Response) => {
 };
 
 /**
- * PUT /api/profile/me/skills
- * Replaces the full set of skills for the authenticated user.
+ * Route: PUT /api/profile/me/skills
+ * Purpose: Replace the entire skills list for the signed-in user.
+ * Used by: `apps/api/src/profile/routes.ts` (router.put("/me/skills", replaceSkills)).
+ * How it works: Validates the payload, deletes existing skills for the profile, inserts the new ranked list, and maps the result.
  */
 export const replaceSkills = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);

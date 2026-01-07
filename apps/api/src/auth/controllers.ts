@@ -22,8 +22,10 @@ const PUBLIC_DOMAINS = new Set([
   "me.com",
 ]);
 
+/** Normalize email strings for consistent lookups and auth. */
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
+/** Map raw profile rows into API response shape. */
 const mapProfile = (profile: any) => ({
   id: profile.id,
   email: profile.email,
@@ -34,6 +36,12 @@ const mapProfile = (profile: any) => ({
   createdAt: profile.created_at || undefined,
 });
 
+/**
+ * Route: POST /api/auth/identify
+ * Purpose: Check whether an email already exists and infer the likely user type.
+ * Used by: `apps/api/src/auth/routes.ts` (router.post("/identify", identifyUser)); `apps/web/src/services/authService.ts` (AuthService.identify).
+ * How it works: Validates the request body, normalizes the email, looks up a profile by email, then falls back to domain-based detection to suggest a user type.
+ */
 export const identifyUser = async (req: Request, res: Response) => {
   try {
     const { email } = IdentifyRequestSchema.parse(req.body);
@@ -72,10 +80,18 @@ export const identifyUser = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * Route: POST /api/auth/authenticate
+ * Purpose: Sign in an existing user or provision a new user/profile and return a session token.
+ * Used by: `apps/api/src/auth/routes.ts` (router.post("/authenticate", authenticateUser)); `apps/web/src/services/authService.ts` (AuthService.authenticate).
+ * How it works: Validates the payload, attempts Supabase password sign-in, creates a user/profile if needed, and returns the mapped profile with an access token.
+ */
+
 export const authenticateUser = async (req: Request, res: Response) => {
   try {
     const { email, password, userType, organizationName } =
       AuthenticateRequestSchema.parse(req.body);
+
     const normalizedEmail = normalizeEmail(email);
 
     const { data: signInData, error: signInError } =
@@ -93,7 +109,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
             .eq("email", normalizedEmail)
             .maybeSingle();
 
-        if (profileLookupError) throw profileLookupError;
+        if (profileLookupError) {
+          throw profileLookupError;
+        }
 
         if (existingProfile) {
           return res.status(401).json({
@@ -124,7 +142,10 @@ export const authenticateUser = async (req: Request, res: Response) => {
 
           throw signUpError;
         }
-        if (!signUpData.user) throw new Error("User creation failed.");
+
+        if (!signUpData.user) {
+          throw new Error("User creation failed.");
+        }
 
         const { data: newSession, error: sessionError } =
           await supabase.auth.signInWithPassword({
@@ -132,7 +153,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
             password,
           });
 
-        if (sessionError) throw sessionError;
+        if (sessionError) {
+          throw sessionError;
+        }
 
         const { error: profileError } = await supabase.from("profiles").insert({
           id: signUpData.user.id,
@@ -142,7 +165,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
             userType === UserType.ORGANIZATION ? organizationName : null,
         });
 
-        if (profileError) throw profileError;
+        if (profileError) {
+          throw profileError;
+        }
 
         return res.json({
           success: true,
@@ -171,7 +196,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
       .limit(1)
       .maybeSingle();
 
-    if (profileError) throw profileError;
+    if (profileError) {
+      throw profileError;
+    }
 
     let resolvedProfile = profile;
     if (!resolvedProfile) {
@@ -183,7 +210,9 @@ export const authenticateUser = async (req: Request, res: Response) => {
           userType === UserType.ORGANIZATION ? organizationName : null,
       });
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        throw insertError;
+      }
 
       const { data: createdProfile, error: createdProfileError } =
         await supabase
@@ -215,6 +244,13 @@ export const authenticateUser = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * Route: POST /api/auth/forgot-password
+ * Purpose: Trigger a password reset email and return delivery status.
+ * Used by: `apps/api/src/auth/routes.ts` (router.post("/forgot-password", forgotPassword)); `apps/web/src/services/authService.ts` (AuthService.forgotPassword).
+ * How it works: Validates the payload, resolves the redirect URL, and calls `resetPasswordForEmail` on Supabase auth.
+ */
+
 export const forgotPassword = async (req: Request, res: Response) => {
   try {
     const { email, redirectTo } = ForgotPasswordRequestSchema.parse(req.body);
@@ -243,6 +279,13 @@ export const forgotPassword = async (req: Request, res: Response) => {
     });
   }
 };
+
+/**
+ * Route: POST /api/auth/reset-password
+ * Purpose: Update the user's password using the reset access token.
+ * Used by: `apps/api/src/auth/routes.ts` (router.post("/reset-password", resetPassword)); `apps/web/src/services/authService.ts` (AuthService.resetPassword).
+ * How it works: Validates the payload, verifies the token via `getUser`, and updates the password through the admin API.
+ */
 
 export const resetPassword = async (req: Request, res: Response) => {
   try {
@@ -276,6 +319,13 @@ export const resetPassword = async (req: Request, res: Response) => {
     });
   }
 };
+
+/**
+ * Route: GET /api/auth/me
+ * Purpose: Return the current session user and profile for a Bearer token.
+ * Used by: `apps/api/src/auth/routes.ts` (router.get("/me", getMe)); `apps/web/src/services/authService.ts` (AuthService.getMe).
+ * How it works: Reads the Bearer token, verifies the session with Supabase, loads the profile row, and maps it for the API response.
+ */
 
 export const getMe = async (req: Request, res: Response) => {
   const authHeader = req.headers.authorization;
