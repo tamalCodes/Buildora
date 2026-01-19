@@ -1,10 +1,10 @@
-import React from "react";
-import SettingsCard from "../../settings/components/SettingsCard";
+import type { ProfileContactSectionProps } from "@/features/profile/constants/interfaces";
+import SettingsCard from "@/features/settings/components/SettingsCard";
 import {
   SettingsButton,
   SettingsInput,
-} from "../../settings/components/SettingsControls";
-import type { ProfileContactSectionProps } from "../constants/interfaces";
+} from "@/features/settings/components/SettingsControls";
+import React from "react";
 
 const ProfileContactSection: React.FC<ProfileContactSectionProps> = ({
   userEmail,

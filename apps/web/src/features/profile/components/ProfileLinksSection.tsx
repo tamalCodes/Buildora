@@ -1,6 +1,6 @@
+import SettingsCard from "@/features/settings/components/SettingsCard";
+import { SettingsButton } from "@/features/settings/components/SettingsControls";
 import React from "react";
-import SettingsCard from "../../settings/components/SettingsCard";
-import { SettingsButton } from "../../settings/components/SettingsControls";
 
 const ProfileLinksSection: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import type { ProjectLinksProps } from "../constants/interfaces";
+import type { ProjectLinksProps } from "@/features/projects/constants/interfaces";
 
 const toneStyles: Record<ProjectLink["tone"], string> = {
   primary:

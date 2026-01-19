@@ -1,7 +1,7 @@
 import { AlertTriangle, CheckCircle2, Clock4 } from "lucide-react";
 import React from "react";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationSectionCardProps } from "../constants/interfaces";
+import type { ApplicationSectionCardProps } from "@/features/hackathons/application/constants/interfaces";
 import { applicationTheme } from "../constants/themes";
 
 const statusStyles = {

@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileLink } from "@/profile/mappers/profile.links.mapper";
+import { mapProfileLink } from "@/profile/mappers/profile.mappers";
 import {
   ProfileLinkCreateSchema,
   ProfileLinkUpdateSchema,

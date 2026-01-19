@@ -1,7 +1,7 @@
 import React from "react";
 import HackathonTabs from "../../components/HackathonTabs";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationHeroProps } from "../constants/interfaces";
+import type { ApplicationHeroProps } from "@/features/hackathons/application/constants/interfaces";
 import { applicationTheme } from "../constants/themes";
 
 const ApplicationHero: React.FC<ApplicationHeroProps> = ({

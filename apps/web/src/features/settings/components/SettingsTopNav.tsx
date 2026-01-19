@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import Logo from "@shared/components/Logo";
-import type { SettingsTopNavProps } from "../constants/interfaces";
+import type { SettingsTopNavProps } from "@/features/settings/constants/interfaces";
 
 const SettingsTopNav: React.FC<SettingsTopNavProps> = ({ user, onSignOut }) => {
   const userLabel = user?.name || user?.email || "Guest";

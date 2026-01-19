@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileCore } from "@/profile/mappers/profile.core.mapper";
+import { mapProfileCore } from "@/profile/mappers/profile.mappers";
 import type { ProfileSummary } from "@/profile/types/profile.core.types";
 import type { Request, Response } from "express";
 
@@ -12,6 +12,7 @@ const mapProfile = mapProfileCore;
  * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/summary", getProfileSummary)); `apps/web/src/services/profileService.ts` (ProfileService.getSummary).
  * How it works: Authenticates the user, loads the profile row, fetches top-ranked skills, and returns a `ProfileSummary` payload.
  */
+
 export const getProfileSummary = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {

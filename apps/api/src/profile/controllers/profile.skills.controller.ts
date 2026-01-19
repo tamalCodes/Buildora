@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileSkill } from "@/profile/mappers/profile.skills.mapper";
+import { mapProfileSkill } from "@/profile/mappers/profile.mappers";
 import { ProfileSkillsUpdateSchema } from "@/profile/validators/profile.skills.validators";
 import type { Request, Response } from "express";
 
@@ -18,6 +18,7 @@ const buildSkillsPayload = (skills: string[], profileId: string) =>
  * Used by: `apps/api/src/profile/routes.ts` (router.get("/me/skills", listSkills)).
  * How it works: Authenticates the request, queries `profile_skills` by profile id, and maps each row.
  */
+
 export const listSkills = async (req: Request, res: Response) => {
   const { user, error } = await getAuthenticatedUser(req);
   if (error || !user) {

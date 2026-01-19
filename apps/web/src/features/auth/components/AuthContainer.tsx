@@ -1,6 +1,6 @@
 
 import React from "react";
-import type { AuthContainerProps } from "../constants/interfaces";
+import type { AuthContainerProps } from "@/features/auth/constants/interfaces";
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
   return (

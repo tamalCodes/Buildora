@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { ProfileHeaderProps } from "../constants/interfaces";
+import type { ProfileHeaderProps } from "@/features/profile/constants/interfaces";
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   avatarUrl,

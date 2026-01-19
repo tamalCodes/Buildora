@@ -1,5 +1,5 @@
 import React from "react";
-import type { HackathonPrizesProps } from "../constants/interfaces";
+import type { HackathonPrizesProps } from "@/features/hackathons/constants/interfaces";
 
 const HackathonPrizes: React.FC<HackathonPrizesProps> = ({ detail }) => {
   return (

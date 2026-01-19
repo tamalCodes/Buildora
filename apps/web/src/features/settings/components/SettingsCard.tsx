@@ -1,5 +1,5 @@
 import React from "react";
-import type { SettingsCardProps } from "../constants/interfaces";
+import type { SettingsCardProps } from "@/features/settings/constants/interfaces";
 
 const SettingsCard: React.FC<SettingsCardProps> = ({
   title,

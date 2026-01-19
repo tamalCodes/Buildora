@@ -1,5 +1,5 @@
 import React from "react";
-import type { BuilderProfileProjectsProps } from "../constants/interfaces";
+import type { BuilderProfileProjectsProps } from "@/features/builders/constants/interfaces";
 
 const BuilderProfileProjects: React.FC<BuilderProfileProjectsProps> = ({
   profile,

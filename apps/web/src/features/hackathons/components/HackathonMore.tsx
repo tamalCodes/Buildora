@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import type { HackathonMoreProps } from "../constants/interfaces";
+import type { HackathonMoreProps } from "@/features/hackathons/constants/interfaces";
 
 const HackathonMore: React.FC<HackathonMoreProps> = ({ hackathons }) => {
   return (

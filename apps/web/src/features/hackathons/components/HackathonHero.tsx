@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@shared/components/Button";
-import type { HackathonHeroProps } from "../constants/interfaces";
+import type { HackathonHeroProps } from "@/features/hackathons/constants/interfaces";
 import { isOnlineHackathon } from "../constants/utils";
 import HackathonTabs from "./HackathonTabs";
 

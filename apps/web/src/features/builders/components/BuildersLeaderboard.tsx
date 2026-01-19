@@ -5,7 +5,7 @@ import type { BuilderStatKey } from "../constants/types";
 import type {
   LeaderboardRowProps,
   StatPillProps,
-} from "../constants/interfaces";
+} from "@/features/builders/constants/interfaces";
 
 const StatPill: React.FC<StatPillProps> = ({ label, value, variant }) => {
   const styles: Record<

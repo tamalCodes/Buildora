@@ -1,6 +1,6 @@
 import React from "react";
-import { PROFILE_NAV_ITEMS } from "../constants/enums";
-import type { ProfileSidebarProps } from "../constants/interfaces";
+import { PROFILE_NAV_ITEMS } from "@/features/profile/constants/enums";
+import type { ProfileSidebarProps } from "@/features/profile/constants/interfaces";
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   activeId,

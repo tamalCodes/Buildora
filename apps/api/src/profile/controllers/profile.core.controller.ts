@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileCore } from "@/profile/mappers/profile.core.mapper";
+import { mapProfileCore } from "@/profile/mappers/profile.mappers";
 import { ProfileUpdateSchema } from "@/profile/validators/profile.core.validators";
 import type { Request, Response } from "express";
 import { ProfileUpdateInput } from "../types/profile.core.types";

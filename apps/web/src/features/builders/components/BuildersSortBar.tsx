@@ -1,6 +1,6 @@
 import React from "react";
 import { BUILDER_SORTS } from "../constants/constants";
-import type { BuildersSortBarProps } from "../constants/interfaces";
+import type { BuildersSortBarProps } from "@/features/builders/constants/interfaces";
 
 const BuildersSortBar: React.FC<BuildersSortBarProps> = ({
   activeSort,

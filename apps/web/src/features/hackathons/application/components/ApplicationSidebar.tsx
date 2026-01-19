@@ -1,7 +1,7 @@
 import Button from "@shared/components/Button";
 import React, { useEffect, useMemo, useState } from "react";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationSidebarProps } from "../constants/interfaces";
+import type { ApplicationSidebarProps } from "@/features/hackathons/application/constants/interfaces";
 import { applicationTheme } from "../constants/themes";
 
 const formatCountdown = (targetMs: number) => {

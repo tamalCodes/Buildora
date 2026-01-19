@@ -1,6 +1,6 @@
 import Button from "@shared/components/Button";
 import React from "react";
-import type { ProjectHeroProps } from "../constants/interfaces";
+import type { ProjectHeroProps } from "@/features/projects/constants/interfaces";
 
 const ProjectHero: React.FC<ProjectHeroProps> = ({ project, details }) => {
   return (

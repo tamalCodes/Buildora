@@ -4,7 +4,7 @@ import type {
   SettingsCheckboxProps,
   SettingsInputProps,
   SettingsToggleProps,
-} from "../constants/interfaces";
+} from "@/features/settings/constants/interfaces";
 import type { ButtonVariant } from "../constants/types";
 
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {

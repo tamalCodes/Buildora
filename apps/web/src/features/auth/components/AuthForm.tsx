@@ -10,7 +10,7 @@ import Button from "@shared/components/Button";
 import { useCustomToast } from "@shared/components/CustomToast";
 import Input from "@shared/components/Input";
 import React, { useEffect, useState } from "react";
-import type { AuthFormProps } from "../constants/interfaces";
+import type { AuthFormProps } from "@/features/auth/constants/interfaces";
 import type { AuthFieldErrors, AuthFieldErrorKey } from "../constants/types";
 
 const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {

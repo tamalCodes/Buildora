@@ -1,5 +1,5 @@
 import React from "react";
-import type { SettingsSidebarProps } from "../constants/interfaces";
+import type { SettingsSidebarProps } from "@/features/settings/constants/interfaces";
 
 const SettingsSidebar: React.FC<SettingsSidebarProps> = ({
   items,

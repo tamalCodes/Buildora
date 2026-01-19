@@ -1,10 +1,10 @@
-import React from "react";
-import SettingsCard from "../../settings/components/SettingsCard";
+import SettingsCard from "@/features/settings/components/SettingsCard";
 import {
   SettingsButton,
   SettingsCheckbox,
   SettingsInput,
-} from "../../settings/components/SettingsControls";
+} from "@/features/settings/components/SettingsControls";
+import React from "react";
 
 const ProfileExperienceSection: React.FC = () => {
   return (
@@ -59,7 +59,7 @@ const ProfileExperienceSection: React.FC = () => {
                     ×
                   </button>
                 </span>
-              )
+              ),
             )}
           </div>
         </div>
@@ -85,7 +85,9 @@ const ProfileExperienceSection: React.FC = () => {
       >
         <div className="flex flex-col gap-4">
           <SettingsCheckbox label="I am yet to find my first work opportunity" />
-          <SettingsButton variant="secondary">+ Add an experience</SettingsButton>
+          <SettingsButton variant="secondary">
+            + Add an experience
+          </SettingsButton>
         </div>
       </SettingsCard>
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 import { BUILDER_PANELS } from "../constants/constants";
-import type { HighlightPanelProps } from "../constants/interfaces";
+import type { HighlightPanelProps } from "@/features/builders/constants/interfaces";
 
 const HighlightPanel: React.FC<HighlightPanelProps> = ({ panel }) => (
   <div

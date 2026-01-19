@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileEducation } from "@/profile/mappers/profile.education.mapper";
+import { mapProfileEducation } from "@/profile/mappers/profile.mappers";
 import {
   ProfileEducationCreateSchema,
   ProfileEducationUpdateSchema,

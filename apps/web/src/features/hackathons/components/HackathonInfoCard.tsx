@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@shared/components/Button";
-import type { HackathonInfoCardProps } from "../constants/interfaces";
+import type { HackathonInfoCardProps } from "@/features/hackathons/constants/interfaces";
 import { isOnlineHackathon } from "../constants/utils";
 
 const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({

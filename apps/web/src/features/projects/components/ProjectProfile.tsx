@@ -1,5 +1,5 @@
 import React from "react";
-import type { ProjectProfileProps } from "../constants/interfaces";
+import type { ProjectProfileProps } from "@/features/projects/constants/interfaces";
 
 const ProjectProfile: React.FC<ProjectProfileProps> = ({ details }) => {
   const items = [

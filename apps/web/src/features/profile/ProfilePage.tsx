@@ -16,10 +16,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
   const [activeSection, setActiveSection] = useState<ProfileSectionId>(
     ProfileSectionId.About
   );
-  const { data: summaryResponse } = useProfileSummary();
-  const { data: profileResponse } = useProfileMe();
-  const summary = summaryResponse?.success ? summaryResponse.data : undefined;
-  const profile = profileResponse?.success ? profileResponse.data : undefined;
+  const { data: summary } = useProfileSummary();
+  const { data: profile } = useProfileMe();
 
   const userLabel = summary?.profile?.name || profile?.name || user?.name || "tamalCodes";
   const userEmail =

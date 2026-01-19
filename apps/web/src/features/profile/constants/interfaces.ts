@@ -30,9 +30,9 @@ export interface ProfileSidebarProps {
 
 export interface ProfileContactSectionProps {
   userEmail: string;
-  profile?: import("../../../services/profileService").ProfileCore;
+  profile?: import("../../../services/types/profile.types").ProfileCore;
 }
 
 export interface ProfileAboutSectionProps {
-  profile?: import("../../../services/profileService").ProfileCore;
+  profile?: import("../../../services/types/profile.types").ProfileCore;
 }

@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileResume } from "@/profile/mappers/profile.resume.mapper";
+import { mapProfileResume } from "@/profile/mappers/profile.mappers";
 import { ProfileResumeUpsertSchema } from "@/profile/validators/profile.resume.validators";
 import type { Request, Response } from "express";
 

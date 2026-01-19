@@ -1,7 +1,7 @@
 import Button from "@shared/components/Button";
 import React from "react";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationAboutFormProps } from "../constants/interfaces";
+import type { ApplicationAboutFormProps } from "@/features/hackathons/application/constants/interfaces";
 
 const ApplicationAboutForm: React.FC<ApplicationAboutFormProps> = ({
   firstName,

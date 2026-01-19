@@ -2,7 +2,7 @@ import Button from "@shared/components/Button";
 import { Trash2 } from "lucide-react";
 import React from "react";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationLinksFormProps } from "../constants/interfaces";
+import type { ApplicationLinksFormProps } from "@/features/hackathons/application/constants/interfaces";
 
 const ApplicationLinksForm: React.FC<ApplicationLinksFormProps> = ({
   links,

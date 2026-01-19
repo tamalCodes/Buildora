@@ -2,7 +2,7 @@ import Button from "@shared/components/Button";
 import { X } from "lucide-react";
 import React from "react";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationExperienceFormProps } from "../constants/interfaces";
+import type { ApplicationExperienceFormProps } from "@/features/hackathons/application/constants/interfaces";
 
 const ApplicationExperienceForm: React.FC<ApplicationExperienceFormProps> = ({
   roles,

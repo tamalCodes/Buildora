@@ -1,7 +1,7 @@
 import { Info } from "lucide-react";
 import React from "react";
 import { applicationClasses } from "../constants/classes";
-import type { ApplicationNoticeProps } from "../constants/interfaces";
+import type { ApplicationNoticeProps } from "@/features/hackathons/application/constants/interfaces";
 import { applicationTheme } from "../constants/themes";
 
 const ApplicationNotice: React.FC<ApplicationNoticeProps> = ({

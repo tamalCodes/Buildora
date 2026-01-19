@@ -1,5 +1,5 @@
 import React from "react";
-import type { ProjectUpdatesProps } from "../constants/interfaces";
+import type { ProjectUpdatesProps } from "@/features/projects/constants/interfaces";
 
 const ProjectUpdates: React.FC<ProjectUpdatesProps> = ({ updates }) => {
   return (

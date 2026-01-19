@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileExperience } from "@/profile/mappers/profile.experience.mapper";
+import { mapProfileExperience } from "@/profile/mappers/profile.mappers";
 import {
   ProfileExperienceCreateSchema,
   ProfileExperienceUpdateSchema,

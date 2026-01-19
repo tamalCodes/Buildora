@@ -1,5 +1,5 @@
 import React from "react";
-import type { ProjectMilestonesProps } from "../constants/interfaces";
+import type { ProjectMilestonesProps } from "@/features/projects/constants/interfaces";
 
 const statusStyles: Record<ProjectMilestone["status"], string> = {
   done: "bg-emerald-400",

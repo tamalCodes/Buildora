@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
-import { mapProfileRole } from "@/profile/mappers/profile.roles.mapper";
+import { mapProfileRole } from "@/profile/mappers/profile.mappers";
 import { ProfileRolesUpdateSchema } from "@/profile/validators/profile.roles.validators";
 import type { Request, Response } from "express";
 

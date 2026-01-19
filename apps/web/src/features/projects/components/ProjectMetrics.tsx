@@ -1,5 +1,5 @@
 import React from "react";
-import type { ProjectMetricsProps } from "../constants/interfaces";
+import type { ProjectMetricsProps } from "@/features/projects/constants/interfaces";
 
 const trendStyles = {
   up: "text-emerald-300",

@@ -1,5 +1,5 @@
 import React from "react";
-import type { ProjectGalleryProps } from "../constants/interfaces";
+import type { ProjectGalleryProps } from "@/features/projects/constants/interfaces";
 
 const ProjectGallery: React.FC<ProjectGalleryProps> = ({ gallery }) => {
   if (!gallery.length) {

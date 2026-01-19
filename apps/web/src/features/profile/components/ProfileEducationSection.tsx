@@ -1,10 +1,10 @@
-import React from "react";
-import SettingsCard from "../../settings/components/SettingsCard";
+import SettingsCard from "@/features/settings/components/SettingsCard";
 import {
   SettingsButton,
   SettingsCheckbox,
   SettingsInput,
-} from "../../settings/components/SettingsControls";
+} from "@/features/settings/components/SettingsControls";
+import React from "react";
 
 const ProfileEducationSection: React.FC = () => {
   return (
