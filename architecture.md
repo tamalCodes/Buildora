@@ -78,6 +78,48 @@
 
 - **Distribution** - `package.json` scripts build the package into `dist`, so `apps/api` and `apps/web` can import `@buildora/shared` instead of duplicating validation or response shapes.
 
+## Database Schema (Supabase PostgreSQL)
+
+Full SQL lives in [`supabase/schema.sql`](supabase/schema.sql). Run it in Supabase SQL Editor to recreate all tables.
+
+### Tables
+
+| Table | Relationship | Description |
+|-------|-------------|-------------|
+| `auth.users` | (Supabase built-in) | Managed by Supabase Auth — email, password, JWT |
+| `profiles` | 1:1 with `auth.users` | Core user profile (name, bio, contact, etc.) |
+| `profile_educations` | N:1 → `profiles` | Education history entries |
+| `profile_experiences` | N:1 → `profiles` | Work experience entries |
+| `profile_links` | N:1 → `profiles` | Social/personal links (label + url) |
+| `profile_resumes` | 1:1 → `profiles` | Single resume per user (UNIQUE on profile_id) |
+| `profile_roles` | N:1 → `profiles` | Role labels (bulk-replaced via PUT, max 12) |
+| `profile_skills` | N:1 → `profiles` | Ranked skills (bulk-replaced via PUT, max 5) |
+
+### Relationship Diagram
+
+```
+auth.users
+    │
+    │ 1:1 (id → profiles.id)
+    │
+profiles
+    ├──→ 1:N → profile_educations
+    ├──→ 1:N → profile_experiences
+    ├──→ 1:N → profile_links
+    ├──→ 1:1 → profile_resumes (UNIQUE constraint)
+    ├──→ 1:N → profile_roles
+    └──→ 1:N → profile_skills
+```
+
+### Key Patterns
+- **All tables** use `ON DELETE CASCADE` from `profiles`, which cascades from `auth.users`
+- **Ownership** enforced in code via `.eq("profile_id", user.id)` on every query
+- **RLS enabled** but no policies — backend uses Service Role Key (bypasses RLS)
+- **Roles & Skills** use bulk-replace pattern: DELETE all → INSERT new set
+- **Resumes** use upsert with `onConflict: "profile_id"` (one per user)
+- **IDs** are UUID with `gen_random_uuid()` default
+- **Timestamps** are `TIMESTAMPTZ DEFAULT now()`
+
 ## How the pieces talk
 
 - The frontend `AuthService` hits `https://<api>/api/auth/*` and stores the returned JWT; the backend controllers validate that token via Supabase before returning user/profile data. Environment variables ensure the frontend points to the correct backend origin while the backend can reach Supabase's admin APIs.
