@@ -161,6 +161,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
           <div className="space-y-8">
             <form onSubmit={handleIdentify} className="space-y-6">
               <Input
+                id="email"
+                name="email"
                 label="Email Address"
                 type="email"
                 placeholder="name@company.com"
@@ -278,6 +280,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
 
               {userType === UserType.ORGANIZATION && (
                 <Input
+                  id="organizationName"
+                  name="organizationName"
                   label="Organization Name"
                   type="text"
                   placeholder="e.g. Acme Corp"
@@ -293,6 +297,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
               )}
 
               <Input
+                id="password"
+                name="password"
                 label="Password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"

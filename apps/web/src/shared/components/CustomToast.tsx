@@ -79,16 +79,16 @@ export const CustomToastProvider: React.FC<{ children: React.ReactNode }> = ({ c
           >
             <div className="flex-1">
               {toast.title && (
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-white/60">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]">
                   {toast.title}
                 </p>
               )}
-              <p className="text-sm font-medium text-white/90">{toast.message}</p>
+              <p className="text-sm font-medium text-[var(--text-primary)]">{toast.message}</p>
             </div>
             <button
               type="button"
               onClick={() => removeToast(toast.id)}
-              className="text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white"
+              className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-heading)]"
               aria-label="Dismiss notification"
             >
               X

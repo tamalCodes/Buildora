@@ -161,17 +161,17 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
 
   return (
     <div
-      className={`rounded-[2.5rem] p-8 border border-white/10 ${
-        isCompact ? "bg-[#0c111b] shadow-2xl" : "glass-card"
+      className={`rounded-[2.5rem] p-8 border border-[var(--border-default)] ${
+        isCompact ? "bg-[var(--bg-elevated)] shadow-2xl" : "glass-card"
       } ${containerClassName}`}
       onBlur={handleWrapperBlur}
     >
       <div className="flex items-center justify-between">
-        <p className="text-sm font-black uppercase tracking-widest text-slate-400">
+        <p className="text-sm font-black uppercase tracking-widest text-[var(--text-secondary)]">
           {title}
         </p>
         {statusLabel ? (
-          <span className="text-[10px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+          <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1 rounded-full">
             {statusLabel}
           </span>
         ) : null}
@@ -208,7 +208,7 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
       </div>
 
       {isOpen && !isCompact ? (
-        <div className="mt-6 rounded-[2rem] border border-white/10 bg-[#0b0f17]">
+        <div className="mt-6 rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-elevated)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6">
             <div className="lg:col-span-4 space-y-3">
               {categories.map((category) => {
@@ -218,8 +218,8 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                     key={category.id}
                     className={`w-full flex items-center justify-between gap-3 rounded-2xl px-4 py-3 border transition-all ${
                       isActive
-                        ? "bg-white/10 border-white/20 text-white"
-                        : "bg-white/5 border-white/5 text-slate-400 hover:border-white/20 hover:text-white"
+                        ? "bg-[var(--bg-surface)] border-[var(--border-hover)] text-[var(--text-heading)]"
+                        : "bg-[var(--bg-input)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-hover)] hover:text-[var(--text-heading)]"
                     }`}
                     onClick={() => {
                       setActiveCategoryId(category.id);
@@ -239,13 +239,13 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                       </div>
                       <div>
                         <p className="text-sm font-bold">{category.label}</p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-[var(--text-tertiary)]">
                           {category.description}
                         </p>
                       </div>
                     </div>
                     <svg
-                      className="h-4 w-4 text-slate-500"
+                      className="h-4 w-4 text-[var(--text-tertiary)]"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -266,20 +266,20 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                     key={facet.id}
                     className={`w-full flex items-center justify-between gap-3 rounded-2xl px-4 py-3 border transition-all ${
                       isActive
-                        ? "bg-indigo-500/80 border-indigo-300 text-white"
-                        : "bg-white/5 border-white/5 text-slate-300 hover:border-indigo-400/40 hover:text-white"
+                        ? "bg-[var(--accent-bg)] border-[var(--accent-border-active)] text-white"
+                        : "bg-[var(--bg-input)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--accent-border)] hover:text-[var(--text-heading)]"
                     }`}
                     onClick={() => setActiveFacetId(facet.id)}
                     type="button"
                   >
                     <div className="text-left">
                       <p className="text-sm font-bold">{facet.label}</p>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-[var(--text-secondary)]">
                         {facet.description}
                       </p>
                     </div>
                     <svg
-                      className="h-4 w-4 text-slate-200"
+                      className="h-4 w-4 text-[var(--text-primary)]"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -293,38 +293,38 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
             </div>
 
             <div className="lg:col-span-4 space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-black uppercase tracking-widest text-slate-500">
+              <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] p-4">
+                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-tertiary)]">
                   Search tips
                 </p>
-                <p className="text-sm font-bold text-white mt-2">
+                <p className="text-sm font-bold text-[var(--text-heading)] mt-2">
                   {activeGuidance?.title ?? "Search Buildora"}
                 </p>
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-[var(--text-secondary)] mt-2">
                   {activeGuidance?.description ??
                     "Type in the field above to discover anything."}
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 space-y-3">
-                <p className="text-xs font-black uppercase tracking-widest text-slate-500">
+              <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] p-4 space-y-3">
+                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-tertiary)]">
                   Quick commands
                 </p>
                 {filteredCommands.map((command) => (
                   <div
                     key={command.id}
-                    className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
+                    className="flex items-center justify-between gap-3 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-2"
                   >
                     <div>
-                      <p className="text-sm font-semibold text-white">
+                      <p className="text-sm font-semibold text-[var(--text-heading)]">
                         {command.label}
                       </p>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-[var(--text-tertiary)]">
                         {command.description}
                       </p>
                     </div>
                     {command.urlLabel ? (
-                      <span className="text-[10px] font-semibold text-slate-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
+                      <span className="text-[10px] font-semibold text-[var(--text-secondary)] bg-[var(--bg-input)] border border-[var(--border-default)] px-2.5 py-1 rounded-full">
                         {command.urlLabel}
                       </span>
                     ) : null}
@@ -334,15 +334,15 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
             </div>
           </div>
 
-          <div className="border-t border-white/10 px-6 py-4">
-            <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-widest text-slate-500 font-semibold">
+          <div className="border-t border-[var(--border-default)] px-6 py-4">
+            <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-widest text-[var(--text-tertiary)] font-semibold">
               {shortcuts.map((shortcut) => (
                 <div
                   key={shortcut.id}
-                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1"
+                  className="flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-1"
                 >
                   <span>{shortcut.label}</span>
-                  <span className="text-slate-300">
+                  <span className="text-[var(--text-primary)]">
                     {shortcut.keys.join(" + ")}
                   </span>
                 </div>
@@ -353,7 +353,7 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
       ) : null}
 
       {isOpen && isCompact ? (
-        <div className="mt-5 rounded-2xl border border-white/10 bg-[#0b0f17] p-4">
+        <div className="mt-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-elevated)] p-4">
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => {
               const isActive = category.id === activeCategoryId;
@@ -362,8 +362,8 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                   key={category.id}
                   className={`rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-widest transition ${
                     isActive
-                      ? "bg-indigo-500/30 border-indigo-400/60 text-white"
-                      : "bg-white/5 border-white/10 text-slate-400 hover:border-white/20 hover:text-white"
+                      ? "bg-[var(--accent-bg-active)] border-[var(--accent-border-active)] text-[var(--accent-text-on-active)]"
+                      : "bg-[var(--bg-input)] border-[var(--border-default)] text-[var(--text-secondary)] hover:border-[var(--border-hover)] hover:text-[var(--text-heading)]"
                   }`}
                   onClick={() => setActiveCategoryId(category.id)}
                   type="button"
@@ -374,10 +374,10 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
             })}
           </div>
           <div className="mt-4 flex items-center justify-between">
-            <p className="text-xs font-black uppercase tracking-widest text-slate-500">
+            <p className="text-xs font-black uppercase tracking-widest text-[var(--text-tertiary)]">
               Results
             </p>
-            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1 rounded-full">
               {trimmedQuery.length > 0 ? filteredResults.length : 0} matches
             </span>
           </div>
@@ -390,8 +390,8 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                   key={result.id}
                   className={`w-full flex items-center justify-between gap-4 rounded-2xl border px-4 py-3 text-left transition ${
                     isActive
-                      ? "bg-indigo-500/30 border-indigo-400/60 text-white"
-                      : "bg-white/5 border-white/10 text-slate-300 hover:border-white/20 hover:text-white"
+                      ? "bg-[var(--accent-bg-active)] border-[var(--accent-border-active)] text-[var(--accent-text-on-active)]"
+                      : "bg-[var(--bg-input)] border-[var(--border-default)] text-[var(--text-primary)] hover:border-[var(--border-hover)] hover:text-[var(--text-heading)]"
                   }`}
                   onMouseEnter={() => setActiveResultId(result.id)}
                   type="button"
@@ -400,15 +400,15 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-semibold">{result.title}</p>
                       {result.badge ? (
-                        <span className="text-[9px] font-black uppercase tracking-widest text-indigo-200 bg-indigo-500/20 border border-indigo-500/30 px-2 py-0.5 rounded-full">
+                        <span className="text-[9px] font-black uppercase tracking-widest text-[var(--accent-text-soft)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-2 py-0.5 rounded-full">
                           {result.badge}
                         </span>
                       ) : null}
                     </div>
-                    <p className="text-xs text-slate-500">{result.subtitle}</p>
+                    <p className="text-xs text-[var(--text-tertiary)]">{result.subtitle}</p>
                   </div>
                   {result.urlLabel ? (
-                    <span className="text-[10px] font-semibold text-slate-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+                    <span className="text-[10px] font-semibold text-[var(--text-secondary)] bg-[var(--bg-input)] border border-[var(--border-default)] px-3 py-1 rounded-full">
                       {result.urlLabel}
                     </span>
                   ) : null}
@@ -417,12 +417,12 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
             })
               : null}
             {trimmedQuery.length === 0 ? (
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-slate-400">
+              <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-3 text-xs text-[var(--text-secondary)]">
                 Start typing to see demo results.
               </div>
             ) : null}
             {trimmedQuery.length > 0 && !filteredResults.length ? (
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-slate-400">
+              <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-3 text-xs text-[var(--text-secondary)]">
                 No demo matches yet.
               </div>
             ) : null}
@@ -433,10 +433,10 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
       {isOpen && !isCompact && (query.trim().length > 0 || filteredResults.length > 0) ? (
         <div className="mt-4 space-y-3">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-black uppercase tracking-widest text-slate-500">
+            <p className="text-xs font-black uppercase tracking-widest text-[var(--text-tertiary)]">
               Results
             </p>
-            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1 rounded-full">
               {filteredResults.length} matches
             </span>
           </div>
@@ -448,8 +448,8 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                   key={result.id}
                   className={`w-full flex items-center justify-between gap-4 rounded-2xl border px-4 py-3 text-left transition ${
                     isActive
-                      ? "bg-indigo-500/30 border-indigo-400/60 text-white"
-                      : "bg-white/5 border-white/10 text-slate-300 hover:border-white/20 hover:text-white"
+                      ? "bg-[var(--accent-bg-active)] border-[var(--accent-border-active)] text-[var(--accent-text-on-active)]"
+                      : "bg-[var(--bg-input)] border-[var(--border-default)] text-[var(--text-primary)] hover:border-[var(--border-hover)] hover:text-[var(--text-heading)]"
                   }`}
                   onMouseEnter={() => setActiveResultId(result.id)}
                   type="button"
@@ -458,22 +458,22 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-semibold">{result.title}</p>
                       {result.badge ? (
-                        <span className="text-[9px] font-black uppercase tracking-widest text-indigo-200 bg-indigo-500/20 border border-indigo-500/30 px-2 py-0.5 rounded-full">
+                        <span className="text-[9px] font-black uppercase tracking-widest text-[var(--accent-text-soft)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-2 py-0.5 rounded-full">
                           {result.badge}
                         </span>
                       ) : null}
                     </div>
-                    <p className="text-xs text-slate-500">{result.subtitle}</p>
+                    <p className="text-xs text-[var(--text-tertiary)]">{result.subtitle}</p>
                   </div>
                   <div className="text-right">
                     {result.urlLabel ? (
-                      <span className="text-[10px] font-semibold text-slate-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+                      <span className="text-[10px] font-semibold text-[var(--text-secondary)] bg-[var(--bg-input)] border border-[var(--border-default)] px-3 py-1 rounded-full">
                         {result.urlLabel}
                       </span>
                     ) : null}
                     {index === 0 ? (
-                      <div className="mt-2 flex items-center gap-2 text-[10px] text-slate-400">
-                        <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5">
+                      <div className="mt-2 flex items-center gap-2 text-[10px] text-[var(--text-secondary)]">
+                        <span className="rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-2 py-0.5">
                           Enter
                         </span>
                         <span>to open</span>
@@ -485,10 +485,10 @@ const SearchCommandCenter: React.FC<SearchCommandCenterProps> = ({
             })}
           </div>
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <button className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-300 border border-white/10 bg-white/5">
+            <button className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-[var(--text-primary)] border border-[var(--border-default)] bg-[var(--bg-input)]">
               Reset filters
             </button>
-            <button className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+            <button className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest bg-[var(--accent-bg)] text-white shadow-lg shadow-[var(--neon-glow-shadow)]">
               Show {filteredResults.length} results
             </button>
           </div>

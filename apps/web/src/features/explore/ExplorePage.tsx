@@ -110,13 +110,13 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
   const activeSignal = SIGNALS.find((signal) => signal.id === viewedSignalId);
 
   return (
-    <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] overflow-x-hidden font-inter">
       <GlobalNav user={user} onSignOut={onSignOut} />
 
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]"></div>
-        <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-teal-500/10 blur-[160px]"></div>
-        <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500/10 blur-[160px]"></div>
+      <div className="pointer-events-none fixed inset-0 -z-10" style={{ opacity: "var(--blob-opacity)" }}>
+        <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600 blur-[140px]"></div>
+        <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-teal-500 blur-[160px]"></div>
+        <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500 blur-[160px]"></div>
       </div>
 
       <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-24">
@@ -125,13 +125,13 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
           id="explore-hero"
         >
           <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-3 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-indigo-300">
+            <div className="inline-flex items-center gap-3 rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-4 py-2 text-xs font-black uppercase tracking-widest text-[var(--accent-text)]">
               Buildora Explorer
             </div>
-            <h1 className="text-5xl lg:text-7xl font-geist font-black text-white leading-[0.95] tracking-tight">
+            <h1 className="text-5xl lg:text-7xl font-geist font-black text-[var(--text-heading)] leading-[0.95] tracking-tight">
               Discover builders, projects, and teams shaping the future.
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl">
+            <p className="text-lg text-[var(--text-secondary)] max-w-2xl">
               Explore the Buildora ecosystem. Track launches, follow standout
               teams, and find collaborators across every stack.
             </p>
@@ -147,12 +147,12 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               >
                 Start exploring
               </Button>
-              <div className="flex flex-wrap items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">
+              <div className="flex flex-wrap items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
                 <span>Explore by</span>
                 {EXPLORE_BY.map((item) => (
                   <button
                     key={item.label}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-indigo-500/40 hover:text-white transition"
+                    className="rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-2 text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] hover:border-[var(--accent-border)] hover:text-[var(--text-heading)] transition"
                     onClick={() => handleCta(item.action)}
                   >
                     {item.label}
@@ -166,10 +166,10 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         <section className="space-y-8 scroll-mt-24" id="explore-projects">
           <div className="flex items-end justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                 Featured launches
               </p>
-              <h2 className="text-3xl font-geist font-black text-white mt-3">
+              <h2 className="text-3xl font-geist font-black text-[var(--text-heading)] mt-3">
                 Curated projects from the Buildora ecosystem
               </h2>
             </div>
@@ -198,7 +198,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               return (
                 <div
                   key={project.id}
-                  className="group rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_60px_-45px_rgba(15,23,42,0.9)] transition hover:-translate-y-1 hover:border-white/20 cursor-pointer"
+                  className="group rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-input)] p-6 shadow-[var(--glass-shadow)] transition hover:-translate-y-1 hover:border-[var(--border-hover)] cursor-pointer"
                   role="button"
                   tabIndex={0}
                   onClick={() =>
@@ -218,19 +218,19 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                     <img
                       src={project.coverUrl}
                       alt={project.title}
-                      className="h-16 w-16 rounded-2xl object-cover border border-white/10"
+                      className="h-16 w-16 rounded-2xl object-cover border border-[var(--border-default)]"
                     />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-start justify-between gap-4">
                         <div>
-                          <h3 className="text-xl font-geist font-black text-white">
+                          <h3 className="text-xl font-geist font-black text-[var(--text-heading)]">
                             {project.title}
                           </h3>
-                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-200 mt-1">
+                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-text-soft)] mt-1">
                             By {project.teamName}
                           </p>
                           <p
-                            className="text-sm text-slate-300 mt-2"
+                            className="text-sm text-[var(--text-secondary)] mt-2"
                             style={{
                               display: "-webkit-box",
                               WebkitLineClamp: 2,
@@ -242,8 +242,8 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                           </p>
                         </div>
                         <div className="flex flex-wrap justify-end gap-2">
-                          <div className="min-w-[70px] rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
-                            <div className="flex items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.25em] text-slate-400">
+                          <div className="min-w-[70px] rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-2 text-center">
+                            <div className="flex items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.25em] text-[var(--text-tertiary)]">
                               <svg
                                 className="h-3 w-3"
                                 viewBox="0 0 24 24"
@@ -256,12 +256,12 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                                 <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" />
                               </svg>
                             </div>
-                            <p className="text-sm font-geist font-black text-white sm:text-base md:text-lg">
+                            <p className="text-sm font-geist font-black text-[var(--text-heading)] sm:text-base md:text-lg">
                               {project.likes}
                             </p>
                           </div>
-                          <div className="min-w-[70px] rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
-                            <div className="flex items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.25em] text-slate-400">
+                          <div className="min-w-[70px] rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-2 text-center">
+                            <div className="flex items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.25em] text-[var(--text-tertiary)]">
                               <svg
                                 className="h-3 w-3"
                                 viewBox="0 0 24 24"
@@ -279,14 +279,14 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                                 <path d="M17 6h2" />
                               </svg>
                             </div>
-                            <p className="text-sm font-geist font-black text-white sm:text-base md:text-lg">
+                            <p className="text-sm font-geist font-black text-[var(--text-heading)] sm:text-base md:text-lg">
                               {project.awards}
                             </p>
                           </div>
                         </div>
                       </div>
-                      <div className="mt-3 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">
-                        <span className="h-1.5 w-1.5 rounded-full bg-indigo-400"></span>
+                      <div className="mt-3 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.25em] text-[var(--text-tertiary)]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-bg)]"></span>
                         <span>{stackLabel}</span>
                       </div>
                     </div>
@@ -294,7 +294,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                   <div className="mt-6 flex items-center justify-between">
                     <span></span>
                     <button
-                      className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-4 py-2 text-xs font-black uppercase tracking-widest text-indigo-200 transition hover:border-indigo-400/60 hover:text-white"
+                      className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-4 py-2 text-xs font-black uppercase tracking-widest text-[var(--accent-text)] transition hover:border-[var(--accent-border-active)] hover:text-[var(--text-heading)]"
                       onClick={(event) => {
                         event.stopPropagation();
                         handleCta({
@@ -325,15 +325,15 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         </section>
 
         <section
-          className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-6 scroll-mt-24"
+          className="rounded-[2.5rem] border border-[var(--border-default)] bg-[var(--bg-input)] px-8 py-6 scroll-mt-24"
           id="explore-pulse"
         >
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                 Ecosystem pulse
               </p>
-              <p className="text-sm text-slate-400 mt-2 max-w-xl">
+              <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-xl">
                 A quick snapshot of activity across the Buildora network.
               </p>
             </div>
@@ -345,12 +345,12 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+                  className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-3"
                 >
-                  <p className="text-2xl font-geist font-black text-white">
+                  <p className="text-2xl font-geist font-black text-[var(--text-heading)]">
                     {stat.value}
                   </p>
-                  <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
+                  <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)] font-bold">
                     {stat.label}
                   </p>
                 </div>
@@ -362,10 +362,10 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-6 scroll-mt-24" id="explore-teams">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                 Teams forming
               </p>
-              <h3 className="text-2xl font-geist font-black text-white mt-3">
+              <h3 className="text-2xl font-geist font-black text-[var(--text-heading)] mt-3">
                 Collaborations starting this week
               </h3>
             </div>
@@ -373,13 +373,13 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               {TEAM_SPOTLIGHTS.map((team) => (
                 <div
                   key={team.id}
-                  className="glass-card rounded-[1.75rem] border border-white/10 p-6 space-y-4"
+                  className="glass-card rounded-[1.75rem] border border-[var(--border-default)] p-6 space-y-4"
                 >
                   <div>
-                    <p className="text-sm font-bold text-white">{team.name}</p>
-                    <p className="text-xs text-slate-500 mt-1">{team.focus}</p>
+                    <p className="text-sm font-bold text-[var(--text-heading)]">{team.name}</p>
+                    <p className="text-xs text-[var(--text-tertiary)] mt-1">{team.focus}</p>
                   </div>
-                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-[var(--text-tertiary)]">
                     <span>{team.members} members</span>
                     <span>{team.location}</span>
                   </div>
@@ -390,19 +390,19 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
 
           <div className="space-y-6 scroll-mt-24" id="explore-stacks">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                 Trending stacks
               </p>
-              <h3 className="text-2xl font-geist font-black text-white mt-3">
+              <h3 className="text-2xl font-geist font-black text-[var(--text-heading)] mt-3">
                 Where builders are investing next
               </h3>
             </div>
-            <div className="glass-card rounded-[2rem] border border-white/10 p-8">
+            <div className="glass-card rounded-[2rem] border border-[var(--border-default)] p-8">
               <div className="flex flex-wrap gap-3">
                 {TRENDING_STACKS.map((stack) => (
                   <button
                     key={stack}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-indigo-500/40 hover:text-white transition"
+                    className="rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-2 text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] hover:border-[var(--accent-border)] hover:text-[var(--text-heading)] transition"
                     onClick={() =>
                       handleCta({
                         type: "scroll",
@@ -414,7 +414,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-slate-500 mt-6">
+              <p className="text-xs text-[var(--text-tertiary)] mt-6">
                 Tap a stack to jump back into the latest launches.
               </p>
             </div>
@@ -424,10 +424,10 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-6 scroll-mt-24" id="explore-builders">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                 Top builders
               </p>
-              <h3 className="text-2xl font-geist font-black text-white mt-3">
+              <h3 className="text-2xl font-geist font-black text-[var(--text-heading)] mt-3">
                 People to follow right now
               </h3>
             </div>
@@ -435,23 +435,23 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
               {TOP_BUILDERS.map((builder) => (
                 <div
                   key={builder.id}
-                  className="glass-card rounded-[1.75rem] border border-white/10 p-6 flex items-center justify-between"
+                  className="glass-card rounded-[1.75rem] border border-[var(--border-default)] p-6 flex items-center justify-between"
                 >
                   <div className="flex items-center gap-4">
                     <img
                       src={builder.avatarUrl}
                       alt={builder.name}
-                      className="w-12 h-12 rounded-2xl border border-white/10"
+                      className="w-12 h-12 rounded-2xl border border-[var(--border-default)]"
                     />
                     <div>
-                      <p className="text-sm font-bold text-white">
+                      <p className="text-sm font-bold text-[var(--text-heading)]">
                         {builder.name}
                       </p>
-                      <p className="text-xs text-slate-500">{builder.role}</p>
+                      <p className="text-xs text-[var(--text-tertiary)]">{builder.role}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1 rounded-full">
                       {builder.badge}
                     </span>
                     <Button
@@ -481,27 +481,27 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
 
           <div className="space-y-6 scroll-mt-24" id="explore-signals">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                 Signals
               </p>
-              <h3 className="text-2xl font-geist font-black text-white mt-3">
+              <h3 className="text-2xl font-geist font-black text-[var(--text-heading)] mt-3">
                 Launches and milestones today
               </h3>
               {activeSignal ? (
-                <p className="text-xs text-slate-400 mt-3">
+                <p className="text-xs text-[var(--text-secondary)] mt-3">
                   Last viewed: {activeSignal.title}.
                 </p>
               ) : null}
             </div>
-            <div className="glass-card rounded-[2.5rem] border border-white/10 p-8 space-y-6">
+            <div className="glass-card rounded-[2.5rem] border border-[var(--border-default)] p-8 space-y-6">
               {SIGNALS.map((item) => (
                 <div
                   key={item.id}
                   className="flex items-center justify-between"
                 >
                   <div>
-                    <p className="text-sm font-bold text-white">{item.title}</p>
-                    <p className="text-xs text-slate-500 mt-1">{item.meta}</p>
+                    <p className="text-sm font-bold text-[var(--text-heading)]">{item.title}</p>
+                    <p className="text-xs text-[var(--text-tertiary)] mt-1">{item.meta}</p>
                   </div>
                   <Button
                     variant="secondary"
@@ -523,23 +523,23 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         </section>
 
         <section
-          className="rounded-[2.5rem] border border-white/10 bg-gradient-to-r from-indigo-600/20 via-transparent to-cyan-500/20 p-10 scroll-mt-24"
+          className="rounded-[2.5rem] border border-[var(--accent-border)] bg-gradient-to-r from-[var(--accent-bg-soft)] via-transparent to-cyan-500/10 p-10 scroll-mt-24"
           id="explore-showcase"
         >
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-200">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text-soft)]">
                 Buildora Explorer
               </p>
-              <h3 className="text-3xl font-geist font-black text-white mt-3">
+              <h3 className="text-3xl font-geist font-black text-[var(--text-heading)] mt-3">
                 Tell the community what you are building.
               </h3>
-              <p className="text-sm text-slate-400 mt-2 max-w-2xl">
+              <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-2xl">
                 Share your project, highlight your team, and attract
                 collaborators in minutes.
               </p>
               {showcaseIntent ? (
-                <p className="text-xs text-slate-300 mt-4">
+                <p className="text-xs text-[var(--text-secondary)] mt-4">
                   Ready to {showcaseIntent === "create" ? "create" : "explore"}?
                   We will open the next step here.
                 </p>

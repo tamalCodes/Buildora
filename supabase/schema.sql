@@ -104,15 +104,8 @@ CREATE INDEX idx_profile_skills_profile_id ON public.profile_skills(profile_id);
 CREATE INDEX idx_profile_skills_rank ON public.profile_skills(profile_id, rank);
 
 -- ============================================================
--- RLS (disabled — backend uses Service Role Key)
+-- RLS disabled — backend is the only Supabase client and
+-- enforces ownership via .eq("profile_id", user.id) in code.
+-- If you add direct client-side Supabase access later, enable
+-- RLS and add policies.
 -- ============================================================
-ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profile_educations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profile_experiences ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profile_links ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profile_resumes ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profile_roles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profile_skills ENABLE ROW LEVEL SECURITY;
-
--- Service Role Key bypasses RLS, so no policies needed for backend access.
--- If you add direct client-side Supabase access later, add policies here.

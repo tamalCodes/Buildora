@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,16 +13,107 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        var t = localStorage.getItem('buildora-theme') || 'light';
+        document.documentElement.classList.add(t);
+      })();
+    </script>
     <style>
+      /* ---- Theme: Light (default) ---- */
       :root {
         --neon-primary: #6366f1;
         --neon-secondary: #06b6d4;
-        --bg-deep: #030712;
+
+        --bg-deep: #ffffff;
+        --bg-page: #f8fafc;
+        --bg-surface: rgba(255, 255, 255, 0.8);
+        --bg-surface-hover: rgba(241, 245, 249, 0.9);
+        --bg-elevated: #ffffff;
+        --bg-input: rgba(241, 245, 249, 0.6);
+
+        --border-default: rgba(15, 23, 42, 0.1);
+        --border-subtle: rgba(15, 23, 42, 0.06);
+        --border-hover: rgba(15, 23, 42, 0.18);
+
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --text-tertiary: #64748b;
+        --text-muted: #94a3b8;
+        --text-heading: #0f172a;
+        --text-on-accent: #ffffff;
+
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(15, 23, 42, 0.08);
+        --glass-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.1);
+        --neon-glow-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+
+        --blob-opacity: 0.08;
+        --overlay-bg: rgba(15, 23, 42, 0.3);
+
+        --nav-bg: rgba(255, 255, 255, 0.85);
+        --nav-active: #6366f1;
+        --nav-inactive: #64748b;
+
+        --canvas-bg: radial-gradient(circle at 50% 50%, #f1f5f9 0%, #ffffff 100%);
+
+        --accent-bg: #6366f1;
+        --accent-bg-soft: rgba(99, 102, 241, 0.12);
+        --accent-bg-active: rgba(99, 102, 241, 0.12);
+        --accent-border: rgba(99, 102, 241, 0.3);
+        --accent-border-active: rgba(99, 102, 241, 0.5);
+        --accent-text: #4f46e5;
+        --accent-text-soft: #4338ca;
+        --accent-text-on-active: #312e81;
       }
+
+      /* ---- Theme: Dark ---- */
+      html.dark {
+        --bg-deep: #030712;
+        --bg-page: #05060c;
+        --bg-surface: rgba(15, 23, 42, 0.6);
+        --bg-surface-hover: rgba(15, 23, 42, 0.8);
+        --bg-elevated: #0a111d;
+        --bg-input: rgba(255, 255, 255, 0.05);
+
+        --border-default: rgba(255, 255, 255, 0.08);
+        --border-subtle: rgba(255, 255, 255, 0.05);
+        --border-hover: rgba(255, 255, 255, 0.15);
+
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --text-tertiary: #64748b;
+        --text-muted: #475569;
+        --text-heading: #ffffff;
+
+        --glass-bg: rgba(15, 23, 42, 0.6);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        --neon-glow-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+
+        --blob-opacity: 0.15;
+        --overlay-bg: rgba(15, 23, 42, 0.7);
+
+        --nav-bg: rgba(5, 6, 12, 0.85);
+        --nav-active: #818cf8;
+        --nav-inactive: #64748b;
+
+        --canvas-bg: radial-gradient(circle at 50% 50%, #0f172a 0%, #030712 100%);
+
+        --accent-bg: #6366f1;
+        --accent-bg-soft: rgba(99, 102, 241, 0.25);
+        --accent-bg-active: rgba(99, 102, 241, 0.3);
+        --accent-border: rgba(99, 102, 241, 0.4);
+        --accent-border-active: rgba(129, 140, 248, 0.6);
+        --accent-text: #a5b4fc;
+        --accent-text-soft: #c7d2fe;
+        --accent-text-on-active: #ffffff;
+      }
+
       body {
         font-family: 'Inter', sans-serif;
         background-color: var(--bg-deep);
-        color: #f8fafc;
+        color: var(--text-primary);
         margin: 0;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
@@ -30,13 +121,13 @@
       .font-geist {
         font-family: 'Geist', sans-serif;
       }
-      
+
       /* Moving Neon Background */
       .bg-canvas {
         position: fixed;
         inset: 0;
         z-index: -1;
-        background: radial-gradient(circle at 50% 50%, #0f172a 0%, #030712 100%);
+        background: var(--canvas-bg);
       }
       .neon-blob {
         position: absolute;
@@ -44,7 +135,7 @@
         height: 600px;
         border-radius: 50%;
         filter: blur(120px);
-        opacity: 0.15;
+        opacity: var(--blob-opacity);
         pointer-events: none;
       }
       .blob-1 {
@@ -65,14 +156,14 @@
       }
 
       .glass-card {
-        background: rgba(15, 23, 42, 0.6);
+        background: var(--glass-bg);
         backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
       }
 
       .neon-glow-hover:hover {
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        box-shadow: var(--neon-glow-shadow);
       }
 
       /* Improve legibility for microcopy across the app. */
