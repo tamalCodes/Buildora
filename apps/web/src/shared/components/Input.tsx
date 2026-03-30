@@ -45,7 +45,7 @@ const Input: React.FC<InputProps> = ({
           {...props}
           className={`
             w-full py-3 rounded-xl border outline-none transition-all duration-300
-            bg-[var(--bg-input)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] backdrop-blur-md
+            bg-[var(--bg-input)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)]
             ${leftElement ? 'pl-11' : 'pl-4'}
             ${inputRightElement ? 'pr-11' : 'pr-4'}
             ${error

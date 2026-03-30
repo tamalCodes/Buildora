@@ -175,7 +175,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                 autoFocus
                 error={fieldErrors.email}
               />
-              <Button className="w-full py-4 text-base" isLoading={isLoading}>
+              <Button
+                className="w-full py-4 text-base bg-indigo-500/80 hover:bg-indigo-500/90 hover:shadow-none border-indigo-300/30"
+                isLoading={isLoading}
+              >
                 Continue
               </Button>
             </form>
@@ -183,10 +186,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
             <div className="space-y-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-white/5"></div>
+                  <div className="w-full border-t border-[var(--border-subtle)]"></div>
                 </div>
-                <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em] text-slate-700">
-                  <span className="bg-[#030712] px-3">or connect with</span>
+                <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--text-tertiary)]">
+                  <span className="bg-[var(--bg-surface)] px-3">or connect with</span>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -269,11 +272,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
             </div>
 
             <div className="space-y-6">
-              <div className="px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-between">
+              <div className="px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-default)] flex items-center justify-between">
                 <span className="text-xs font-medium text-slate-400 truncate max-w-[200px]">
                   {email}
                 </span>
-                <span className="text-[10px] font-black text-slate-700 uppercase">
+                <span className="text-[10px] font-black text-[var(--text-tertiary)] uppercase">
                   Identity
                 </span>
               </div>
@@ -350,7 +353,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
               />
             </div>
 
-            <Button className="w-full py-4 text-base" isLoading={isLoading}>
+            <Button
+              className="w-full py-4 text-base bg-indigo-500/80 hover:bg-indigo-500/90 hover:shadow-none border-indigo-300/30"
+              isLoading={isLoading}
+            >
               {isNewUser ? "Complete Registration" : "Log In"}
             </Button>
 
