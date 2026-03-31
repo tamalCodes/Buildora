@@ -1,72 +1,118 @@
-import React from "react";
 import type { AuthContainerProps } from "@/features/auth/constants/interfaces";
+import React, { useEffect, useState } from "react";
 
-const RibbonVisual: React.FC = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <div className="absolute -left-44 -top-44 h-[640px] w-[640px] rounded-full border-[56px] border-indigo-300/25 rotate-[-18deg]" />
-    <div className="absolute -left-16 top-[28%] h-[460px] w-[760px] rounded-full border-[48px] border-cyan-300/20 rotate-[14deg]" />
-    <div className="absolute right-[-190px] bottom-[-170px] h-[480px] w-[480px] rounded-full border-[42px] border-violet-300/25" />
-    <div className="absolute right-12 top-16 h-36 w-36 rounded-3xl border border-white/15 bg-white/5 rotate-12" />
-  </div>
-);
+type DemoTweet = {
+  id: string;
+  handle: string;
+  role: string;
+  text: string;
+};
+
+const TWEET_INDEX_KEY = "buildora-auth-tweet-index";
+
+const FALLBACK_TWEET: DemoTweet = {
+  id: "fallback",
+  handle: "@buildora",
+  role: "Product Team",
+  text: "Buildora helps communities run large-scale hackathons with calm, reliable, developer-first infrastructure.",
+};
 
 const AuthContainer: React.FC<AuthContainerProps> = ({ children }) => {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 lg:p-8">
-      <div className="w-full max-w-[1320px] min-h-[720px] flex flex-col lg:flex-row rounded-[2rem] overflow-hidden border border-[var(--border-default)] bg-[var(--bg-elevated)] shadow-[0_40px_110px_-80px_rgba(15,23,42,0.65)] animate-in fade-in zoom-in-95 duration-500">
-        <section className="w-full lg:w-[53%] relative overflow-hidden p-8 lg:p-14 flex flex-col justify-between bg-[linear-gradient(140deg,#090d1c_0%,#141c35_45%,#13203a_100%)]">
-          <RibbonVisual />
+  const [activeTweet, setActiveTweet] = useState<DemoTweet>(FALLBACK_TWEET);
 
-          <div className="relative z-10 space-y-10 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.03] backdrop-blur-[6px] px-6 py-7 lg:px-8 lg:py-8">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl border border-white/20 bg-white/10 flex items-center justify-center">
-                <div className="w-5 h-5 border-[2.5px] border-white rounded-lg" />
+  useEffect(() => {
+    let isCancelled = false;
+
+    const loadTweet = async () => {
+      try {
+        const response = await fetch("/demoTweets.json");
+        if (!response.ok) {
+          return;
+        }
+
+        const tweets = (await response.json()) as DemoTweet[];
+        if (!Array.isArray(tweets) || tweets.length === 0) {
+          return;
+        }
+
+        const previousRaw = sessionStorage.getItem(TWEET_INDEX_KEY);
+        const previousIndex = Number.parseInt(previousRaw ?? "-1", 10);
+        const nextIndex = Number.isNaN(previousIndex)
+          ? 0
+          : (previousIndex + 1) % tweets.length;
+
+        sessionStorage.setItem(TWEET_INDEX_KEY, String(nextIndex));
+        if (!isCancelled) {
+          setActiveTweet(tweets[nextIndex]);
+        }
+      } catch {
+        // Keep fallback tweet on any network/parse failure.
+      }
+    };
+
+    void loadTweet();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen w-full bg-[var(--bg-elevated)] text-[var(--text-primary)]">
+      <div className="min-h-screen w-full flex flex-col lg:flex-row">
+        <section className="w-full lg:w-[42%] border-r-0 lg:border-r border-[var(--border-subtle)] bg-white dark:bg-[var(--bg-page)] flex flex-col min-h-screen lg:min-h-0">
+          <header className="px-6 lg:px-10 pt-7 pb-4 lg:py-6">
+            <div className="flex items-center justify-center lg:justify-start gap-3">
+              <div className="w-8 h-8 rounded-lg border border-[var(--border-default)] bg-[var(--bg-input)] flex items-center justify-center">
+                <div className="w-3.5 h-3.5 border-2 border-indigo-400 rounded-md" />
               </div>
-              <span className="text-white font-geist font-black text-3xl tracking-tighter">
+              <span className="font-geist font-black text-2xl tracking-tight text-[var(--text-heading)]">
                 Buildora
               </span>
             </div>
+          </header>
 
-            <div className="space-y-5 max-w-xl">
-              <p className="text-[11px] font-black uppercase tracking-[0.28em] text-slate-300">
-                Hacker Infrastructure
-              </p>
-              <h1 className="text-4xl lg:text-5xl font-geist font-black text-white leading-[1.03] tracking-[-0.04em]">
-                Command center for{" "}
-                <span className="bg-gradient-to-r from-indigo-300 via-sky-300 to-cyan-300 bg-clip-text text-transparent">
-                  technical hackathons
-                </span>
-                .
-              </h1>
-              <p className="text-slate-300 text-lg leading-relaxed max-w-md">
-                Run applications, review tracks, and scale communities with a fast,
-                secure, engineer-first workspace.
-              </p>
-            </div>
+          <div className="flex-1 flex items-center justify-center px-6 lg:px-10">
+            <div className="w-full max-w-[420px]">{children}</div>
           </div>
 
-          <div className="relative z-10 mt-12 lg:mt-0">
-            <div className="rounded-3xl border border-white/15 bg-black/20 px-6 py-5 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="flex gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-cyan-300" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-indigo-300" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-violet-300" />
-                </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
-                  92 countries hosting events
-                </p>
+          <div className="lg:hidden px-6 pb-8 pt-4">
+            <div className="mx-auto w-fit flex items-center gap-2 opacity-70">
+              <div className="w-6 h-6 rounded-md border border-[var(--border-default)] bg-[var(--bg-input)] flex items-center justify-center">
+                <div className="w-2.5 h-2.5 border-2 border-indigo-400 rounded-sm" />
               </div>
-              <blockquote className="text-sm text-slate-200 leading-relaxed">
-                "Fast enough for live judging, stable enough for global finals."
-              </blockquote>
+              <span className="font-geist font-bold text-2xl tracking-tight text-[var(--text-heading)]">
+                Buildora
+              </span>
             </div>
           </div>
         </section>
 
-        <section className="w-full lg:w-[47%] border-l border-[var(--border-subtle)] bg-[var(--bg-page)] p-6 lg:p-16 flex items-center justify-center">
-          <div className="w-full max-w-[500px] animate-in fade-in slide-in-from-right-4 duration-300">
-            {children}
+        <section className="hidden lg:flex w-full lg:w-[58%] bg-[var(--auth-hero-bg)] text-[var(--auth-hero-text)] relative overflow-hidden px-8 lg:px-16 py-10 lg:py-12 items-center justify-center">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -left-40 top-10 h-[520px] w-[520px] rounded-full border-[40px] border-[var(--auth-hero-ring-indigo)]" />
+            <div className="absolute right-[-180px] bottom-[-120px] h-[460px] w-[460px] rounded-full border-[36px] border-[var(--auth-hero-ring-cyan)]" />
+            <div className="absolute left-1/3 top-1/2 h-px w-40 bg-gradient-to-r from-transparent via-[var(--auth-hero-line)] to-transparent" />
+          </div>
+
+          <div className="relative z-10 max-w-[700px]">
+            <div className="flex items-start gap-3">
+              <span className="text-5xl leading-none text-[var(--auth-hero-quote)] select-none translate-y-1">
+                &ldquo;
+              </span>
+              <blockquote className="text-[1.9rem] lg:text-[2.35rem] leading-[1.22] tracking-[-0.01em] font-geist font-semibold text-[var(--auth-hero-text)]">
+                {activeTweet.text}
+              </blockquote>
+            </div>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-400 to-cyan-400" />
+              <div>
+                <p className="text-sm font-bold text-[var(--auth-hero-text)]">
+                  {activeTweet.handle}
+                </p>
+                <p className="text-xs text-[var(--auth-hero-muted)]">{activeTweet.role}</p>
+              </div>
+            </div>
           </div>
         </section>
       </div>

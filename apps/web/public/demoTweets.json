@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tw-001",
+    "handle": "@devrelay",
+    "role": "Hackathon Organizer",
+    "text": "Buildora helped us review 1,800 submissions in one weekend without the platform slowing down."
+  },
+  {
+    "id": "tw-002",
+    "handle": "@shipwithana",
+    "role": "Community Lead",
+    "text": "Our mentors love the judging flow. Less admin work, more time helping teams build."
+  },
+  {
+    "id": "tw-003",
+    "handle": "@sreharsh",
+    "role": "Infra Engineer",
+    "text": "Event day traffic spikes were smooth. The dashboard stayed responsive the whole time."
+  },
+  {
+    "id": "tw-004",
+    "handle": "@buildfastclub",
+    "role": "Student Community",
+    "text": "We launched registrations in minutes and filled all seats in under 24 hours."
+  },
+  {
+    "id": "tw-005",
+    "handle": "@foundergrid",
+    "role": "Program Manager",
+    "text": "The application quality filters saved our team from manually triaging hundreds of duplicate entries."
+  },
+  {
+    "id": "tw-006",
+    "handle": "@meera_codes",
+    "role": "Hackathon Host",
+    "text": "Real-time status tracking for applicants is the feature we didn't know we needed."
+  },
+  {
+    "id": "tw-007",
+    "handle": "@api_ninja",
+    "role": "Developer Advocate",
+    "text": "Participants moved from signup to shipping projects faster because the onboarding flow is so clean."
+  },
+  {
+    "id": "tw-008",
+    "handle": "@northstarlabs",
+    "role": "Innovation Team",
+    "text": "Buildora made our global challenge feel local for every city chapter."
+  },
+  {
+    "id": "tw-009",
+    "handle": "@hackstack",
+    "role": "Event Ops",
+    "text": "No more spreadsheet chaos. Everything from team approvals to finalist picks happens in one place."
+  },
+  {
+    "id": "tw-010",
+    "handle": "@communitybyali",
+    "role": "Regional Lead",
+    "text": "The platform feels made for technical communities, not generic event software."
+  },
+  {
+    "id": "tw-011",
+    "handle": "@samir_dev",
+    "role": "Judge",
+    "text": "Submission review is ridiculously fast. I can focus on projects, not UI friction."
+  },
+  {
+    "id": "tw-012",
+    "handle": "@openbuilds",
+    "role": "Partner Network",
+    "text": "Sponsor visibility and participant engagement metrics are finally in the same view."
+  },
+  {
+    "id": "tw-013",
+    "handle": "@kavya_pm",
+    "role": "Product Manager",
+    "text": "Buildora gave our team confidence to scale from one local hackathon to a multi-region series."
+  },
+  {
+    "id": "tw-014",
+    "handle": "@fosscollective",
+    "role": "Open Source Community",
+    "text": "The organizer workflow is straightforward enough that new volunteers can run operations on day one."
+  },
+  {
+    "id": "tw-015",
+    "handle": "@buildops",
+    "role": "Technical Program Ops",
+    "text": "Our finalist shortlist process went from days to hours."
+  },
+  {
+    "id": "tw-016",
+    "handle": "@codecampus",
+    "role": "University Chapter",
+    "text": "Students appreciated how clear each application step was. Drop-offs were way lower than last year."
+  },
+  {
+    "id": "tw-017",
+    "handle": "@edgecompute",
+    "role": "Engineering Team",
+    "text": "We monitor everything in real time and still keep the participant experience simple."
+  },
+  {
+    "id": "tw-018",
+    "handle": "@pixeltoapi",
+    "role": "Design Engineer",
+    "text": "Great balance between visual polish and speed. Nothing feels heavy."
+  },
+  {
+    "id": "tw-019",
+    "handle": "@launchguild",
+    "role": "Startup Community",
+    "text": "From onboarding to final showcase, Buildora keeps both organizers and builders in sync."
+  },
+  {
+    "id": "tw-020",
+    "handle": "@deeptechhub",
+    "role": "Ecosystem Team",
+    "text": "This is the first platform where our event team and engineering team are both genuinely happy."
+  }
+]
