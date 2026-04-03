@@ -15,6 +15,7 @@ export const FEATURED_PROJECTS: Project[] = [
     stack: ["Next.js", "Vector", "Postgres"],
     likes: 824,
     awards: 3,
+    highlightLabel: "Featured pick",
     coverUrl:
       "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2000&auto=format&fit=crop",
   },
@@ -39,6 +40,28 @@ export const FEATURED_PROJECTS: Project[] = [
     awards: 2,
     coverUrl:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop",
+  },
+  {
+    id: "p4",
+    title: "Northstar OS",
+    summary: "Workflow command center for shipping AI operations without tool sprawl.",
+    teamName: "Aperture Stack",
+    stack: ["TypeScript", "Workers", "AI SDK"],
+    likes: 298,
+    awards: 4,
+    coverUrl:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2000&auto=format&fit=crop",
+  },
+  {
+    id: "p5",
+    title: "Cinder Note",
+    summary: "A research-to-shipping notebook for founders turning raw findings into product moves.",
+    teamName: "Paper Trail",
+    stack: ["React", "RAG", "Supabase"],
+    likes: 351,
+    awards: 5,
+    coverUrl:
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2000&auto=format&fit=crop",
   },
 ];
 

@@ -368,9 +368,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
               {isNewUser ? "Complete Registration" : "Log In"}
             </Button>
 
-            <p className="text-center text-[10px] font-medium text-[var(--text-tertiary)] leading-relaxed max-w-[240px] mx-auto uppercase tracking-tighter opacity-70">
-              Infrastructure secured by Buildora Protocol.
-            </p>
           </form>
         )}
       </div>

@@ -21,11 +21,13 @@ Copy the example files and fill in your Supabase values:
 
 ## Run locally
 
-Install dependencies at the repo root:
+Install dependencies once at the repo root:
 
 ```
 npm install
 ```
+
+This repo uses npm workspaces, so the root install also installs dependencies for `apps/api`, `apps/web`, and `packages/shared`.
 
 Start both apps:
 

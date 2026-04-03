@@ -7,6 +7,7 @@ export type Project = {
   likes: number;
   awards: number;
   coverUrl: string;
+  highlightLabel?: string;
 };
 
 export type Builder = {
