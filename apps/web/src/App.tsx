@@ -4,6 +4,7 @@ import { AuthService } from "./services/authService";
 import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
 import Footer from "@shared/components/Footer";
+import MaintenanceBanner from "@shared/components/MaintenanceBanner";
 import ScrollToTop from "@shared/components/ScrollToTop";
 import GlobalSearchModal from "@shared/components/search/GlobalSearchModal";
 import { SearchOverlayProvider } from "@shared/components/search/SearchOverlayContext";
@@ -26,6 +27,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ routes, isAuthenticated }) => {
 
   return (
     <>
+      <MaintenanceBanner />
       <Suspense fallback={<RouteLoadingFallback />}>
         <RouteErrorBoundary fallback={<RouteErrorFallback />}>
           <Routes>
