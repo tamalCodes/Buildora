@@ -1,5 +1,6 @@
 import type {
-  Builder,
+  BuilderSpotlight,
+  FeaturedBuilder,
   ExploreCta,
   Project,
   Signal,
@@ -65,27 +66,81 @@ export const FEATURED_PROJECTS: Project[] = [
   },
 ];
 
-export const TOP_BUILDERS: Builder[] = [
+export const BUILDER_SPOTLIGHT: BuilderSpotlight = {
+  id: "b4",
+  name: "Sarang Parikh",
+  role: "Founder, AI product designer",
+  badge: "Builder Spotlight",
+  avatarUrl: "https://i.pravatar.cc/150?u=sarang",
+  title: "Meet Sarang Parikh",
+  headline: "Shipping opinionated AI products with a distinct point of view.",
+  summary:
+    "Sarang blends storytelling, product intuition, and relentless execution to turn ambitious concepts into products people actually remember.",
+  currentProject: "Buildora and a portfolio of AI-native experiments",
+  location: "Remote • India",
+  imageUrl:
+    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600&auto=format&fit=crop",
+  metrics: [
+    { value: "06", label: "live launches" },
+    { value: "12k", label: "builder reach" },
+    { value: "3x", label: "shipped this quarter" },
+  ],
+};
+
+export const FEATURED_BUILDERS: FeaturedBuilder[] = [
   {
     id: "b1",
     name: "Anya Dsouza",
-    role: "Product Engineer",
-    badge: "Top 1% Builder",
+    role: "Product engineer",
+    badge: "AI Systems",
     avatarUrl: "https://i.pravatar.cc/150?u=anya",
+    headline: "Turns internal ops pain into clean tools teams adopt fast.",
+    summary:
+      "Known for shipping polished workflow products that feel deceptively simple, even when the stack underneath is not.",
+    currentProject: "Northstar OS",
+    location: "Singapore",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
+    metrics: [
+      { value: "04", label: "products shipped" },
+      { value: "18", label: "team pilots" },
+    ],
   },
   {
     id: "b2",
     name: "Rahil K",
-    role: "Protocol Designer",
-    badge: "Hackathon Winner",
+    role: "Protocol designer",
+    badge: "Infra + Web3",
     avatarUrl: "https://i.pravatar.cc/150?u=rahil",
+    headline: "Builds deep infrastructure with the clarity of a consumer product.",
+    summary:
+      "Rahil’s work stands out because complex systems stay legible, collaborative, and launch-ready instead of collapsing under jargon.",
+    currentProject: "Signal Forge",
+    location: "Bengaluru",
+    imageUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
+    metrics: [
+      { value: "10k", label: "teams reached" },
+      { value: "05", label: "core launches" },
+    ],
   },
   {
     id: "b3",
     name: "Meera Das",
-    role: "AI Engineer",
+    role: "AI engineer",
     badge: "Community Lead",
     avatarUrl: "https://i.pravatar.cc/150?u=meera",
+    headline: "Blends community energy with products that invite people in.",
+    summary:
+      "She builds for momentum: prototypes that attract contributors, create conversation, and compound into stronger ecosystems.",
+    currentProject: "Cinder Note",
+    location: "Berlin",
+    imageUrl:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
+    metrics: [
+      { value: "22", label: "community sprints" },
+      { value: "03", label: "featured builds" },
+    ],
   },
 ];
 

@@ -3,7 +3,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Buildora | The Standard for Modern Hackathons</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -22,6 +25,11 @@
     <style>
       /* ---- Theme: Light (default) ---- */
       :root {
+        --safe-area-top: env(safe-area-inset-top, 0px);
+        --safe-area-right: env(safe-area-inset-right, 0px);
+        --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+        --safe-area-left: env(safe-area-inset-left, 0px);
+
         --neon-primary: #6366f1;
         --neon-secondary: #06b6d4;
 
@@ -50,6 +58,21 @@
 
         --blob-opacity: 0.08;
         --overlay-bg: rgba(15, 23, 42, 0.3);
+        --spotlight-image-overlay: linear-gradient(
+          180deg,
+          rgba(15, 23, 42, 0.3) 0%,
+          rgba(15, 23, 42, 0.38) 38%,
+          rgba(2, 6, 23, 0.88) 100%
+        );
+        --spotlight-content-bg: linear-gradient(
+          180deg,
+          rgba(2, 6, 23, 0.02) 0%,
+          rgba(2, 6, 23, 0.58) 18%,
+          rgba(2, 6, 23, 0.82) 100%
+        );
+        --spotlight-text-strong: rgba(255, 255, 255, 0.96);
+        --spotlight-text-body: rgba(255, 255, 255, 0.88);
+        --spotlight-text-muted: rgba(255, 255, 255, 0.68);
 
         --nav-bg: rgba(255, 255, 255, 0.85);
         --nav-active: #6366f1;
@@ -101,6 +124,21 @@
 
         --blob-opacity: 0.15;
         --overlay-bg: rgba(15, 23, 42, 0.7);
+        --spotlight-image-overlay: linear-gradient(
+          180deg,
+          rgba(15, 23, 42, 0.08) 0%,
+          rgba(2, 6, 23, 0.22) 36%,
+          rgba(2, 6, 23, 0.86) 100%
+        );
+        --spotlight-content-bg: linear-gradient(
+          180deg,
+          rgba(2, 6, 23, 0.02) 0%,
+          rgba(2, 6, 23, 0.4) 20%,
+          rgba(2, 6, 23, 0.82) 100%
+        );
+        --spotlight-text-strong: rgba(255, 255, 255, 0.96);
+        --spotlight-text-body: rgba(255, 255, 255, 0.88);
+        --spotlight-text-muted: rgba(255, 255, 255, 0.68);
 
         --nav-bg: rgba(5, 6, 12, 0.85);
         --nav-active: #818cf8;
@@ -126,13 +164,48 @@
         --auth-hero-line: rgba(103, 232, 249, 0.35);
       }
 
+      html,
+      body,
+      #root {
+        min-height: 100%;
+      }
+
       body {
         font-family: 'Inter', sans-serif;
-        background-color: var(--bg-deep);
+        min-height: 100dvh;
+        background-color: var(--bg-page);
         color: var(--text-primary);
         margin: 0;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
+      }
+
+      #root {
+        min-height: 100dvh;
+      }
+
+      .safe-area-pt {
+        padding-top: var(--safe-area-top);
+      }
+
+      .safe-area-pb {
+        padding-bottom: var(--safe-area-bottom);
+      }
+
+      .safe-area-pl {
+        padding-left: var(--safe-area-left);
+      }
+
+      .safe-area-pr {
+        padding-right: var(--safe-area-right);
+      }
+
+      .safe-area-inset {
+        padding:
+          var(--safe-area-top)
+          var(--safe-area-right)
+          var(--safe-area-bottom)
+          var(--safe-area-left);
       }
       .font-geist {
         font-family: 'Geist', sans-serif;

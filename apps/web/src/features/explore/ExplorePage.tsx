@@ -5,11 +5,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FeaturedProjectsSection from "./components/FeaturedProjectsSection";
 import {
+  BUILDER_SPOTLIGHT,
   EXPLORE_BY,
+  FEATURED_BUILDERS,
   FEATURED_PROJECTS,
   SIGNALS,
   TEAM_SPOTLIGHTS,
-  TOP_BUILDERS,
   TRENDING_STACKS,
 } from "./constants/constants";
 import type {
@@ -278,61 +279,172 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
           </div>
         </section>
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <section className="space-y-10">
           <div className="space-y-6 scroll-mt-24" id="explore-builders">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
-                Top builders
+                Featured builders
               </p>
               <h3 className="text-2xl font-geist font-black text-[var(--text-heading)] mt-3">
-                People to follow right now
+                Builders shipping standout work right now
               </h3>
+              <p className="mt-3 max-w-2xl text-sm text-[var(--text-secondary)]">
+                A cleaner spotlight for the people building with range, taste,
+                and actual momentum across the Buildora ecosystem.
+              </p>
             </div>
-            <div className="space-y-4">
-              {TOP_BUILDERS.map((builder) => (
-                <div
-                  key={builder.id}
-                  className="glass-card rounded-[1.75rem] border border-[var(--border-default)] p-6 flex items-center justify-between"
-                >
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={builder.avatarUrl}
-                      alt={builder.name}
-                      className="w-12 h-12 rounded-2xl border border-[var(--border-default)]"
-                    />
-                    <div>
-                      <p className="text-sm font-bold text-[var(--text-heading)]">
-                        {builder.name}
-                      </p>
-                      <p className="text-xs text-[var(--text-tertiary)]">{builder.role}</p>
+
+            <div className="glass-card rounded-[2.5rem] border border-[var(--border-default)] p-4 sm:p-5 lg:p-6">
+              <div className="grid grid-cols-1 gap-5 lg:gap-6 2xl:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
+                <article className="relative min-h-[300px] overflow-hidden rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-elevated)] shadow-[0_24px_70px_rgba(15,23,42,0.14)] lg:min-h-[340px]">
+                  <img
+                    src={BUILDER_SPOTLIGHT.imageUrl}
+                    alt={BUILDER_SPOTLIGHT.name}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[var(--spotlight-image-overlay)]" />
+
+                  <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-6">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--spotlight-text-strong)]">
+                          Builder spotlight
+                        </p>
+                        <p className="mt-2 text-sm text-[var(--spotlight-text-muted)]">
+                          {BUILDER_SPOTLIGHT.location}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="max-w-[78%] rounded-[1.5rem] border border-white/10 bg-[var(--spotlight-content-bg)] p-4 backdrop-blur-sm sm:max-w-[82%] sm:p-5">
+                      <div className="space-y-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={BUILDER_SPOTLIGHT.avatarUrl}
+                            alt={BUILDER_SPOTLIGHT.name}
+                            className="h-12 w-12 rounded-2xl border border-white/20 object-cover"
+                          />
+                          <div>
+                            <p className="text-lg font-bold text-[var(--spotlight-text-strong)]">
+                              {BUILDER_SPOTLIGHT.name}
+                            </p>
+                            <p className="text-sm text-[var(--spotlight-text-body)]">
+                              {BUILDER_SPOTLIGHT.role}
+                            </p>
+                          </div>
+                        </div>
+                        <h4 className="max-w-[14ch] text-3xl font-geist font-black leading-[0.95] tracking-tight text-[var(--spotlight-text-strong)] sm:text-5xl">
+                          {BUILDER_SPOTLIGHT.title}
+                        </h4>
+                        <p className="max-w-lg text-sm font-semibold text-[var(--spotlight-text-strong)] sm:text-base">
+                          {BUILDER_SPOTLIGHT.headline}
+                        </p>
+                        <p className="max-w-lg text-sm leading-6 text-[var(--spotlight-text-body)]">
+                          {BUILDER_SPOTLIGHT.summary}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                          <p className="text-sm text-[var(--spotlight-text-body)]">
+                            {BUILDER_SPOTLIGHT.currentProject}
+                          </p>
+                          <p className="mt-1 text-xs text-[var(--spotlight-text-muted)]">
+                            {BUILDER_SPOTLIGHT.metrics[0].value} live launches ·{" "}
+                            {BUILDER_SPOTLIGHT.metrics[1].value} builder reach
+                          </p>
+                        </div>
+                        <Button
+                          variant={
+                            followedBuilderIds.has(BUILDER_SPOTLIGHT.id)
+                              ? "secondary"
+                              : "outline"
+                          }
+                          className="!w-full sm:!w-fit !rounded-2xl !border-white/20 !bg-white/10 !px-5 !py-3 !text-sm !text-white backdrop-blur-md hover:!border-white/35 hover:!bg-white/16"
+                          aria-pressed={followedBuilderIds.has(BUILDER_SPOTLIGHT.id)}
+                          onClick={() =>
+                            handleCta({
+                              type: "followBuilder",
+                              builderId: BUILDER_SPOTLIGHT.id,
+                            })
+                          }
+                        >
+                          {followedBuilderIds.has(BUILDER_SPOTLIGHT.id)
+                            ? "Following"
+                            : "Follow builder"}
+                        </Button>
+                      </div>
+                    </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1 rounded-full">
-                      {builder.badge}
-                    </span>
-                    <Button
-                      variant={
-                        followedBuilderIds.has(builder.id)
-                          ? "secondary"
-                          : "outline"
-                      }
-                      className="!px-4 !py-2 !text-xs !rounded-xl"
-                      aria-pressed={followedBuilderIds.has(builder.id)}
-                      onClick={() =>
-                        handleCta({
-                          type: "followBuilder",
-                          builderId: builder.id,
-                        })
-                      }
+                </article>
+
+                <div className="space-y-4">
+                  {FEATURED_BUILDERS.slice(0, 2).map((builder) => (
+                    <article
+                      key={builder.id}
+                      className="rounded-[1.75rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 shadow-[0_14px_40px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-[var(--accent-border)]"
                     >
-                      {followedBuilderIds.has(builder.id)
-                        ? "Following"
-                        : "Follow"}
-                    </Button>
-                  </div>
+                      <div className="flex flex-col gap-4">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div>
+                              <div className="flex items-center gap-3">
+                                <img
+                                  src={builder.avatarUrl}
+                                  alt={builder.name}
+                                  className="h-10 w-10 rounded-xl border border-[var(--border-default)] object-cover"
+                                />
+                                <div>
+                                  <p className="text-base font-bold text-[var(--text-heading)]">
+                                    {builder.name}
+                                  </p>
+                                  <p className="text-xs text-[var(--text-tertiary)]">
+                                    {builder.role}
+                                  </p>
+                                </div>
+                              </div>
+                              <p className="mt-3 text-lg font-geist font-black leading-tight text-[var(--text-heading)]">
+                                {builder.headline}
+                              </p>
+                            </div>
+                          </div>
+
+                          <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
+                            {builder.summary}
+                          </p>
+
+                          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="text-xs text-[var(--text-tertiary)]">
+                              {builder.currentProject} · {builder.location}
+                            </div>
+                            <Button
+                              variant={
+                                followedBuilderIds.has(builder.id)
+                                  ? "secondary"
+                                  : "outline"
+                              }
+                              className="!w-full sm:!w-fit !px-4 !py-2.5 !text-xs !rounded-xl"
+                              aria-pressed={followedBuilderIds.has(builder.id)}
+                              onClick={() =>
+                                handleCta({
+                                  type: "followBuilder",
+                                  builderId: builder.id,
+                                })
+                              }
+                            >
+                              {followedBuilderIds.has(builder.id)
+                                ? "Following"
+                                : "Follow"}
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
@@ -350,31 +462,35 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
                 </p>
               ) : null}
             </div>
-            <div className="glass-card rounded-[2.5rem] border border-[var(--border-default)] p-8 space-y-6">
-              {SIGNALS.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center justify-between"
-                >
-                  <div>
-                    <p className="text-sm font-bold text-[var(--text-heading)]">{item.title}</p>
-                    <p className="text-xs text-[var(--text-tertiary)] mt-1">{item.meta}</p>
-                  </div>
-                  <Button
-                    variant="secondary"
-                    className="!px-4 !py-2 !text-xs !rounded-xl"
-                    aria-pressed={viewedSignalId === item.id}
-                    onClick={() =>
-                      handleCta({
-                        type: "viewSignal",
-                        signalId: item.id,
-                      })
-                    }
+            <div className="glass-card rounded-[2.5rem] border border-[var(--border-default)] p-6 sm:p-7">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                {SIGNALS.map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-[1.4rem] border border-[var(--border-default)] bg-[var(--bg-input)] p-4 sm:p-5"
                   >
-                    {viewedSignalId === item.id ? "Viewed" : "View"}
-                  </Button>
-                </div>
-              ))}
+                    <div className="flex h-full flex-col justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-bold text-[var(--text-heading)]">{item.title}</p>
+                        <p className="text-xs text-[var(--text-tertiary)] mt-1">{item.meta}</p>
+                      </div>
+                      <Button
+                        variant="secondary"
+                        className="!w-full sm:!w-fit !px-4 !py-2 !text-xs !rounded-xl"
+                        aria-pressed={viewedSignalId === item.id}
+                        onClick={() =>
+                          handleCta({
+                            type: "viewSignal",
+                            signalId: item.id,
+                          })
+                        }
+                      >
+                        {viewedSignalId === item.id ? "Viewed" : "View"}
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

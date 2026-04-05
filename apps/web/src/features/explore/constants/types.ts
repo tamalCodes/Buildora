@@ -18,6 +18,24 @@ export type Builder = {
   avatarUrl: string;
 };
 
+export type BuilderMetric = {
+  label: string;
+  value: string;
+};
+
+export type FeaturedBuilder = Builder & {
+  headline: string;
+  summary: string;
+  currentProject: string;
+  location: string;
+  imageUrl: string;
+  metrics: BuilderMetric[];
+};
+
+export type BuilderSpotlight = FeaturedBuilder & {
+  title: string;
+};
+
 export type Team = {
   id: string;
   name: string;
