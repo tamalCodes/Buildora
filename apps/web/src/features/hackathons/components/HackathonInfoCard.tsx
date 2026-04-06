@@ -16,15 +16,15 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
   const isOnline = isOnlineHackathon(hackathon, detail);
 
   return (
-    <aside className="rounded-[2rem] border border-white/10 bg-white/5 p-6 space-y-6 sticky top-28">
+    <aside className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 space-y-6 sticky top-28">
       <div className="space-y-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-300">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
           Applications
         </p>
-        <h3 className="text-xl font-geist font-black text-white">
+        <h3 className="text-xl font-geist font-black text-[var(--text-heading)]">
           Apply to {hackathon.title}
         </h3>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-[var(--text-secondary)]">
           Deadline: {detail.applicationDeadline}
         </p>
         <div className="flex gap-3">
@@ -57,17 +57,17 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
         ].map((item) => (
           <div
             key={item.label}
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+            className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-3"
           >
-            <p className="text-[10px] uppercase tracking-widest text-slate-500">
+            <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)]">
               {item.label}
             </p>
-            <p className="text-slate-100 mt-1">{item.value}</p>
+            <p className="text-[var(--text-primary)] mt-1">{item.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-4 text-xs font-bold text-slate-300">
+      <div className="grid grid-cols-2 gap-4 text-xs font-bold text-[var(--text-secondary)]">
         {[
           { label: "Status", value: hackathon.status },
           { label: "Mode", value: detail.mode },
@@ -76,35 +76,35 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
         ].map((item) => (
           <div
             key={item.label}
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+            className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-3"
           >
-            <p className="text-[10px] uppercase tracking-widest text-slate-500">
+            <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)]">
               {item.label}
             </p>
-            <p className="text-slate-100 mt-1">{item.value}</p>
+            <p className="text-[var(--text-primary)] mt-1">{item.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-indigo-500/20 via-transparent to-cyan-500/20 p-4">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-200">
+      <div className="rounded-2xl border border-[var(--accent-border)] bg-gradient-to-br from-indigo-500/20 via-transparent to-cyan-500/20 p-4">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
           Prize pool
         </p>
-        <p className="text-2xl font-geist font-black text-white mt-2">
+        <p className="text-2xl font-geist font-black text-[var(--text-heading)] mt-2">
           {detail.prizePool}
         </p>
-        <p className="text-xs text-slate-400 mt-2">
+        <p className="text-xs text-[var(--text-secondary)] mt-2">
           Paid across multiple tracks and sponsor awards.
         </p>
       </div>
 
       <div className="space-y-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
           Contact
         </p>
         <a
           href={`mailto:${detail.contactEmail}`}
-          className="text-sm font-bold text-indigo-300 hover:text-indigo-200"
+          className="text-sm font-bold text-[var(--accent-text)] hover:text-[var(--accent-text-soft)]"
         >
           {detail.contactEmail}
         </a>
@@ -113,7 +113,7 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
             <a
               key={social.label}
               href={social.href}
-              className="text-[10px] font-black uppercase tracking-widest text-slate-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:text-white"
+              className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] bg-[var(--bg-input)] border border-[var(--border-default)] px-3 py-1.5 rounded-full hover:text-[var(--text-heading)]"
               rel="noreferrer"
               target="_blank"
             >

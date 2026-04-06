@@ -45,14 +45,14 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+      <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] overflow-x-hidden font-inter">
         <GlobalNav user={user} onSignOut={onSignOut} />
         <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+          <div className="rounded-[2.5rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-10 text-center space-y-5">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
               Loading
             </p>
-            <h1 className="text-3xl lg:text-4xl font-geist font-black text-white">
+            <h1 className="text-3xl lg:text-4xl font-geist font-black text-[var(--text-heading)]">
               Fetching hackathon details...
             </h1>
           </div>
@@ -63,7 +63,7 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
 
   if (!hackathon || !detail) {
     return (
-      <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+      <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] overflow-x-hidden font-inter">
         <GlobalNav user={user} onSignOut={onSignOut} />
         <div className="pointer-events-none fixed inset-0 -z-10">
           <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]"></div>
@@ -71,14 +71,14 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
           <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500/10 blur-[160px]"></div>
         </div>
         <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+          <div className="rounded-[2.5rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-10 text-center space-y-5">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
               Hackathon not found
             </p>
-            <h1 className="text-3xl lg:text-4xl font-geist font-black text-white">
+            <h1 className="text-3xl lg:text-4xl font-geist font-black text-[var(--text-heading)]">
               We could not find that hackathon.
             </h1>
-            <p className="text-sm text-slate-400 max-w-xl mx-auto">
+            <p className="text-sm text-[var(--text-secondary)] max-w-xl mx-auto">
               Head back to Hackathons to explore live opportunities.
             </p>
             <div className="flex justify-center">
@@ -114,7 +114,7 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] overflow-x-hidden font-inter">
       <GlobalNav user={user} onSignOut={onSignOut} />
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]"></div>
@@ -125,12 +125,12 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
       <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-24 space-y-16">
         <div className="flex items-center justify-between">
           <button
-            className="text-xs font-black uppercase tracking-widest text-indigo-300"
+            className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] hover:text-[var(--accent-text-soft)]"
             onClick={() => navigate("/hackathons")}
           >
             Back to hackathons
           </button>
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
             Hackathon details
           </div>
         </div>
@@ -167,12 +167,12 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4"
+                      className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-4"
                     >
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-tertiary)]">
                         {item.label}
                       </p>
-                      <p className="text-sm font-bold text-white mt-2">
+                      <p className="text-sm font-bold text-[var(--text-primary)] mt-2">
                         {item.value}
                       </p>
                     </div>
@@ -188,38 +188,38 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
               <>
                 <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                   <div className="lg:col-span-5 space-y-6">
-                    <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-indigo-500/20 via-transparent to-emerald-500/10 p-6 space-y-4">
-                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-200">
+                    <div className="rounded-[2rem] border border-[var(--accent-border)] bg-gradient-to-br from-indigo-500/20 via-transparent to-emerald-500/10 p-6 space-y-4">
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                         Prize pool
                       </p>
-                      <p className="text-3xl font-geist font-black text-white">
+                      <p className="text-3xl font-geist font-black text-[var(--text-heading)]">
                         {detail.prizePool}
                       </p>
-                      <p className="text-sm text-slate-400">
+                      <p className="text-sm text-[var(--text-secondary)]">
                         Top prizes plus sponsor awards across multiple tracks.
                       </p>
                     </div>
 
-                    <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 space-y-4">
-                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+                    <div className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 space-y-4">
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
                         Sponsor awards
                       </p>
                       <div className="space-y-3">
                         {detail.sponsors.map((sponsor) => (
                           <div
                             key={sponsor.name}
-                            className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+                            className="flex items-center gap-3 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-3"
                           >
                             <img
                               src={sponsor.logoUrl}
                               alt={sponsor.name}
-                              className="h-9 w-9 rounded-lg border border-white/10 bg-white/5 p-1"
+                              className="h-9 w-9 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] p-1"
                             />
                             <div>
-                              <p className="text-sm font-bold text-white">
+                              <p className="text-sm font-bold text-[var(--text-heading)]">
                                 {sponsor.name}
                               </p>
-                              <p className="text-[10px] uppercase tracking-widest text-slate-500">
+                              <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)]">
                                 {sponsor.tier} partner
                               </p>
                             </div>
@@ -228,15 +228,15 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
                       </div>
                     </div>
 
-                    <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 space-y-4">
-                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+                    <div className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 space-y-4">
+                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
                         Focus tracks
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {detail.tracks.slice(0, 6).map((track) => (
                           <span
                             key={track}
-                            className="text-[10px] font-black uppercase tracking-widest text-slate-200 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full"
+                            className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] bg-[var(--bg-input)] border border-[var(--border-default)] px-3 py-1.5 rounded-full"
                           >
                             {track}
                           </span>
@@ -252,28 +252,28 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
             )}
             {activeTab === "schedule" && (
               <>
-                <section className="rounded-[2rem] border border-white/10 bg-white/5 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div className="flex items-center gap-3 text-sm text-slate-300">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <section className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div className="flex items-center gap-3 text-sm text-[var(--text-secondary)]">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-tertiary)]">
                       Timezone
                     </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-indigo-200">
+                    <span className="rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1 text-xs font-bold text-[var(--accent-text)]">
                       GMT +05:30
                     </span>
-                    <span className="text-xs text-slate-500">
+                    <span className="text-xs text-[var(--text-tertiary)]">
                       Times update as sessions are confirmed.
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-3">
                     <button
                       type="button"
-                      className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
+                      className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest bg-[var(--accent-bg)] text-[var(--text-on-accent)] shadow-lg shadow-indigo-600/20"
                     >
                       Add to calendar
                     </button>
                     <button
                       type="button"
-                      className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-300 border border-white/10"
+                      className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] border border-[var(--border-default)] bg-[var(--bg-input)]"
                     >
                       Download schedule
                     </button>
@@ -284,14 +284,14 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
               </>
             )}
             {activeTab === "projects" && (
-              <section className="rounded-[2rem] border border-white/10 bg-white/5 p-10 text-center space-y-4">
-                <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              <section className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-10 text-center space-y-4">
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
                   Projects opening soon
                 </p>
-                <h2 className="text-3xl font-geist font-black text-white">
+                <h2 className="text-3xl font-geist font-black text-[var(--text-heading)]">
                   Submissions launch after kickoff.
                 </h2>
-                <p className="text-sm text-slate-400 max-w-xl mx-auto">
+                <p className="text-sm text-[var(--text-secondary)] max-w-xl mx-auto">
                   Teams will be able to showcase demos, pitch decks, and
                   repos once the build window starts.
                 </p>

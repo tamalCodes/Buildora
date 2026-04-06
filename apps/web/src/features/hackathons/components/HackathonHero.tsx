@@ -21,7 +21,7 @@ const HackathonHero: React.FC<HackathonHeroProps> = ({
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">
       <div className="lg:col-span-7 space-y-6">
-        <div className="inline-flex items-center gap-3 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-indigo-300">
+        <div className="inline-flex items-center gap-3 rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
           {detail.statusLabel}
         </div>
         <div className="space-y-4">
@@ -29,18 +29,18 @@ const HackathonHero: React.FC<HackathonHeroProps> = ({
             <img
               src={hackathon.logoUrl}
               alt={hackathon.title}
-              className="w-14 h-14 rounded-2xl border border-white/10 bg-white/5 p-2"
+              className="w-14 h-14 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] p-2"
             />
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-500">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
                 {hackathon.organizer}
               </p>
-              <h1 className="text-4xl lg:text-6xl font-geist font-black text-white tracking-tight leading-[1.02]">
+              <h1 className="text-4xl lg:text-6xl font-geist font-black text-[var(--text-heading)] tracking-tight leading-[1.02]">
                 {hackathon.title}
               </h1>
             </div>
           </div>
-          <p className="text-lg text-slate-400 max-w-2xl">
+          <p className="text-lg text-[var(--text-secondary)] max-w-2xl">
             {detail.heroSubtitle}
           </p>
         </div>
@@ -80,15 +80,15 @@ const HackathonHero: React.FC<HackathonHeroProps> = ({
         />
       </div>
       <div className="lg:col-span-5">
-        <div className="relative rounded-[2.5rem] border border-white/10 bg-white/5 overflow-hidden min-h-[320px]">
+        <div className="relative rounded-[2.5rem] border border-[var(--border-default)] bg-[var(--bg-surface)] overflow-hidden min-h-[320px]">
           <img
             src={detail.bannerUrl}
             alt={`${hackathon.title} banner`}
             className="absolute inset-0 h-full w-full object-cover opacity-70"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#05060c] via-[#05060c]/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent"></div>
           <div className="relative z-10 p-8 flex items-end h-full">
-            <div className="rounded-2xl border border-white/10 bg-[#05060c]/70 px-4 py-3 text-xs font-bold text-slate-200">
+            <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--glass-bg)] px-4 py-3 text-xs font-bold text-[var(--spotlight-text-strong)] backdrop-blur">
               {hackathon.dates} · {hackathon.location}
             </div>
           </div>
