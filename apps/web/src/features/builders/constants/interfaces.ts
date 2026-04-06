@@ -31,7 +31,7 @@ export interface BuilderHighlightsProps {
 }
 
 export interface BuildersLeaderboardProps {
-  builders: import("./types").LeaderboardBuilder[];
+  activeSort: import("./types").BuilderStatKey;
 }
 
 export interface BuildersSortBarProps {
@@ -51,12 +51,8 @@ export interface HighlightPanelProps {
   panel: import("./types").BuilderPanel;
 }
 
-export interface StatPillProps {
-  label: string;
-  value: number;
-  variant: import("./types").BuilderStatKey;
-}
-
 export interface LeaderboardRowProps {
   builder: import("./types").LeaderboardBuilder;
+  rank: number;
+  activeSort: import("./types").BuilderStatKey;
 }

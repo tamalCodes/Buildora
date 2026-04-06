@@ -51,6 +51,12 @@ export const BUILDER_SORTS: BuilderSortOption[] = [
   { id: "prizes", label: "Most prizes won" },
 ];
 
+export const BUILDER_EXPLORE_BY = [
+  { label: "Featured", targetId: "builders-featured" },
+  { label: "Leaderboard", targetId: "builders-leaderboard" },
+  { label: "Highlights", targetId: "builders-highlights" },
+];
+
 export const LEADERBOARD_BUILDERS: LeaderboardBuilder[] = [
   {
     id: "kush-shah",

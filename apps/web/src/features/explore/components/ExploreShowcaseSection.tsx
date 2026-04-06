@@ -1,6 +1,6 @@
+import type { ExploreShowcaseSectionProps } from "@/features/explore/constants/interfaces";
 import Button from "@shared/components/Button";
 import React from "react";
-import type { ExploreShowcaseSectionProps } from "@/features/explore/constants/interfaces";
 
 const ExploreShowcaseSection: React.FC<ExploreShowcaseSectionProps> = ({
   showcaseIntent,
@@ -12,9 +12,7 @@ const ExploreShowcaseSection: React.FC<ExploreShowcaseSectionProps> = ({
   >
     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
       <div>
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text-soft)]">
-          Buildora Explorer
-        </p>
+      
         <h3 className="text-3xl font-geist font-black text-[var(--text-heading)] mt-3">
           Tell the community what you are building.
         </h3>

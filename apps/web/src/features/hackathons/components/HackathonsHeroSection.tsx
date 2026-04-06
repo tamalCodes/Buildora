@@ -1,4 +1,4 @@
-import React from "react";
+import { HACKATHON_HERO_STATS } from "@/features/hackathons/constants/constants";
 import Button from "@shared/components/Button";
 import SearchCommandCenter from "@shared/components/search/SearchCommandCenter";
 import {
@@ -9,14 +9,12 @@ import {
   SEARCH_RESULTS,
   SEARCH_SHORTCUTS,
 } from "@shared/components/search/mockData";
-import { HACKATHON_HERO_STATS } from "@/features/hackathons/constants/constants";
+import React from "react";
 
 const HackathonsHeroSection: React.FC = () => (
   <section className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
     <div className="space-y-6 lg:col-span-7">
-      <div className="inline-flex items-center rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--accent-text)]">
-        Buildora hackathons
-      </div>
+      
       <h1 className="max-w-3xl text-4xl font-geist font-black leading-tight tracking-tight text-[var(--text-heading)] lg:text-6xl">
         Find your next team, prize, and obsession.
       </h1>

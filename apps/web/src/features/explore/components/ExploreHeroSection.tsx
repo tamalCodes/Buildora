@@ -1,8 +1,8 @@
+import type { ExploreHeroSectionProps } from "@/features/explore/constants/interfaces";
 import Button from "@shared/components/Button";
 import { ArrowRight } from "lucide-react";
 import React from "react";
 import { EXPLORE_BY } from "../constants/constants";
-import type { ExploreHeroSectionProps } from "@/features/explore/constants/interfaces";
 
 const ExploreHeroSection: React.FC<ExploreHeroSectionProps> = ({ onCta }) => (
   <section
@@ -10,9 +10,7 @@ const ExploreHeroSection: React.FC<ExploreHeroSectionProps> = ({ onCta }) => (
     id="explore-hero"
   >
     <div className="lg:col-span-7 space-y-8">
-      <div className="inline-flex items-center gap-3 rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-4 py-2 text-xs font-black uppercase tracking-widest text-[var(--accent-text)]">
-        Buildora Explorer
-      </div>
+  
       <h1 className="text-5xl lg:text-7xl font-geist font-black text-[var(--text-heading)] leading-[0.95] tracking-tight">
         Discover Builders, projects, and teams shaping the future.
       </h1>
