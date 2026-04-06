@@ -42,6 +42,7 @@ export interface HackathonHeroProps {
 export interface HackathonInfoCardProps {
   hackathon: Hackathon;
   detail: HackathonDetail;
+  activeTab?: string;
 }
 
 export interface HackathonMoreProps {

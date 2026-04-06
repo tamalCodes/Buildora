@@ -13,7 +13,7 @@ import HackathonSponsors from "./components/HackathonSponsors";
 import {
   getHackathonDetails,
 } from "./constants/constants";
-import { isOnlineHackathon } from "./constants/utils";
+import { getPrizePoolDisplay, isOnlineHackathon } from "./constants/utils";
 import type { HackathonDetailsPageProps } from "./constants/interfaces";
 import { useHackathonsCatalog } from "./hooks/useHackathons";
 
@@ -41,6 +41,7 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
   ).slice(0, 3);
   const activeTab = tabId ?? "overview";
   const isOnline = hackathon && detail ? isOnlineHackathon(hackathon, detail) : false;
+  const prizePool = detail ? getPrizePoolDisplay(detail.prizePool) : null;
   const disabledTabs = ["projects", ...(isOnline ? [] : ["application"])];
 
   if (isLoading) {
@@ -163,7 +164,7 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
                     },
                     { label: "Format", value: detail.mode },
                     { label: "Team size", value: detail.teamSize },
-                    { label: "Eligibility", value: detail.eligibility },
+                    { label: "Tracks", value: `${detail.tracks.length} tracks` },
                   ].map((item) => (
                     <div
                       key={item.label}
@@ -190,14 +191,18 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
                   <div className="lg:col-span-5 space-y-6">
                     <div className="rounded-[2rem] border border-[var(--accent-border)] bg-gradient-to-br from-indigo-500/20 via-transparent to-emerald-500/10 p-6 space-y-4">
                       <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
-                        Prize pool
+                        Payout snapshot
                       </p>
-                      <p className="text-3xl font-geist font-black text-[var(--text-heading)]">
-                        {detail.prizePool}
-                      </p>
-                      <p className="text-sm text-[var(--text-secondary)]">
-                        Top prizes plus sponsor awards across multiple tracks.
-                      </p>
+                      <div className="flex items-end gap-2">
+                        <p className="text-5xl leading-none font-geist font-black tracking-tight bg-gradient-to-r from-[var(--text-heading)] via-indigo-700 to-cyan-700 bg-clip-text text-transparent">
+                          {prizePool?.amount}
+                        </p>
+                        {prizePool?.label ? (
+                          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--text-secondary)] pb-1">
+                            {prizePool.label}
+                          </p>
+                        ) : null}
+                      </div>
                     </div>
 
                     <div className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 space-y-4">
@@ -304,7 +309,11 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
             )}
           </div>
           <div className="lg:col-span-4">
-            <HackathonInfoCard hackathon={hackathon} detail={detail} />
+            <HackathonInfoCard
+              hackathon={hackathon}
+              detail={detail}
+              activeTab={activeTab}
+            />
           </div>
         </section>
 

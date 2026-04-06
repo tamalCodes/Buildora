@@ -9,7 +9,7 @@ const HackathonPrizes: React.FC<HackathonPrizesProps> = ({ detail }) => {
           Prizes
         </p>
         <h2 className="text-3xl font-geist font-black text-[var(--text-heading)] mt-3">
-          {detail.prizePool} across categories
+          Awards across categories
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

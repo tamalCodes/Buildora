@@ -2,11 +2,12 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@shared/components/Button";
 import type { HackathonInfoCardProps } from "@/features/hackathons/constants/interfaces";
-import { isOnlineHackathon } from "../constants/utils";
+import { getPrizePoolDisplay, isOnlineHackathon } from "../constants/utils";
 
 const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
   hackathon,
   detail,
+  activeTab,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,9 +15,20 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
     ? "/hackathons"
     : "";
   const isOnline = isOnlineHackathon(hackathon, detail);
+  const prizePool = getPrizePoolDisplay(detail.prizePool);
 
   return (
     <aside className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 space-y-6 sticky top-28">
+      <div className="flex justify-end">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--accent-text)]">
+          <span className="relative inline-flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--accent-text)] opacity-45 motion-safe:animate-ping"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent-text)]"></span>
+          </span>
+          {detail.statusLabel}
+        </div>
+      </div>
+
       <div className="space-y-3">
         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
           Applications
@@ -48,11 +60,32 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
         </div>
       </div>
 
+      {activeTab !== "prizes" && (
+        <div className="rounded-2xl border border-[var(--accent-border)] bg-gradient-to-br from-indigo-500/20 via-transparent to-cyan-500/20 p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
+            Prize pool
+          </p>
+          <div className="mt-2 flex items-end gap-2">
+            <p className="text-3xl leading-none font-geist font-black tracking-tight bg-gradient-to-r from-[var(--text-heading)] via-indigo-700 to-cyan-700 bg-clip-text text-transparent">
+              {prizePool.amount}
+            </p>
+            {prizePool.label ? (
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[var(--text-secondary)] pb-0.5">
+                {prizePool.label}
+              </p>
+            ) : null}
+          </div>
+          <p className="text-xs text-[var(--text-secondary)] mt-2">
+            Paid across multiple tracks and sponsor awards.
+          </p>
+        </div>
+      )}
+
       <div className="grid grid-cols-2 gap-3 text-xs">
         {[
           { label: "Dates", value: hackathon.dates },
           { label: "Location", value: hackathon.location },
-          { label: "Prize pool", value: detail.prizePool },
+          { label: "Tracks", value: `${detail.tracks.length} tracks` },
           { label: "Builders", value: hackathon.participants },
         ].map((item) => (
           <div
@@ -84,18 +117,6 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
             <p className="text-[var(--text-primary)] mt-1">{item.value}</p>
           </div>
         ))}
-      </div>
-
-      <div className="rounded-2xl border border-[var(--accent-border)] bg-gradient-to-br from-indigo-500/20 via-transparent to-cyan-500/20 p-4">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
-          Prize pool
-        </p>
-        <p className="text-2xl font-geist font-black text-[var(--text-heading)] mt-2">
-          {detail.prizePool}
-        </p>
-        <p className="text-xs text-[var(--text-secondary)] mt-2">
-          Paid across multiple tracks and sponsor awards.
-        </p>
       </div>
 
       <div className="space-y-3">
