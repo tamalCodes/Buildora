@@ -2,14 +2,14 @@ import React from "react";
 import { BUILDER_PANELS } from "../constants/constants";
 import type { HighlightPanelProps } from "@/features/builders/constants/interfaces";
 
-const metricStyles: Record<string, string> = {
-  prizes: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300",
-  projects: "bg-amber-500/15 text-amber-600 dark:text-amber-300",
+const metricTone: Record<string, string> = {
+  prizes: "#10b981",
+  projects: "#f59e0b",
 };
 
-const panelAccent: Record<string, string> = {
-  "hackathons-won": "bg-emerald-500/10 border-emerald-500/25 text-emerald-700 dark:text-emerald-300",
-  "projects-built": "bg-amber-500/10 border-amber-500/25 text-amber-700 dark:text-amber-300",
+const panelTone: Record<string, string> = {
+  "hackathons-won": "#10b981",
+  "projects-built": "#f59e0b",
 };
 
 const HighlightPanel: React.FC<HighlightPanelProps> = ({ panel }) => (
@@ -17,11 +17,12 @@ const HighlightPanel: React.FC<HighlightPanelProps> = ({ panel }) => (
     <div className="space-y-6">
       <div>
         <p
-          className={`inline-flex w-fit rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] ${
-            panelAccent[panel.id] ??
-            "bg-[var(--accent-bg-soft)] border-[var(--accent-border)] text-[var(--accent-text)]"
-          }`}
+          className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-[var(--text-heading)]"
         >
+          <span
+            className="h-1.5 w-1.5 rounded-full"
+            style={{ backgroundColor: panelTone[panel.id] ?? "var(--accent-bg)" }}
+          />
           Builder highlights
         </p>
         <h3 className="text-2xl font-geist font-black text-[var(--text-heading)] mt-3">
@@ -51,11 +52,15 @@ const HighlightPanel: React.FC<HighlightPanelProps> = ({ panel }) => (
               </div>
             </div>
             <span
-              className={`rounded-full px-3 py-1 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em] ${
-                metricStyles[entry.metricLabel] ??
-                "bg-[var(--accent-bg-soft)] text-[var(--accent-text)]"
-              }`}
+              aria-label={`${entry.metricValue} ${entry.metricLabel}`}
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] px-3 py-1 text-xs font-black uppercase tracking-[0.08em] text-[var(--text-heading)]"
             >
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{
+                  backgroundColor: metricTone[entry.metricLabel] ?? "var(--accent-bg)",
+                }}
+              />
               {entry.metricValue} {entry.metricLabel}
             </span>
           </div>

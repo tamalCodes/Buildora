@@ -13,10 +13,10 @@ const METRIC_LABELS: Record<BuilderStatKey, string> = {
   prizes: "prizes",
 };
 
-const METRIC_STYLES: Record<BuilderStatKey, string> = {
-  hackathons: "bg-[var(--accent-bg-soft)] text-[var(--accent-text)]",
-  projects: "bg-amber-500/15 text-amber-600 dark:text-amber-300",
-  prizes: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300",
+const METRIC_TONE: Record<BuilderStatKey, string> = {
+  hackathons: "#6366f1",
+  projects: "#f59e0b",
+  prizes: "#10b981",
 };
 
 const SECONDARY_KEYS: Record<BuilderStatKey, BuilderStatKey[]> = {
@@ -52,10 +52,15 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
 
     <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 lg:ml-auto">
       <span
-        className={`inline-flex w-fit items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold ${METRIC_STYLES[activeSort]}`}
+        aria-label={`${builder.stats[activeSort]} ${METRIC_LABELS[activeSort]}`}
+        className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] px-3 py-2 text-xs font-semibold text-[var(--text-heading)]"
       >
+        <span
+          className="h-1.5 w-1.5 rounded-full"
+          style={{ backgroundColor: METRIC_TONE[activeSort] }}
+        />
         <span className="font-black">{builder.stats[activeSort]}</span>
-        <span className="uppercase tracking-widest text-[10px]">
+        <span className="uppercase tracking-[0.1em] text-[10px]">
           {METRIC_LABELS[activeSort]}
         </span>
       </span>
