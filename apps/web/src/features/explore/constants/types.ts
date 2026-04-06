@@ -27,7 +27,6 @@ export type FeaturedBuilder = Builder & {
   headline: string;
   summary: string;
   currentProject: string;
-  location: string;
   imageUrl: string;
   metrics: BuilderMetric[];
 };
@@ -71,4 +70,13 @@ export type ExploreCtaAction =
 export type ExploreCta = {
   label: string;
   action: ExploreCtaAction;
+};
+
+export type ExploreShowcaseIntent =
+  | Extract<ExploreCtaAction, { type: "showcase" }>["intent"]
+  | null;
+
+export type PulseStat = {
+  label: string;
+  value: string;
 };

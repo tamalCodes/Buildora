@@ -2,6 +2,7 @@ import type {
   BuilderSpotlight,
   FeaturedBuilder,
   ExploreCta,
+  PulseStat,
   Project,
   Signal,
   Team,
@@ -76,10 +77,9 @@ export const BUILDER_SPOTLIGHT: BuilderSpotlight = {
   headline: "Shipping opinionated AI products with a distinct point of view.",
   summary:
     "Sarang blends storytelling, product intuition, and relentless execution to turn ambitious concepts into products people actually remember.",
-  currentProject: "Buildora and a portfolio of AI-native experiments",
-  location: "Remote • India",
+  currentProject: "AI-native experiments",
   imageUrl:
-    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop",
   metrics: [
     { value: "06", label: "live launches" },
     { value: "12k", label: "builder reach" },
@@ -98,7 +98,6 @@ export const FEATURED_BUILDERS: FeaturedBuilder[] = [
     summary:
       "Known for shipping polished workflow products that feel deceptively simple, even when the stack underneath is not.",
     currentProject: "Northstar OS",
-    location: "Singapore",
     imageUrl:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
     metrics: [
@@ -116,7 +115,6 @@ export const FEATURED_BUILDERS: FeaturedBuilder[] = [
     summary:
       "Rahil’s work stands out because complex systems stay legible, collaborative, and launch-ready instead of collapsing under jargon.",
     currentProject: "Signal Forge",
-    location: "Bengaluru",
     imageUrl:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
     metrics: [
@@ -134,7 +132,6 @@ export const FEATURED_BUILDERS: FeaturedBuilder[] = [
     summary:
       "She builds for momentum: prototypes that attract contributors, create conversation, and compound into stronger ecosystems.",
     currentProject: "Cinder Note",
-    location: "Berlin",
     imageUrl:
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1200&auto=format&fit=crop",
     metrics: [
@@ -213,4 +210,10 @@ export const EXPLORE_BY: ExploreCta[] = [
     label: "Stacks",
     action: { type: "scroll", targetId: "explore-stacks" },
   },
+];
+
+export const PULSE_STATS: PulseStat[] = [
+  { label: "New launches", value: "128" },
+  { label: "Active builders", value: "21k" },
+  { label: "Teams forming", value: "640" },
 ];

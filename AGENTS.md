@@ -68,6 +68,7 @@ packages/
 
 ### Frontend Patterns
 - Feature module pattern: each feature owns its components, hooks, constants, types
+- In feature folders, do not declare `type` / `interface` inside `.tsx` files; keep them in `.ts` files under `constants/` (or feature-level `types/`) and import into components
 - Route-based code splitting via `lazyImport()` with chunk error retry
 - Auth guard via `withAuthGuard()` HOC for protected routes
 - React Query for server state; local React state for UI state

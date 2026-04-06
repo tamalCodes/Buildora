@@ -1,11 +1,12 @@
 import Button from "@shared/components/Button";
 import React from "react";
-import type { ExploreCtaAction, Project } from "../constants/types";
-
-type FeaturedProjectsSectionProps = {
-  projects: Project[];
-  onCta: (action: ExploreCtaAction) => void;
-};
+import type {
+  FeaturedProjectCompactCardProps,
+  FeaturedProjectHeroCardProps,
+  FeaturedProjectsSectionProps,
+  LikesBadgeProps,
+} from "@/features/explore/constants/interfaces";
+import type { Project } from "../constants/types";
 
 const formatProjectMetric = (value: number) =>
   new Intl.NumberFormat("en", {
@@ -18,7 +19,7 @@ const getStackLabel = (stack: Project["stack"]) =>
     ? `${stack.slice(0, 2).join(" / ")} +${stack.length - 2}`
     : stack.join(" / ");
 
-const LikesBadge: React.FC<{ likes: number }> = ({ likes }) => (
+const LikesBadge: React.FC<LikesBadgeProps> = ({ likes }) => (
   <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-[11px] font-semibold text-white/85 backdrop-blur-md">
     <svg
       className="h-3.5 w-3.5"
@@ -56,10 +57,10 @@ const ProjectLink: React.FC = () => (
   </span>
 );
 
-const FeaturedProjectHeroCard: React.FC<{
-  project: Project;
-  onOpen: () => void;
-}> = ({ project, onOpen }) => (
+const FeaturedProjectHeroCard: React.FC<FeaturedProjectHeroCardProps> = ({
+  project,
+  onOpen,
+}) => (
   <article
     className="group relative overflow-hidden rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-[var(--glass-shadow)] transition duration-300 hover:-translate-y-1 hover:border-[var(--border-hover)]"
     role="button"
@@ -125,12 +126,13 @@ const FeaturedProjectHeroCard: React.FC<{
   </article>
 );
 
-const FeaturedProjectCompactCard: React.FC<{
-  project: Project;
-  onOpen: () => void;
-}> = ({ project, onOpen }) => (
+const FeaturedProjectCompactCard: React.FC<FeaturedProjectCompactCardProps> = ({
+  project,
+  onOpen,
+  className,
+}) => (
   <article
-    className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-[var(--glass-shadow)] transition duration-300 hover:-translate-y-1 hover:border-[var(--border-hover)] xl:rounded-[1.5rem]"
+    className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-[var(--glass-shadow)] transition duration-300 hover:-translate-y-1 hover:border-[var(--border-hover)] xl:rounded-[1.5rem] ${className ?? ""}`}
     role="button"
     tabIndex={0}
     onClick={onOpen}
@@ -232,10 +234,11 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({
           />
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:col-span-6 xl:grid-cols-2 xl:grid-rows-2 xl:h-full xl:content-start xl:gap-4 xl:self-start">
-          {compactProjects.map((project) => (
+          {compactProjects.map((project, index) => (
             <FeaturedProjectCompactCard
               key={project.id}
               project={project}
+              className={index > 0 ? "hidden sm:flex" : undefined}
               onOpen={() =>
                 onCta({ type: "viewProject", projectId: project.id })
               }
