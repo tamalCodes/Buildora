@@ -47,3 +47,24 @@ export interface HackathonInfoCardProps {
 export interface HackathonMoreProps {
   hackathons: Hackathon[];
 }
+
+export interface HackathonListingCardProps {
+  hackathon: Hackathon;
+  onSelect: () => void;
+}
+
+export interface HackathonsFeaturedSectionProps {
+  hackathons: Hackathon[];
+  onSelect: (id: string) => void;
+}
+
+export interface HackathonsOpenSectionProps {
+  hackathons: Hackathon[];
+  onSelect: (id: string) => void;
+}
+
+export interface HackathonsTimelineSectionProps {
+  upcomingHackathons: Hackathon[];
+  pastHackathons: Hackathon[];
+  onSelect: (id: string) => void;
+}

@@ -1,4 +1,9 @@
-import type { Hackathon, HackathonDetail } from "./types";
+import type {
+  Hackathon,
+  HackathonDetail,
+  HackathonsHeroStat,
+  HackathonsOpenFilter,
+} from "./types";
 
 export const FEATURED_HACKATHONS: Hackathon[] = [
   {
@@ -246,6 +251,18 @@ export const FILTERS = [
   "Teams",
   "Solo",
   "Student",
+];
+
+export const HACKATHON_HERO_STATS: HackathonsHeroStat[] = [
+  { label: "Hackathons live", value: "48" },
+  { label: "Prize pool", value: "$3.6M" },
+  { label: "Builders active", value: "18k" },
+];
+
+export const HACKATHON_OPEN_FILTERS: HackathonsOpenFilter[] = [
+  { label: "Open now", isActive: true },
+  { label: "Ending soon" },
+  { label: "Highest prize" },
 ];
 
 const BASE_HACKATHON_DETAIL: Omit<HackathonDetail, "id" | "bannerUrl"> = {

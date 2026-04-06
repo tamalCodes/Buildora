@@ -11,7 +11,7 @@ export const withAuthGuard = <P extends object>(
   const Wrapped: React.FC<P & GuardProps> = (props) => {
     const { isAuthenticated, ...rest } = props;
     if (!isAuthenticated) {
-      return <Navigate to="/" replace />;
+      return <Navigate to="/explore" replace />;
     }
     return <Component {...(rest as P)} />;
   };

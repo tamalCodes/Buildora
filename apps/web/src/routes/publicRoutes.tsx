@@ -56,7 +56,7 @@ const AuthRoute: React.FC<RouteContext> = ({ onLoginSuccess }) => (
 const ExploreOrAuthRoute = withAuthSwitch(ExploreRoute, AuthRoute);
 
 export const createPublicRoutes = (ctx: RouteContext): RouteConfig[] => [
-  { path: "/", element: <ExploreOrAuthRoute {...ctx} /> },
+  { path: "/", element: <Navigate to="/explore" replace /> },
   { path: "/explore", element: <ExploreOrAuthRoute {...ctx} /> },
   {
     path: "/hackathons",
@@ -112,5 +112,5 @@ export const createPublicRoutes = (ctx: RouteContext): RouteConfig[] => [
     element: <BrandAssetsPage user={ctx.user} onSignOut={ctx.onSignOut} />,
   },
   { path: "/account", element: <Navigate to="/settings" replace /> },
-  { path: "*", element: <Navigate to="/" replace /> },
+  { path: "*", element: <Navigate to="/explore" replace /> },
 ];

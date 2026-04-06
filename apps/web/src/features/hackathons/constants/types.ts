@@ -41,6 +41,16 @@ export type HackathonSocialLink = {
   href: string;
 };
 
+export type HackathonsHeroStat = {
+  label: string;
+  value: string;
+};
+
+export type HackathonsOpenFilter = {
+  label: string;
+  isActive?: boolean;
+};
+
 export type HackathonDetail = {
   id: string;
   heroSubtitle: string;
