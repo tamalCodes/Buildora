@@ -194,7 +194,7 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
                         Payout snapshot
                       </p>
                       <div className="flex items-end gap-2">
-                        <p className="text-5xl leading-none font-geist font-black tracking-tight bg-gradient-to-r from-[var(--text-heading)] via-indigo-700 to-cyan-700 bg-clip-text text-transparent">
+                        <p className="text-5xl leading-none font-geist font-black tracking-tight text-[var(--text-heading)]">
                           {prizePool?.amount}
                         </p>
                         {prizePool?.label ? (
@@ -257,31 +257,35 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
             )}
             {activeTab === "schedule" && (
               <>
-                <section className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div className="flex items-center gap-3 text-sm text-[var(--text-secondary)]">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-tertiary)]">
-                      Timezone
-                    </span>
-                    <span className="rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1 text-xs font-bold text-[var(--accent-text)]">
-                      GMT +05:30
-                    </span>
-                    <span className="text-xs text-[var(--text-tertiary)]">
-                      Times update as sessions are confirmed.
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
+                <section className="rounded-[1.75rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 md:p-5">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
+                          Timezone
+                        </span>
+                        <span className="rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1 text-xs font-bold text-[var(--accent-text)]">
+                          GMT +05:30
+                        </span>
+                      </div>
+                      <p className="text-xs leading-relaxed text-[var(--text-tertiary)] md:max-w-[34ch]">
+                        Times update as sessions are confirmed.
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:flex md:flex-wrap md:justify-end md:gap-3">
                     <button
                       type="button"
-                      className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest bg-[var(--accent-bg)] text-[var(--text-on-accent)] shadow-lg shadow-indigo-600/20"
+                      className="min-h-10 rounded-full px-4 py-2.5 text-[10px] font-black uppercase tracking-widest bg-[var(--accent-bg)] text-[var(--text-on-accent)] shadow-lg shadow-indigo-600/20"
                     >
                       Add to calendar
                     </button>
                     <button
                       type="button"
-                      className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] border border-[var(--border-default)] bg-[var(--bg-input)]"
+                      className="min-h-10 rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-2.5 text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)]"
                     >
                       Download schedule
                     </button>
+                    </div>
                   </div>
                 </section>
 

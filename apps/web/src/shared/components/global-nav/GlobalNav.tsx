@@ -27,6 +27,12 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
         ? "text-[var(--text-heading)]"
         : "text-[var(--nav-inactive)] hover:text-[var(--text-heading)]"
     }`;
+  const mobileNavLinkClasses = (isActive: boolean) =>
+    `block rounded-xl border px-3 py-2.5 text-sm font-semibold transition-colors ${
+      isActive
+        ? "border-[var(--accent-border)] bg-[var(--accent-bg-soft)] text-[var(--text-heading)]"
+        : "border-transparent text-[var(--text-primary)] hover:border-[var(--border-default)] hover:bg-[var(--bg-input)]"
+    }`;
 
   const handleNavClick = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -36,6 +42,7 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
 
   const handleSignOutClick = () => {
     setIsUserMenuOpen(false);
+    setIsMenuOpen(false);
     onSignOut?.();
   };
 
@@ -201,61 +208,76 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
       </button>
 
       {isMenuOpen && (
-        <div className="md:hidden absolute left-0 right-0 top-28 border-b border-[var(--border-subtle)] bg-[var(--nav-bg)] backdrop-blur-xl">
-          <div className="px-6 py-4 space-y-3">
+        <div className="md:hidden absolute left-0 right-0 top-full border-b border-[var(--border-default)] bg-[var(--bg-elevated)] backdrop-blur-md shadow-[0_24px_40px_-24px_rgba(2,6,23,0.65)]">
+          <div className="px-6 py-3.5 space-y-2">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.label}
                 to={item.path}
                 end
                 onClick={handleNavClick}
-                className={({ isActive }) =>
-                  `block text-sm font-medium transition-colors ${
-                    isActive ? "text-[var(--text-heading)]" : "text-[var(--nav-inactive)]"
-                  }`
-                }
+                className={({ isActive }) => mobileNavLinkClasses(isActive)}
               >
                 {item.label}
               </NavLink>
             ))}
-            <div className="pt-3 border-t border-[var(--border-subtle)] flex flex-col gap-3">
-              <ThemeToggle />
+            <div className="mt-3 border-t border-[var(--border-subtle)] pt-3 space-y-2">
               {user ? (
                 <>
-                  <Link
-                    to="/profile"
-                    className="flex items-center gap-3"
-                    onClick={handleNavClick}
-                  >
-                    <img
-                      src={avatarUrl}
-                      className="w-8 h-8 rounded-full border border-[var(--border-default)] object-cover"
-                      alt="User"
-                    />
-                    <div>
-                      <p className="text-sm font-semibold text-[var(--text-heading)]">
-                        {userLabel}
-                      </p>
-                      <p className="text-xs text-[var(--text-tertiary)] capitalize">
-                        {roleLabel}
-                      </p>
-                    </div>
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      to="/profile"
+                      className="min-w-0 flex-1 flex items-center gap-2.5 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-2"
+                      onClick={handleNavClick}
+                    >
+                      <img
+                        src={avatarUrl}
+                        className="h-7 w-7 rounded-full border border-[var(--border-default)] object-cover"
+                        alt="User"
+                      />
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-[var(--text-heading)]">
+                          {userLabel}
+                        </p>
+                        <p className="text-[11px] text-[var(--text-tertiary)] capitalize">
+                          {roleLabel}
+                        </p>
+                      </div>
+                    </Link>
+                    <ThemeToggle className="shrink-0" />
+                  </div>
                   <button
-                    className="text-left text-sm font-medium text-rose-500 hover:text-rose-600 transition-colors"
-                    onClick={onSignOut}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-600 transition-colors hover:bg-rose-500/15 hover:text-rose-500"
+                    onClick={handleSignOutClick}
+                    type="button"
                   >
+                    <svg
+                      className="h-4 w-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <path d="M16 17l5-5-5-5" />
+                      <path d="M21 12H9" />
+                    </svg>
                     Sign out
                   </button>
                 </>
               ) : (
-                <Link
-                  to="/explore"
-                  className="text-sm font-medium text-[var(--nav-inactive)] hover:text-[var(--text-heading)] transition-colors"
-                  onClick={handleNavClick}
-                >
-                  Sign in
-                </Link>
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/explore"
+                    className="flex-1 rounded-xl border border-transparent px-3 py-2 text-sm font-semibold text-[var(--text-primary)] hover:border-[var(--border-default)] hover:bg-[var(--bg-input)] transition-colors"
+                    onClick={handleNavClick}
+                  >
+                    Sign in
+                  </Link>
+                  <ThemeToggle className="shrink-0" />
+                </div>
               )}
             </div>
           </div>

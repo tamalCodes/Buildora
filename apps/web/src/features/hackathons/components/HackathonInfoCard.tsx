@@ -66,7 +66,7 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
             Prize pool
           </p>
           <div className="mt-2 flex items-end gap-2">
-            <p className="text-3xl leading-none font-geist font-black tracking-tight bg-gradient-to-r from-[var(--text-heading)] via-indigo-700 to-cyan-700 bg-clip-text text-transparent">
+            <p className="text-3xl leading-none font-geist font-black tracking-tight text-[var(--text-heading)]">
               {prizePool.amount}
             </p>
             {prizePool.label ? (
