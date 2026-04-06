@@ -33,13 +33,19 @@ const HackathonsOpenSection: React.FC<HackathonsOpenSectionProps> = ({
       </div>
     </div>
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {hackathons.map((hackathon) => (
-        <HackathonsGridCard
-          key={hackathon.id}
-          hackathon={hackathon}
-          onSelect={() => onSelect(hackathon.id)}
-        />
-      ))}
+      {hackathons.length ? (
+        hackathons.map((hackathon) => (
+          <HackathonsGridCard
+            key={hackathon.id}
+            hackathon={hackathon}
+            onSelect={() => onSelect(hackathon.id)}
+          />
+        ))
+      ) : (
+        <div className="md:col-span-2 xl:col-span-3 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-6 py-8 text-sm text-[var(--text-secondary)]">
+          No open hackathons yet. Check back when new calls go live.
+        </div>
+      )}
     </div>
   </section>
 );

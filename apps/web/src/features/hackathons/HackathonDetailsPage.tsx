@@ -11,14 +11,11 @@ import HackathonPrizes from "./components/HackathonPrizes";
 import HackathonSchedule from "./components/HackathonSchedule";
 import HackathonSponsors from "./components/HackathonSponsors";
 import {
-  FEATURED_HACKATHONS,
-  OPEN_HACKATHONS,
-  PAST_HACKATHONS,
-  UPCOMING_HACKATHONS,
   getHackathonDetails,
 } from "./constants/constants";
 import { isOnlineHackathon } from "./constants/utils";
 import type { HackathonDetailsPageProps } from "./constants/interfaces";
+import { useHackathonsCatalog } from "./hooks/useHackathons";
 
 const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
   user,
@@ -27,23 +24,42 @@ const HackathonDetailsPage: React.FC<HackathonDetailsPageProps> = ({
   const { hackathonId, tabId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { data: catalog, isLoading } = useHackathonsCatalog();
   const basePath = location.pathname.startsWith("/hackathons/")
     ? "/hackathons"
     : "";
   const allHackathons = [
-    ...FEATURED_HACKATHONS,
-    ...OPEN_HACKATHONS,
-    ...UPCOMING_HACKATHONS,
-    ...PAST_HACKATHONS,
+    ...(catalog?.featuredHackathons ?? []),
+    ...(catalog?.openHackathons ?? []),
+    ...(catalog?.upcomingHackathons ?? []),
+    ...(catalog?.pastHackathons ?? []),
   ];
   const hackathon = allHackathons.find((item) => item.id === hackathonId);
   const detail = hackathon ? getHackathonDetails(hackathon) : undefined;
-  const moreHackathons = OPEN_HACKATHONS.filter(
+  const moreHackathons = (catalog?.openHackathons ?? []).filter(
     (item) => item.id !== hackathonId
   ).slice(0, 3);
   const activeTab = tabId ?? "overview";
   const isOnline = hackathon && detail ? isOnlineHackathon(hackathon, detail) : false;
   const disabledTabs = ["projects", ...(isOnline ? [] : ["application"])];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+        <GlobalNav user={user} onSignOut={onSignOut} />
+        <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+              Loading
+            </p>
+            <h1 className="text-3xl lg:text-4xl font-geist font-black text-white">
+              Fetching hackathon details...
+            </h1>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (!hackathon || !detail) {
     return (

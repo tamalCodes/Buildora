@@ -22,13 +22,10 @@ import {
 import type { HackathonApplicationPageProps } from "./application/constants/interfaces";
 import { applicationTheme } from "./application/constants/themes";
 import {
-  FEATURED_HACKATHONS,
-  OPEN_HACKATHONS,
-  PAST_HACKATHONS,
-  UPCOMING_HACKATHONS,
   getHackathonDetails,
 } from "./constants/constants";
 import { isOnlineHackathon } from "./constants/utils";
+import { useHackathonsCatalog } from "./hooks/useHackathons";
 
 const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
   user,
@@ -37,19 +34,38 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
   const { hackathonId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { data: catalog, isLoading } = useHackathonsCatalog();
   const basePath = location.pathname.startsWith("/hackathons/")
     ? "/hackathons"
     : "";
   const allHackathons = [
-    ...FEATURED_HACKATHONS,
-    ...OPEN_HACKATHONS,
-    ...UPCOMING_HACKATHONS,
-    ...PAST_HACKATHONS,
+    ...(catalog?.featuredHackathons ?? []),
+    ...(catalog?.openHackathons ?? []),
+    ...(catalog?.upcomingHackathons ?? []),
+    ...(catalog?.pastHackathons ?? []),
   ];
   const hackathon = allHackathons.find((item) => item.id === hackathonId);
   const detail = hackathon ? getHackathonDetails(hackathon) : undefined;
   const isOnline =
     hackathon && detail ? isOnlineHackathon(hackathon, detail) : false;
+
+  if (isLoading) {
+    return (
+      <div className={applicationTheme.page}>
+        <GlobalNav user={user} onSignOut={onSignOut} />
+        <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-emerald-200">
+              Loading
+            </p>
+            <h1 className="text-3xl lg:text-4xl font-geist font-black text-white">
+              Preparing application details...
+            </h1>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (!hackathon || !detail) {
     return (

@@ -13,6 +13,13 @@ export type Hackathon = {
   sponsor?: string;
 };
 
+export type HackathonsCatalog = {
+  featuredHackathons: Hackathon[];
+  openHackathons: Hackathon[];
+  upcomingHackathons: Hackathon[];
+  pastHackathons: Hackathon[];
+};
+
 export type HackathonPrize = {
   title: string;
   amount: string;

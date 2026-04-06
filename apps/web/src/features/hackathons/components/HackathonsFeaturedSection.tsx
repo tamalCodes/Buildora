@@ -22,13 +22,19 @@ const HackathonsFeaturedSection: React.FC<HackathonsFeaturedSectionProps> = ({
       </Button>
     </div>
     <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-      {hackathons.map((hackathon) => (
-        <HackathonsFeaturedCard
-          key={hackathon.id}
-          hackathon={hackathon}
-          onSelect={() => onSelect(hackathon.id)}
-        />
-      ))}
+      {hackathons.length ? (
+        hackathons.map((hackathon) => (
+          <HackathonsFeaturedCard
+            key={hackathon.id}
+            hackathon={hackathon}
+            onSelect={() => onSelect(hackathon.id)}
+          />
+        ))
+      ) : (
+        <div className="xl:col-span-2 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-6 py-8 text-sm text-[var(--text-secondary)]">
+          No featured hackathons available yet.
+        </div>
+      )}
     </div>
   </section>
 );
