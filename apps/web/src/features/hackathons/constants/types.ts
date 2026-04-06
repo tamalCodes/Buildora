@@ -54,9 +54,14 @@ export type HackathonsHeroStat = {
 };
 
 export type HackathonsOpenFilter = {
+  id: HackathonsOpenFilterId;
   label: string;
-  isActive?: boolean;
 };
+
+export type HackathonsOpenFilterId =
+  | "open-now"
+  | "ending-soon"
+  | "highest-prize";
 
 export type HackathonDetail = {
   id: string;

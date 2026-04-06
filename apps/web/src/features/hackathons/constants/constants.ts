@@ -260,9 +260,9 @@ export const HACKATHON_HERO_STATS: HackathonsHeroStat[] = [
 ];
 
 export const HACKATHON_OPEN_FILTERS: HackathonsOpenFilter[] = [
-  { label: "Open now", isActive: true },
-  { label: "Ending soon" },
-  { label: "Highest prize" },
+  { id: "open-now", label: "Open now" },
+  { id: "ending-soon", label: "Ending soon" },
+  { id: "highest-prize", label: "Highest prize" },
 ];
 
 const BASE_HACKATHON_DETAIL: Omit<HackathonDetail, "id" | "bannerUrl"> = {

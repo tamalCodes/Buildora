@@ -15,7 +15,7 @@
   - `auth`: UI for the login flow split into `AuthContainer` + `AuthForm`, plus request/response shapes in `constants`. Uses `@buildora/shared` enums/schemas to match the API.
   - `builders`: `BuildersPage` and `BuilderDetailsPage` surface builder data and rely on shared UI cards defined in `components` alongside `constants`.
   - `explore`: `ExplorePage` curates hackathons, projects, and articles; configuration points live in the `constants` subfolder.
-  - `hackathons`: Pages for the list, details, and application flows (`HackathonsPage`, `HackathonDetailsPage`, `HackathonApplicationPage`) plus reusable sections (`Hero`, `Tabs`, `Faqs`, application fields, etc.) under `components`/`application`.
+  - `hackathons`: Pages for the list, details, and application flows (`HackathonsPage`, `HackathonDetailsPage`, `HackathonApplicationPage`) plus reusable sections (`Hero`, `Tabs`, `Faqs`, application fields, etc.) under `components`/`application`. The open-list section now has client-side filter semantics: `open-now` keeps open items, `ending-soon` sorts by nearest end date, and `highest-prize` sorts by prize value descending, which should map to backend query params once `/hackathons` supports server-side sort/filter.
   - `legal`: Static policy pages (`Privacy`, `Terms`, `Code of Conduct`, `Brand Assets`) share `LegalPageShell` and centralized copy/links in `constants`.
   - `profile`: `ProfilePage` plus small `components`/`constants` used to render authenticated user info and CTA tiles.
   - `projects`: `ProjectDetailsPage` with view-specific cards living under `components`.

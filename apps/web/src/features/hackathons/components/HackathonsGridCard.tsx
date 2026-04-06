@@ -21,11 +21,6 @@ const HackathonsGridCard: React.FC<HackathonListingCardProps> = ({
     <div className="relative h-36">
       <img src={hackathon.coverUrl} alt={hackathon.title} className="h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
-      <div className="absolute left-4 top-4 flex items-center gap-2">
-        <span className="rounded-full border border-white/35 bg-black/25 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-          {hackathon.status}
-        </span>
-      </div>
       <p className="absolute bottom-4 left-4 text-xs font-medium text-white/90">{hackathon.location}</p>
     </div>
     <div className="space-y-4 p-5">
