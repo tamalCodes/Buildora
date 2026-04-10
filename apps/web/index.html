@@ -15,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
       (function() {
         var t = localStorage.getItem('buildora-theme') || 'light';
@@ -44,11 +44,11 @@
         --border-subtle: rgba(15, 23, 42, 0.06);
         --border-hover: rgba(15, 23, 42, 0.18);
 
-        --text-primary: #0f172a;
-        --text-secondary: #475569;
-        --text-tertiary: #64748b;
-        --text-muted: #94a3b8;
-        --text-heading: #0f172a;
+        --text-primary: #1a212d;
+        --text-secondary: #6a7181;
+        --text-tertiary: #6a7181;
+        --text-muted: #8a94a8;
+        --text-heading: #1a212d;
         --text-on-accent: #ffffff;
 
         --glass-bg: rgba(255, 255, 255, 0.7);
@@ -111,11 +111,11 @@
         --border-subtle: rgba(255, 255, 255, 0.05);
         --border-hover: rgba(255, 255, 255, 0.15);
 
-        --text-primary: #f8fafc;
-        --text-secondary: #94a3b8;
-        --text-tertiary: #64748b;
-        --text-muted: #475569;
-        --text-heading: #ffffff;
+        --text-primary: #f3f4f7;
+        --text-secondary: #8a94a8;
+        --text-tertiary: #8a94a8;
+        --text-muted: #6a7181;
+        --text-heading: #f3f4f7;
 
         --glass-bg: rgba(15, 23, 42, 0.6);
         --glass-border: rgba(255, 255, 255, 0.08);
@@ -171,7 +171,7 @@
       }
 
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         min-height: 100dvh;
         background-color: var(--bg-page);
         color: var(--text-primary);
@@ -208,7 +208,11 @@
           var(--safe-area-left);
       }
       .font-geist {
-        font-family: 'Geist', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      .font-inter {
+        font-family: 'Plus Jakarta Sans', sans-serif;
       }
 
       /* Static ambient background (GPU-friendly). */

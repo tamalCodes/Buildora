@@ -21,7 +21,7 @@ type AppRoutesProps = {
 
 const AppRoutes: React.FC<AppRoutesProps> = ({ routes, isAuthenticated }) => {
   const location = useLocation();
-  const hideFooterForGuests = new Set(["/", "/auth", "/login"]);
+  const hideFooterForGuests = new Set(["/", "/explore", "/auth", "/login"]);
   const shouldHideFooter =
     !isAuthenticated && hideFooterForGuests.has(location.pathname);
 

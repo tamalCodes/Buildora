@@ -134,7 +134,7 @@ const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
                   Headlines
                 </p>
                 <p className="text-2xl font-geist font-black text-white">
-                  Geist Bold
+                  Plus Jakarta Sans Bold
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
@@ -142,7 +142,7 @@ const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
                   Body
                 </p>
                 <p className="text-lg font-inter text-slate-200">
-                  Inter Regular
+                  Plus Jakarta Sans Regular
                 </p>
               </div>
             </div>
