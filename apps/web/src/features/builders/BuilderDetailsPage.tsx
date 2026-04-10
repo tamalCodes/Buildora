@@ -19,22 +19,25 @@ const BuilderDetailsPage: React.FC<BuilderDetailsPageProps> = ({
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+      <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] overflow-x-hidden font-inter">
         <GlobalNav user={user} onSignOut={onSignOut} />
-        <div className="pointer-events-none fixed inset-0 -z-10">
-          <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]"></div>
-          <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-teal-500/10 blur-[160px]"></div>
-          <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500/10 blur-[160px]"></div>
+        <div
+          className="pointer-events-none fixed inset-0 -z-10"
+          style={{ opacity: "var(--blob-opacity)" }}
+        >
+          <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600 blur-[140px]"></div>
+          <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-teal-500 blur-[160px]"></div>
+          <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500 blur-[160px]"></div>
         </div>
         <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
+          <div className="rounded-[2.5rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-10 text-center space-y-5">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
               Builder not found
             </p>
-            <h1 className="text-3xl lg:text-4xl font-geist font-black text-white">
+            <h1 className="text-3xl lg:text-4xl font-geist font-black text-[var(--text-heading)]">
               We could not find that builder profile.
             </h1>
-            <p className="text-sm text-slate-400 max-w-xl mx-auto">
+            <p className="text-sm text-[var(--text-secondary)] max-w-xl mx-auto">
               Head back to Builders to explore top contributors in the
               community.
             </p>
@@ -53,35 +56,38 @@ const BuilderDetailsPage: React.FC<BuilderDetailsPageProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-[#05060c] text-slate-100 overflow-x-hidden font-inter">
+    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)] overflow-x-hidden font-inter">
       <GlobalNav user={user} onSignOut={onSignOut} />
 
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]"></div>
-        <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-teal-500/10 blur-[160px]"></div>
-        <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500/10 blur-[160px]"></div>
+      <div
+        className="pointer-events-none fixed inset-0 -z-10"
+        style={{ opacity: "var(--blob-opacity)" }}
+      >
+        <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600 blur-[140px]"></div>
+        <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-teal-500 blur-[160px]"></div>
+        <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500 blur-[160px]"></div>
       </div>
 
       <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-24 space-y-14">
         <div className="flex items-center justify-between">
           <button
-            className="text-xs font-black uppercase tracking-widest text-indigo-300"
+            className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] hover:text-[var(--accent-text-soft)] transition"
             onClick={() => navigate("/builders")}
           >
             Back to builders
           </button>
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
             Builder details
           </div>
         </div>
 
         <BuilderProfileHero profile={profile} />
         <BuilderProfileStats profile={profile} />
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7 space-y-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+          <div className="lg:col-span-7">
             <BuilderProfileAbout profile={profile} />
           </div>
-          <div className="lg:col-span-5 space-y-10">
+          <div className="lg:col-span-5 lg:sticky lg:top-28 h-fit">
             <BuilderProfileProjects profile={profile} />
           </div>
         </div>

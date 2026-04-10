@@ -2,61 +2,123 @@ import Button from "@shared/components/Button";
 import React from "react";
 import SocialIcon from "@shared/components/SocialIcon";
 import type { SocialIconType } from "@shared/components/SocialIcon";
+import { MapPin } from "lucide-react";
 import type { BuilderProfileHeroProps } from "@/features/builders/constants/interfaces";
 
-const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
-  return (
-    <section className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 items-center">
-      <div className="flex items-center gap-6">
-        <div className="relative">
-          <div className="absolute -inset-2 rounded-[2rem] bg-indigo-500/20 blur-xl"></div>
-          <img
-            src={profile.avatarUrl}
-            alt={profile.name}
-            className="relative w-28 h-28 rounded-[2rem] border border-white/10 object-cover"
-          />
-        </div>
-        <div>
-          <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
-            Builder profile
-          </p>
-          <h1 className="text-4xl lg:text-5xl font-geist font-black text-white mt-3">
-            {profile.name}
-          </h1>
-          <p className="text-sm text-slate-400 mt-2">{profile.handle}</p>
-          <p className="text-sm text-slate-500 mt-1">{profile.location}</p>
-        </div>
-      </div>
+const SOCIAL_LABEL_TO_TYPE: Record<string, SocialIconType> = {
+  X: "X",
+  GitHub: "GitHub",
+  LinkedIn: "LinkedIn",
+  Discord: "Discord",
+};
 
-      <div className="space-y-6 lg:ml-auto">
+const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
+  const rolePills = profile.roles && profile.roles.length > 0
+    ? profile.roles
+    : [profile.role];
+
+  return (
+    <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+      <div className="lg:col-span-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6">
+          <div className="relative shrink-0">
+            <div className="absolute -inset-2 rounded-[2.1rem] bg-indigo-500/25 blur-xl"></div>
+            <div className="absolute -inset-0.5 rounded-[2rem] border border-indigo-400/30"></div>
+            <img
+              src={profile.avatarUrl}
+              alt={profile.name}
+              className="relative w-28 h-28 rounded-[2rem] border border-[var(--border-default)] object-cover"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
+              Builder profile
+            </p>
+            <div>
+              <h1 className="text-4xl lg:text-5xl font-geist font-black text-[var(--text-heading)] tracking-tight">
+                {profile.name}
+              </h1>
+              <p className="mt-1 text-sm text-[var(--text-tertiary)]">
+                {profile.handle}
+              </p>
+              <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-[var(--text-secondary)]">
+                <MapPin size={14} />
+                {profile.location}
+              </p>
+            </div>
+            <p className="text-sm font-semibold text-[var(--text-primary)]">
+              {profile.role}
+            </p>
+          </div>
+        </div>
+
+        {profile.headline ? (
+          <p className="max-w-3xl text-base text-[var(--text-secondary)] leading-relaxed">
+            {profile.headline}
+          </p>
+        ) : null}
+
+        <div className="flex flex-wrap gap-2">
+          {rolePills.map((item) => (
+            <span
+              key={item}
+              className="inline-flex items-center rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-[var(--text-secondary)]"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+
         <div className="flex flex-wrap gap-2">
           {profile.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[10px] font-black uppercase tracking-widest text-slate-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full"
+              className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1.5 rounded-full"
             >
               {tag}
             </span>
           ))}
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <Button className="!px-6 !py-3 !rounded-xl">Follow</Button>
-          <Button variant="secondary" className="!px-6 !py-3 !rounded-xl">
-            Message
-          </Button>
-          <div className="flex items-center gap-2">
-            {profile.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 text-slate-300 flex items-center justify-center hover:border-indigo-500/50 hover:text-white transition"
-                aria-label={link.label}
-              >
-                <SocialIcon
-                  type={link.label as SocialIconType}
-                  className="h-4 w-4"
-                />
-              </a>
+      </div>
+
+      <div className="lg:col-span-4 lg:pl-4">
+        <div className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-5 sm:p-6 space-y-5">
+          <div className="flex flex-wrap items-center gap-3">
+            <Button className="!px-5 !py-2.5 !rounded-xl">Follow</Button>
+            <Button variant="secondary" className="!px-5 !py-2.5 !rounded-xl">
+              Message
+            </Button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            {profile.links
+              .filter((link) => SOCIAL_LABEL_TO_TYPE[link.label])
+              .map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="h-10 w-10 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] text-[var(--text-secondary)] flex items-center justify-center hover:border-[var(--accent-border)] hover:text-[var(--text-heading)] transition"
+                  aria-label={link.label}
+                >
+                  <SocialIcon
+                    type={SOCIAL_LABEL_TO_TYPE[link.label]}
+                    className="h-4 w-4"
+                  />
+                </a>
+              ))}
+          </div>
+
+          <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-3 space-y-2">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+              Best known for
+            </p>
+            {profile.highlights.slice(0, 2).map((item) => (
+              <p key={item} className="text-sm text-[var(--text-secondary)]">
+                {item}
+              </p>
             ))}
           </div>
         </div>

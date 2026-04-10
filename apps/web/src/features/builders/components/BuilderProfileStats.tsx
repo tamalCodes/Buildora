@@ -9,12 +9,12 @@ const BuilderProfileStats: React.FC<BuilderProfileStatsProps> = ({
       {profile.stats.map((stat) => (
         <div
           key={stat.label}
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4"
+          className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-4 sm:px-5 sm:py-5"
         >
-          <p className="text-2xl font-geist font-black text-white">
+          <p className="text-2xl font-geist font-black text-[var(--text-heading)]">
             {stat.value}
           </p>
-          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-tertiary)] font-black mt-1">
             {stat.label}
           </p>
         </div>

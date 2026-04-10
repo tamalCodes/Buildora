@@ -55,6 +55,10 @@ export type BuilderProfileProject = {
   tags: string[];
   likes: number;
   coverUrl: string;
+  subtitle?: string;
+  builtAt?: string;
+  outcome?: string;
+  role?: string;
 };
 
 export type BuilderProfileLink = {
@@ -75,4 +79,27 @@ export type BuilderProfile = {
   stats: BuilderProfileStat[];
   projects: BuilderProfileProject[];
   links: BuilderProfileLink[];
+  headline?: string;
+  readme?: string[];
+  strengths?: string[];
+  roles?: string[];
+  experience?: BuilderProfileExperience[];
+  education?: BuilderProfileEducation[];
+};
+
+export type BuilderProfileExperience = {
+  id: string;
+  title: string;
+  organization: string;
+  period: string;
+  location?: string;
+  summary?: string;
+};
+
+export type BuilderProfileEducation = {
+  id: string;
+  degree: string;
+  institution: string;
+  period: string;
+  focus?: string;
 };

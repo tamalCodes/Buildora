@@ -6,18 +6,36 @@ export const BUILDER_PROFILES: BuilderProfile[] = [
     name: "Vaibhav Saini",
     handle: "@vasa",
     avatarUrl: "https://i.pravatar.cc/240?img=11",
-    role: "Product builder",
+    role: "Blockchain product builder",
     location: "New Delhi, India",
-    tags: ["Solidity", "React", "Node.js", "MongoDB", "Go"],
+    headline:
+      "Building practical infra for decentralized apps, with a focus on developer tooling and clear technical communication.",
+    tags: ["Solidity", "Go", "Node.js", "React", "MongoDB"],
+    roles: [
+      "Co-founder, TowardsBlockchain",
+      "Open-source maintainer",
+      "Community mentor",
+    ],
     bio: [
-      "Building Gem, a trading utility that helps NFT collectors save gas across every marketplace.",
-      "Focused on shipping community-led infrastructure and explaining complex systems in simple language.",
-      "Previously collaborated with multiple hackathon teams across the Buildora network.",
+      "I build developer-focused products that simplify blockchain infra and help teams ship faster.",
+      "Most of my recent work blends smart contracts, backend services, and product UX for real user adoption.",
+      "I enjoy turning dense technical concepts into practical playbooks for early-stage builders.",
+    ],
+    readme: [
+      "I am a builder from New Delhi working across decentralized infrastructure, distributed systems, and product engineering. Over the last few years I have built with teams spanning hackathons, open-source collectives, and early-stage startups.",
+      "My current focus is building tools that improve developer workflows across blockchain apps, especially where performance, reliability, and clarity matter.",
+      "Outside shipping products, I contribute to open-source efforts, write technical explainers, and mentor first-time builders during hackathon sprints.",
     ],
     highlights: [
       "Winner at ETHIndia 2019 and ETHGlobal Online.",
-      "Writes deep dives on Ethereum tooling and IPFS.",
-      "Mentors first-time builders during Buildora sprints.",
+      "Built and maintained infra components used in multi-team hackathon deployments.",
+      "Published technical breakdowns on Ethereum tooling and decentralized storage.",
+    ],
+    strengths: [
+      "Rapid prototyping from idea to demo-ready MVP",
+      "Designing backend architectures for blockchain workloads",
+      "Writing production-grade smart contracts and APIs",
+      "Explaining complex systems in simple product language",
     ],
     stats: [
       { label: "Hackathons", value: "22" },
@@ -29,8 +47,12 @@ export const BUILDER_PROFILES: BuilderProfile[] = [
       {
         id: "gem-platform",
         title: "Gem",
+        subtitle: "NFT trade routing and gas optimization",
         summary:
-          "Aggregates NFT marketplace listings and optimizes gas usage for collectors.",
+          "Aggregates NFT marketplace listings and helps collectors execute with lower gas overhead.",
+        outcome: "Used by active collectors for discovery + execution workflows.",
+        builtAt: "Built at ETHIndia 2019",
+        role: "Product + smart contract architecture",
         tags: ["Web3", "Marketplaces", "Infra"],
         likes: 128,
         coverUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
@@ -38,15 +60,72 @@ export const BUILDER_PROFILES: BuilderProfile[] = [
       {
         id: "mesh-relay",
         title: "Mesh Relay",
+        subtitle: "Realtime wallet event network",
         summary:
           "A lightweight relay network to push wallet events to builders in realtime.",
+        outcome:
+          "Reduced event delivery latency for downstream apps and internal dashboards.",
+        builtAt: "Built for internal tooling",
+        role: "Backend engineering + infra reliability",
         tags: ["Realtime", "APIs", "Node.js"],
         likes: 92,
         coverUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
       },
+      {
+        id: "cluster-labs-toolkit",
+        title: "Cluster Toolkit",
+        subtitle: "Open-source infra and starter templates",
+        summary:
+          "A collection of reusable contracts, API starters, and deployment scripts for hackathon teams.",
+        outcome:
+          "Helped multiple teams cut setup time and move directly to product differentiation.",
+        builtAt: "Open-source initiative",
+        role: "Maintainer + ecosystem contributor",
+        tags: ["Open Source", "Solidity", "DevEx"],
+        likes: 76,
+        coverUrl: "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=400&q=80",
+      },
+    ],
+    experience: [
+      {
+        id: "towards-blockchain",
+        title: "Co-founder",
+        organization: "TowardsBlockchain",
+        period: "2019 - Present",
+        location: "India",
+        summary:
+          "Building products, infra, and educational content focused on practical blockchain adoption.",
+      },
+      {
+        id: "cluster-labs",
+        title: "Core contributor",
+        organization: "Cluster Labs",
+        period: "2020 - Present",
+        location: "Remote",
+        summary:
+          "Maintained open-source modules for distributed apps and mentored contributors.",
+      },
+      {
+        id: "community-sprints",
+        title: "Hackathon mentor",
+        organization: "Community programs",
+        period: "2021 - Present",
+        location: "Global",
+        summary:
+          "Guided first-time teams on architecture, product scoping, and demo storytelling.",
+      },
+    ],
+    education: [
+      {
+        id: "iitd",
+        degree: "B.Tech (incomplete)",
+        institution: "Indian Institute of Technology, Delhi",
+        period: "Engineering Physics",
+        focus: "Transitioned early into startup and product building.",
+      },
     ],
     links: [
-      { label: "GitHub", href: "#" },
+      { label: "GitHub", href: "https://github.com/cluster-labs" },
       { label: "LinkedIn", href: "#" },
       { label: "X", href: "#" },
     ],
