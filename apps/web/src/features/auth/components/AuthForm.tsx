@@ -160,11 +160,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
         {step === AuthStep.IDENTIFY ? (
           <div className="space-y-6 sm:space-y-8">
             <div className="space-y-2">
-              <h1 className="text-3xl sm:text-4xl font-geist font-black tracking-tight text-[var(--text-heading)]">
+              <h1 className="text-3xl sm:text-4xl font-geist font-black tracking-tight text-(--text-heading)">
                 <span className="sm:hidden">Sign in</span>
                 <span className="hidden sm:inline">Welcome back</span>
               </h1>
-              <p className="hidden sm:block text-base text-[var(--text-secondary)]">
+              <p className="hidden sm:block text-base text-(--text-secondary)">
                 Sign in to your account
               </p>
             </div>
@@ -172,7 +172,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
             <div className="space-y-4">
               <Button
                 variant="secondary"
-                className="w-full h-[52px] text-base"
+                className="w-full h-13 text-base"
                 icon={
                   <svg
                     className="w-5 h-5 text-indigo-400"
@@ -187,7 +187,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
               </Button>
               <Button
                 variant="outline"
-                className="w-full h-[52px] text-base"
+                className="w-full h-13 text-base"
                 icon={
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
@@ -216,10 +216,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
             <form onSubmit={handleIdentify} className="space-y-5 sm:space-y-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-[var(--border-subtle)]"></div>
+                  <div className="w-full border-t border-(--border-subtle)"></div>
                 </div>
-                <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--text-tertiary)]">
-                  <span className="bg-[var(--bg-page)] px-3">or</span>
+                <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em] text-(--text-tertiary)">
+                  <span className="bg-(--bg-page) px-3">or</span>
                 </div>
               </div>
               <Input
@@ -280,11 +280,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
             </div>
 
             <div className="space-y-6">
-              <div className="px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-default)] flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-400 truncate max-w-[200px]">
+              <div className="px-4 py-3 rounded-xl bg-(--bg-input) border border-(--border-default) flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-400 truncate max-w-50">
                   {email}
                 </span>
-                <span className="text-[10px] font-black text-[var(--text-tertiary)] uppercase">
+                <span className="text-[10px] font-black text-(--text-tertiary) uppercase">
                   Identity
                 </span>
               </div>

@@ -131,7 +131,7 @@ const CodeOfConductPage: React.FC<CodeOfConductPageProps> = ({
         </div>
 
         <aside className="lg:col-span-4 space-y-6 lg:sticky top-28 self-start">
-          <div className="glass-card rounded-[2rem] p-6 space-y-4">
+          <div className="glass-card rounded-4xl p-6 space-y-4">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-emerald-300">
               Safety contacts
             </p>
@@ -148,7 +148,7 @@ const CodeOfConductPage: React.FC<CodeOfConductPageProps> = ({
             </a>
           </div>
 
-          <div className="glass-card rounded-[2rem] p-6 space-y-3">
+          <div className="glass-card rounded-4xl p-6 space-y-3">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-emerald-300">
               Commitment
             </p>

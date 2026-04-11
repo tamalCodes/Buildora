@@ -13,7 +13,7 @@ const SettingsTopNav: React.FC<SettingsTopNavProps> = ({ user, onSignOut }) => {
 
   return (
     <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-4 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-4 lg:px-8">
         <div className="flex items-center gap-8">
           <Link to="/explore" className="flex items-center gap-2">
             <Logo size="sm" hideText />
@@ -36,7 +36,7 @@ const SettingsTopNav: React.FC<SettingsTopNavProps> = ({ user, onSignOut }) => {
                 alt={userLabel}
                 className="h-8 w-8 rounded-full border border-slate-200"
               />
-              <span className="max-w-[140px] truncate text-sm font-semibold text-slate-700">
+              <span className="max-w-35 truncate text-sm font-semibold text-slate-700">
                 {userLabel}
               </span>
               <button

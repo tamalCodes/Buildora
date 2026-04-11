@@ -72,7 +72,7 @@ const TermsOfUsePage: React.FC<TermsOfUsePageProps> = ({
           {TERMS_SECTIONS.map((section) => (
             <section
               key={section.title}
-              className="rounded-[2rem] border border-white/10 bg-white/5 px-6 py-6 space-y-3"
+              className="rounded-4xl border border-white/10 bg-white/5 px-6 py-6 space-y-3"
             >
               <h2 className="text-xl font-geist font-black text-white">
                 {section.title}
@@ -83,7 +83,7 @@ const TermsOfUsePage: React.FC<TermsOfUsePageProps> = ({
         </div>
 
         <aside className="lg:col-span-4 space-y-6 lg:sticky top-28 self-start">
-          <div className="glass-card rounded-[2rem] p-6 space-y-4">
+          <div className="glass-card rounded-4xl p-6 space-y-4">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
               Highlights
             </p>
@@ -94,7 +94,7 @@ const TermsOfUsePage: React.FC<TermsOfUsePageProps> = ({
             </ul>
           </div>
 
-          <div className="glass-card rounded-[2rem] p-6 space-y-4">
+          <div className="glass-card rounded-4xl p-6 space-y-4">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
               Contact
             </p>

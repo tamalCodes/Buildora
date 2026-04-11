@@ -47,12 +47,12 @@ const LegalPageShell: React.FC<LegalPageShellProps> = ({
       <GlobalNav user={user} onSignOut={onSignOut} />
 
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className={`absolute -top-40 left-0 h-[520px] w-[520px] rounded-full ${accentStyles.glowA} blur-[140px]`} />
-        <div className={`absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full ${accentStyles.glowB} blur-[160px]`} />
-        <div className={`absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full ${accentStyles.glowC} blur-[160px]`} />
+        <div className={`absolute -top-40 left-0 h-130 w-130 rounded-full ${accentStyles.glowA} blur-[140px]`} />
+        <div className={`absolute top-1/3 right-0 h-105 w-105 rounded-full ${accentStyles.glowB} blur-[160px]`} />
+        <div className={`absolute bottom-0 left-1/3 h-120 w-120 rounded-full ${accentStyles.glowC} blur-[160px]`} />
       </div>
 
-      <main className="max-w-[1200px] mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-12">
+      <main className="max-w-300 mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-12">
         <header className="space-y-6">
           <div
             className={`inline-flex items-center gap-3 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-widest ${accentStyles.badge}`}

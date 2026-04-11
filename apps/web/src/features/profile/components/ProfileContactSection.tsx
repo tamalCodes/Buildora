@@ -49,7 +49,7 @@ const ProfileContactSection: React.FC<ProfileContactSectionProps> = ({
         description="For emergencies during events."
         action={<SettingsButton>Save</SettingsButton>}
       >
-        <div className="grid gap-4 md:grid-cols-[1fr_1fr]">
+        <div className="grid gap-4 md:grid-cols-2">
           <SettingsInput
             label="Contact name"
             defaultValue={profile?.emergencyName || ""}

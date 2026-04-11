@@ -43,12 +43,12 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user, onSignOut }) => {
       <GlobalNav user={user} onSignOut={onSignOut} />
 
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-indigo-600/15 blur-[140px]" />
-        <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[160px]" />
-        <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-rose-500/10 blur-[160px]" />
+        <div className="absolute -top-40 left-0 h-130 w-130 rounded-full bg-indigo-600/15 blur-[140px]" />
+        <div className="absolute top-1/3 right-0 h-105 w-105 rounded-full bg-cyan-500/10 blur-[160px]" />
+        <div className="absolute bottom-0 left-1/3 h-120 w-120 rounded-full bg-rose-500/10 blur-[160px]" />
       </div>
 
-      <main className="mx-auto max-w-[1200px] px-6 pb-24 pt-32 lg:px-12">
+      <main className="mx-auto max-w-300 px-6 pb-24 pt-32 lg:px-12">
         <ProfileHeader
           avatarUrl={avatarUrl}
           userLabel={userLabel}

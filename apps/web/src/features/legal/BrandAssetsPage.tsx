@@ -69,7 +69,7 @@ const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
         </div>
 
         <div className="lg:col-span-5 space-y-6">
-          <div className="glass-card rounded-[2rem] p-6 space-y-4">
+          <div className="glass-card rounded-4xl p-6 space-y-4">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
               Logo usage
             </p>
@@ -150,7 +150,7 @@ const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
         </div>
 
         <div className="lg:col-span-5 space-y-6">
-          <div className="glass-card rounded-[2rem] p-6 space-y-4">
+          <div className="glass-card rounded-4xl p-6 space-y-4">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
               Do
             </p>
@@ -160,7 +160,7 @@ const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
               ))}
             </ul>
           </div>
-          <div className="glass-card rounded-[2rem] p-6 space-y-4">
+          <div className="glass-card rounded-4xl p-6 space-y-4">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
               Do not
             </p>
@@ -170,7 +170,7 @@ const BrandAssetsPage: React.FC<BrandAssetsPageProps> = ({
               ))}
             </ul>
           </div>
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 space-y-3">
+          <div className="rounded-4xl border border-white/10 bg-white/5 p-6 space-y-3">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300">
               Press inquiries
             </p>

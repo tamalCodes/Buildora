@@ -7,7 +7,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   onSelect,
 }) => {
   return (
-    <aside className="hidden w-full max-w-[240px] flex-col rounded-[2rem] border border-white/10 bg-white/5 px-4 py-6 lg:flex">
+    <aside className="hidden w-full max-w-60 flex-col rounded-4xl border border-white/10 bg-white/5 px-4 py-6 lg:flex">
       <p className="px-3 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
         Profile
       </p>
