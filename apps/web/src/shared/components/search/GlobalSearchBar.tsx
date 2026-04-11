@@ -19,12 +19,12 @@ const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
       <button
         type="button"
         onClick={openSearch}
-        className={`group flex w-full flex-nowrap items-center gap-3 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-2.5 text-left text-xs text-[var(--text-secondary)] transition hover:border-[var(--border-hover)] hover:text-[var(--text-heading)] ${buttonClassName}`}
+        className={`group flex w-full flex-nowrap items-center gap-3 rounded-2xl border border-(--border-default) bg-(--bg-input) px-4 py-2.5 text-left text-xs text-(--text-secondary) transition hover:border-(--border-hover) hover:text-(--text-heading) ${buttonClassName}`}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
       >
         <svg
-          className="h-4 w-4 text-[var(--text-tertiary)] group-hover:text-[var(--text-heading)]"
+          className="h-4 w-4 text-(--text-tertiary) group-hover:text-(--text-heading)"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -36,15 +36,15 @@ const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
         </svg>
-        <span className="min-w-0 flex-1 truncate text-[var(--text-secondary)] group-hover:text-[var(--text-heading)]">
+        <span className="min-w-0 flex-1 truncate text-(--text-secondary) group-hover:text-(--text-heading)">
           Type to begin search, or use the global shortcut
         </span>
         {showShortcut ? (
-          <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)]">
-            <span className="rounded-lg border border-[var(--border-hover)] bg-[var(--bg-input)] px-2 py-1 text-[var(--text-primary)]">
+          <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-(--text-secondary)">
+            <span className="rounded-lg border border-(--border-hover) bg-(--bg-input) px-2 py-1 text-(--text-primary)">
               Ctrl
             </span>
-            <span className="rounded-lg border border-[var(--border-hover)] bg-[var(--bg-input)] px-2 py-1 text-[var(--text-primary)]">
+            <span className="rounded-lg border border-(--border-hover) bg-(--bg-input) px-2 py-1 text-(--text-primary)">
               K
             </span>
           </span>

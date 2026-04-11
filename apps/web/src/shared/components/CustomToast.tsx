@@ -73,22 +73,22 @@ export const CustomToastProvider: React.FC<{ children: React.ReactNode }> = ({ c
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`flex w-[320px] max-w-full items-start gap-3 rounded-2xl border px-4 py-3 shadow-lg backdrop-blur ${getVariantStyles(
+            className={`flex w-80 max-w-full items-start gap-3 rounded-2xl border px-4 py-3 shadow-lg backdrop-blur ${getVariantStyles(
               toast.variant
             )} animate-in slide-in-from-top-2 fade-in duration-300`}
           >
             <div className="flex-1">
               {toast.title && (
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-(--text-secondary)">
                   {toast.title}
                 </p>
               )}
-              <p className="text-sm font-medium text-[var(--text-primary)]">{toast.message}</p>
+              <p className="text-sm font-medium text-(--text-primary)">{toast.message}</p>
             </div>
             <button
               type="button"
               onClick={() => removeToast(toast.id)}
-              className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-heading)]"
+              className="text-xs font-bold uppercase tracking-widest text-(--text-muted) hover:text-(--text-heading)"
               aria-label="Dismiss notification"
             >
               X

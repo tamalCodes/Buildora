@@ -23,13 +23,13 @@ const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`flex items-center ${currentSize.gap} ${className}`}>
       <div
-        className={`${currentSize.icon} bg-indigo-600 shadow-[var(--neon-glow-shadow)] rounded-xl flex items-center justify-center border border-indigo-400/20`}
+        className={`${currentSize.icon} bg-indigo-600 shadow-(--neon-glow-shadow) rounded-xl flex items-center justify-center border border-indigo-400/20`}
       >
         <div className="w-[45%] h-[45%] border-2 border-white rounded-md"></div>
       </div>
       {!hideText && (
         <span
-          className={`text-[var(--text-heading)] font-geist font-black tracking-tighter ${currentSize.text}`}
+          className={`text-(--text-heading) font-geist font-black tracking-tighter ${currentSize.text}`}
         >
           Buildora
         </span>

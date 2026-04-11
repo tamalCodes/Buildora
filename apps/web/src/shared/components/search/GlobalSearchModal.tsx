@@ -55,7 +55,7 @@ const GlobalSearchModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-start justify-center px-4 pt-24">
-      <div className="absolute inset-0 bg-[var(--overlay-bg)] backdrop-blur-md" />
+      <div className="absolute inset-0 bg-(--overlay-bg) backdrop-blur-md" />
       <div ref={panelRef} className="relative z-10 w-full max-w-2xl">
         <SearchCommandCenter
           title="Search"
@@ -70,7 +70,7 @@ const GlobalSearchModal: React.FC = () => {
           autoFocus
           defaultOpen
           variant="compact"
-          containerClassName="rounded-[2rem] p-6"
+          containerClassName="rounded-4xl p-6"
         />
       </div>
     </div>

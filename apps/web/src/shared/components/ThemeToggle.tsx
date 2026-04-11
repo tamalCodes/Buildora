@@ -8,7 +8,7 @@ const ThemeToggle: React.FC<{ className?: string }> = ({ className = "" }) => {
   return (
     <button
       onClick={toggleTheme}
-      className={`flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] text-[var(--text-tertiary)] transition hover:border-[var(--border-hover)] hover:text-[var(--text-primary)] cursor-pointer ${className}`}
+      className={`flex h-9 w-9 items-center justify-center rounded-xl border border-(--border-default) bg-(--bg-input) text-(--text-tertiary) transition hover:border-(--border-hover) hover:text-(--text-primary) cursor-pointer ${className}`}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}

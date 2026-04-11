@@ -50,12 +50,12 @@ const Button: React.FC<ButtonProps> = ({
   const layoutStyles = withArrow ? 'justify-between gap-3' : 'justify-center';
   const variants: Record<ButtonVariant, string> = {
     primary:
-      'bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-[var(--neon-glow-shadow)] border border-indigo-400/20',
+      'bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-(--neon-glow-shadow) border border-indigo-400/20',
     secondary:
-      'bg-[var(--bg-input)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-default)] hover:border-[var(--border-hover)]',
+      'bg-(--bg-input) text-(--text-primary) hover:bg-(--bg-surface-hover) border border-(--border-default) hover:border-(--border-hover)',
     outline:
-      'bg-transparent border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-heading)] hover:border-indigo-500/40 hover:bg-indigo-500/5',
-    cta: 'bg-indigo-600 text-white border border-indigo-400/20 shadow-[0_18px_45px_rgba(79,70,229,0.22)] hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(79,70,229,0.3)] active:translate-y-[1px] active:shadow-[0_12px_28px_rgba(79,70,229,0.18)]'
+      'bg-transparent border border-(--border-default) text-(--text-secondary) hover:text-(--text-heading) hover:border-indigo-500/40 hover:bg-indigo-500/5',
+    cta: 'bg-indigo-600 text-white border border-indigo-400/20 shadow-[0_18px_45px_rgba(79,70,229,0.22)] hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(79,70,229,0.3)] active:translate-y-0.25 active:shadow-[0_12px_28px_rgba(79,70,229,0.18)]'
   };
   const usesLightArrow = variant === 'primary' || variant === 'cta';
 
@@ -74,7 +74,7 @@ const Button: React.FC<ButtonProps> = ({
             <span className="relative z-10">{children}</span>
             <span
               className={`pointer-events-none absolute inset-0 -z-0 rounded-full opacity-0 blur-md transition duration-300 group-hover:opacity-100 ${
-                usesLightArrow ? 'bg-white/12' : 'bg-[var(--accent-bg-soft)]'
+                usesLightArrow ? 'bg-white/12' : 'bg-(--accent-bg-soft)'
               }`}
             ></span>
           </span>
@@ -89,14 +89,14 @@ const Button: React.FC<ButtonProps> = ({
           className={`relative flex h-9 w-9 items-center justify-center rounded-full transition duration-300 ${
             usesLightArrow
               ? 'border border-white/20 bg-white/14 text-white group-hover:translate-x-1 group-hover:scale-110 group-hover:bg-white/22 group-active:translate-x-0.5 group-active:scale-95'
-              : 'border border-[var(--border-default)] bg-[var(--bg-input)] text-[var(--text-secondary)] group-hover:translate-x-1 group-hover:border-[var(--accent-border)] group-hover:text-[var(--text-heading)]'
+              : 'border border-(--border-default) bg-(--bg-input) text-(--text-secondary) group-hover:translate-x-1 group-hover:border-(--accent-border) group-hover:text-(--text-heading)'
           }`}
         >
           <span
             className={`pointer-events-none absolute inset-0 rounded-full opacity-0 transition duration-300 ${
               usesLightArrow
                 ? 'border border-white/30 group-hover:scale-[1.35] group-hover:opacity-100 group-active:scale-110'
-                : 'border border-[var(--accent-border)]/70 group-hover:scale-[1.25] group-hover:opacity-100'
+                : 'border border-(--accent-border)/70 group-hover:scale-[1.25] group-hover:opacity-100'
             }`}
           ></span>
           {usesLightArrow && (

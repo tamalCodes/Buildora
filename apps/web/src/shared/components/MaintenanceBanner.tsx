@@ -19,7 +19,7 @@ const MaintenanceBanner: React.FC = () => {
         `}
       </style>
 
-      <div className="mx-auto flex min-h-12 max-w-[1600px] items-center justify-center px-4 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-slate-950 sm:hidden">
+      <div className="mx-auto flex min-h-12 max-w-400 items-center justify-center px-4 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-slate-950 sm:hidden">
         <div className="w-full overflow-hidden">
           <div
             className="flex w-max items-center whitespace-nowrap"
@@ -31,7 +31,7 @@ const MaintenanceBanner: React.FC = () => {
         </div>
       </div>
 
-      <div className="mx-auto hidden min-h-12 max-w-[1600px] items-center justify-center px-4 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-slate-950 sm:flex sm:px-6">
+      <div className="mx-auto hidden min-h-12 max-w-400 items-center justify-center px-4 py-3 text-center text-xs font-black uppercase tracking-[0.18em] text-slate-950 sm:flex sm:px-6">
         {message}
       </div>
     </div>

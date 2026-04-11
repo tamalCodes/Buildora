@@ -64,11 +64,11 @@ const SOCIALS: {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-[var(--border-default)] bg-[var(--bg-page)]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16">
+    <footer className="border-t border-(--border-default) bg-(--bg-page)">
+      <div className="max-w-350 mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5 space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-geist font-black text-[var(--text-heading)] leading-[1.05]">
+            <h2 className="text-4xl lg:text-5xl font-geist font-black text-(--text-heading) leading-[1.05]">
               We love{" "}
               <span className="text-indigo-400 drop-shadow-[0_0_12px_rgba(129,140,248,0.35)]">
                 software
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="h-11 w-11 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] text-[var(--text-secondary)] flex items-center justify-center hover:border-indigo-500/50 hover:text-[var(--text-heading)] hover:bg-[var(--bg-surface-hover)] transition"
+                  className="h-11 w-11 rounded-xl border border-(--border-default) bg-(--bg-input) text-(--text-secondary) flex items-center justify-center hover:border-indigo-500/50 hover:text-(--text-heading) hover:bg-(--bg-surface-hover) transition"
                 >
                   {social.type ? (
                     <SocialIcon type={social.type} className="h-5 w-5" />
@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
             {FOOTER_LINKS.map((group) => (
               <div key={group.title} className="space-y-4">
-                <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-secondary)]">
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-(--text-secondary)">
                   {group.title}
                 </p>
                 <div className="space-y-3">
@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
                       <Link
                         key={link.label}
                         to={link.href}
-                        className="block text-sm text-[var(--text-tertiary)] hover:text-[var(--text-heading)] transition"
+                        className="block text-sm text-(--text-tertiary) hover:text-(--text-heading) transition"
                       >
                         {link.label}
                       </Link>
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
                       <a
                         key={link.label}
                         href={link.href}
-                        className="block text-sm text-[var(--text-tertiary)] hover:text-[var(--text-heading)] transition"
+                        className="block text-sm text-(--text-tertiary) hover:text-(--text-heading) transition"
                       >
                         {link.label}
                       </a>
@@ -131,16 +131,16 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-[var(--border-default)] pt-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div className="mt-12 border-t border-(--border-default) pt-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <Logo size="sm" />
-          <div className="flex flex-wrap items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
+          <div className="flex flex-wrap items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-(--text-tertiary)">
             <span>(c) 2025 Buildora Protocol Labs</span>
             <span className="flex items-center gap-2 text-emerald-400">
               <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
               Global mainnet active
             </span>
           </div>
-          <div className="rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-6 py-2 text-[10px] font-black uppercase tracking-[0.4em] text-[var(--text-tertiary)]">
+          <div className="rounded-full border border-(--border-default) bg-(--bg-input) px-6 py-2 text-[10px] font-black uppercase tracking-[0.4em] text-(--text-tertiary)">
             Never stop building
           </div>
         </div>
