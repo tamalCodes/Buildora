@@ -21,10 +21,10 @@ const HackathonsOpenSection: React.FC<HackathonsOpenSectionProps> = ({
     <section className="space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--accent-text)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-(--accent-text)">
             Open hackathons
           </p>
-          <h2 className="mt-2 text-2xl font-geist font-black text-[var(--text-heading)] lg:text-3xl">
+          <h2 className="mt-2 text-2xl font-geist font-black text-(--text-heading) lg:text-3xl">
             Apply while the window is open
           </h2>
         </div>
@@ -40,8 +40,8 @@ const HackathonsOpenSection: React.FC<HackathonsOpenSectionProps> = ({
                 onClick={() => setActiveFilterId(filter.id)}
                 className={
                   isActive
-                    ? "rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--accent-text)]"
-                    : "rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--text-secondary)]"
+                    ? "rounded-full border border-(--accent-border) bg-(--accent-bg-soft) px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-(--accent-text)"
+                    : "rounded-full border border-(--border-default) bg-(--bg-input) px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-(--text-secondary)"
                 }
               >
                 {filter.label}
@@ -60,7 +60,7 @@ const HackathonsOpenSection: React.FC<HackathonsOpenSectionProps> = ({
             />
           ))
         ) : (
-          <div className="md:col-span-2 xl:col-span-3 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-6 py-8 text-sm text-[var(--text-secondary)]">
+          <div className="md:col-span-2 xl:col-span-3 rounded-2xl border border-(--border-default) bg-(--bg-surface) px-6 py-8 text-sm text-(--text-secondary)">
             No open hackathons yet. Check back when new calls go live.
           </div>
         )}

@@ -7,7 +7,7 @@ const HackathonsFeaturedCard: React.FC<HackathonListingCardProps> = ({
   onSelect,
 }) => (
   <div
-    className="group overflow-hidden rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent-border)] cursor-pointer"
+    className="group overflow-hidden rounded-2xl border border-(--border-default) bg-(--bg-surface) shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-(--accent-border) cursor-pointer"
     onClick={onSelect}
     onKeyDown={(event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -54,7 +54,7 @@ const HackathonsFeaturedCard: React.FC<HackathonListingCardProps> = ({
         {hackathon.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)]"
+            className="rounded-full border border-(--border-default) bg-(--bg-input) px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-(--text-secondary)"
           >
             {tag}
           </span>
@@ -62,33 +62,33 @@ const HackathonsFeaturedCard: React.FC<HackathonListingCardProps> = ({
       </div>
       <div className="grid grid-cols-2 gap-3 text-sm">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--text-tertiary)">
             Dates
           </p>
-          <p className="mt-1 text-[var(--text-primary)]">{hackathon.dates}</p>
+          <p className="mt-1 text-(--text-primary)">{hackathon.dates}</p>
         </div>
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--text-tertiary)">
             Location
           </p>
-          <p className="mt-1 text-[var(--text-primary)]">{hackathon.location}</p>
+          <p className="mt-1 text-(--text-primary)">{hackathon.location}</p>
         </div>
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--text-tertiary)">
             Prize
           </p>
-          <p className="mt-1 font-semibold text-[var(--text-primary)]">{hackathon.prize}</p>
+          <p className="mt-1 font-semibold text-(--text-primary)">{hackathon.prize}</p>
         </div>
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-tertiary)]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--text-tertiary)">
             Builders
           </p>
-          <p className="mt-1 text-[var(--text-secondary)]">{hackathon.participants}</p>
+          <p className="mt-1 text-(--text-secondary)">{hackathon.participants}</p>
         </div>
       </div>
-      <div className="flex justify-end border-t border-[var(--border-subtle)] pt-4">
+      <div className="flex justify-end border-t border-(--border-subtle) pt-4">
         <Button
-          className="!rounded-lg !px-5 !py-2.5 !text-sm"
+          className="rounded-lg! px-5! py-2.5! text-sm!"
           onClick={(event) => {
             event.stopPropagation();
             onSelect();

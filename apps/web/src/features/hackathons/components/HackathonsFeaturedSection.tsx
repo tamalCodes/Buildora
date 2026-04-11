@@ -10,14 +10,14 @@ const HackathonsFeaturedSection: React.FC<HackathonsFeaturedSectionProps> = ({
   <section className="space-y-6">
     <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
       <div>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--accent-text)]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-(--accent-text)">
           Featured hackathons
         </p>
-        <h2 className="mt-2 text-2xl font-geist font-black text-[var(--text-heading)] lg:text-3xl">
+        <h2 className="mt-2 text-2xl font-geist font-black text-(--text-heading) lg:text-3xl">
           Sponsored and verified by Buildora
         </h2>
       </div>
-      <Button variant="outline" className="!rounded-lg !px-4 !py-2 !text-xs">
+      <Button variant="outline" className="rounded-lg! px-4! py-2! text-xs!">
         View all featured
       </Button>
     </div>
@@ -31,7 +31,7 @@ const HackathonsFeaturedSection: React.FC<HackathonsFeaturedSectionProps> = ({
           />
         ))
       ) : (
-        <div className="xl:col-span-2 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-6 py-8 text-sm text-[var(--text-secondary)]">
+        <div className="xl:col-span-2 rounded-2xl border border-(--border-default) bg-(--bg-surface) px-6 py-8 text-sm text-(--text-secondary)">
           No featured hackathons available yet.
         </div>
       )}

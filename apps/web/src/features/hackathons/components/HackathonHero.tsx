@@ -26,24 +26,24 @@ const HackathonHero: React.FC<HackathonHeroProps> = ({
             <img
               src={hackathon.logoUrl}
               alt={hackathon.title}
-              className="w-14 h-14 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] p-2"
+              className="w-14 h-14 rounded-2xl border border-(--border-default) bg-(--bg-input) p-2"
             />
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-(--text-tertiary)">
                 {hackathon.organizer}
               </p>
-              <h1 className="text-4xl lg:text-6xl font-geist font-black text-[var(--text-heading)] tracking-tight leading-[1.02]">
+              <h1 className="text-4xl lg:text-6xl font-geist font-black text-(--text-heading) tracking-tight leading-[1.02]">
                 {hackathon.title}
               </h1>
             </div>
           </div>
-          <p className="text-lg text-[var(--text-secondary)] max-w-2xl">
+          <p className="text-lg text-(--text-secondary) max-w-2xl">
             {detail.heroSubtitle}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <Button
-            className="!px-8 !py-4 !rounded-2xl"
+            className="px-8! py-4! rounded-2xl!"
             onClick={() => {
               if (isOnline) {
                 if (onNavigate) {

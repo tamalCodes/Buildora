@@ -76,7 +76,7 @@ const ApplicationSidebar: React.FC<ApplicationSidebarProps> = ({
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 leading-tight max-w-[70px] mx-auto">
+              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 leading-tight max-w-17.5 mx-auto">
                 <span className="block">{labelFirst}</span>
                 <span className="block">{labelSecond || labelFirst}</span>
               </p>
@@ -124,7 +124,7 @@ const ApplicationSidebar: React.FC<ApplicationSidebarProps> = ({
         </p>
       </div>
 
-      <Button className="!px-6 !py-3 !rounded-xl w-full">
+      <Button className="px-6! py-3! rounded-xl! w-full">
         Submit application
       </Button>
     </aside>

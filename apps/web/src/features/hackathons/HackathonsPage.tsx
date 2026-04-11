@@ -20,15 +20,15 @@ const HackathonsPage: React.FC<HackathonsPageProps> = ({ user, onSignOut }) => {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[var(--bg-page)] pb-24 font-inter text-[var(--text-primary)]">
+    <div className="min-h-screen overflow-x-hidden bg-(--bg-page) pb-24 font-inter text-(--text-primary)">
       <GlobalNav user={user} onSignOut={onSignOut} />
       <HackathonsPageBackground />
 
-      <main className="mx-auto max-w-[1220px] space-y-16 px-5 pt-24 lg:px-8 lg:pt-28">
+      <main className="mx-auto max-w-305 space-y-16 px-5 pt-24 lg:px-8 lg:pt-28">
         <HackathonsHeroSection />
 
         {isLoading ? (
-          <section className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-6 py-8 text-sm text-[var(--text-secondary)]">
+          <section className="rounded-2xl border border-(--border-default) bg-(--bg-surface) px-6 py-8 text-sm text-(--text-secondary)">
             Loading hackathons...
           </section>
         ) : (

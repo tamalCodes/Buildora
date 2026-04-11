@@ -4,7 +4,7 @@ export const applicationClasses = {
   input:
     "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40",
   textarea:
-    "w-full min-h-[140px] resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40",
+    "w-full min-h-35 resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40",
   label:
     "text-[11px] font-black uppercase tracking-[0.3em] text-slate-500",
   sectionSummary:

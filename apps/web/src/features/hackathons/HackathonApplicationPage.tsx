@@ -53,7 +53,7 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
     return (
       <div className={applicationTheme.page}>
         <GlobalNav user={user} onSignOut={onSignOut} />
-        <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
+        <main className="max-w-275 mx-auto px-6 lg:px-12 pt-32 pb-24">
           <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-emerald-200">
               Loading
@@ -71,7 +71,7 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
     return (
       <div className={applicationTheme.page}>
         <GlobalNav user={user} onSignOut={onSignOut} />
-        <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24">
+        <main className="max-w-275 mx-auto px-6 lg:px-12 pt-32 pb-24">
           <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center space-y-5">
             <p className="text-xs font-black uppercase tracking-[0.3em] text-emerald-200">
               Hackathon not found
@@ -84,7 +84,7 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
             </p>
             <div className="flex justify-center">
               <Button
-                className="!px-6 !py-3 !rounded-xl"
+                className="px-6! py-3! rounded-xl!"
                 onClick={() => navigate("/hackathons")}
               >
                 Back to Hackathons
@@ -100,7 +100,7 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
     return (
       <div className={applicationTheme.page}>
         <GlobalNav user={user} onSignOut={onSignOut} />
-        <main className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-8">
+        <main className="max-w-275 mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-8">
           <button
             className="text-xs font-black uppercase tracking-widest text-emerald-200"
             onClick={() => navigate(`${basePath}/${hackathon.id}/overview`)}
@@ -120,7 +120,7 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
             </p>
             <div className="flex justify-center">
               <Button
-                className="!px-6 !py-3 !rounded-xl"
+                className="px-6! py-3! rounded-xl!"
                 onClick={() => navigate(`${basePath}/${hackathon.id}/overview`)}
               >
                 View hackathon details
@@ -136,12 +136,12 @@ const HackathonApplicationPage: React.FC<HackathonApplicationPageProps> = ({
     <div className={applicationTheme.page}>
       <GlobalNav user={user} onSignOut={onSignOut} />
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-40 left-0 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]"></div>
-        <div className="absolute top-1/3 right-0 h-[420px] w-[420px] rounded-full bg-amber-500/10 blur-[160px]"></div>
-        <div className="absolute bottom-0 left-1/3 h-[480px] w-[480px] rounded-full bg-cyan-500/10 blur-[160px]"></div>
+        <div className="absolute -top-40 left-0 h-130 w-130 rounded-full bg-emerald-500/10 blur-[140px]"></div>
+        <div className="absolute top-1/3 right-0 h-105 w-105 rounded-full bg-amber-500/10 blur-[160px]"></div>
+        <div className="absolute bottom-0 left-1/3 h-120 w-120 rounded-full bg-cyan-500/10 blur-[160px]"></div>
       </div>
 
-      <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-24 space-y-12">
+      <main className="max-w-350 mx-auto px-6 lg:px-12 pt-28 pb-24 space-y-12">
         <div className="flex items-center justify-between">
           <button
             className="text-xs font-black uppercase tracking-widest text-emerald-200"

@@ -18,30 +18,30 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
   const prizePool = getPrizePoolDisplay(detail.prizePool);
 
   return (
-    <aside className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-6 space-y-6 sticky top-28">
+    <aside className="rounded-4xl border border-(--border-default) bg-(--bg-surface) p-6 space-y-6 sticky top-28">
       <div className="flex justify-end">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-border)] bg-[var(--accent-bg-soft)] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--accent-text)]">
+        <div className="inline-flex items-center gap-2 rounded-full border border-(--accent-border) bg-(--accent-bg-soft) px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.25em] text-(--accent-text)">
           <span className="relative inline-flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--accent-text)] opacity-45 motion-safe:animate-ping"></span>
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent-text)]"></span>
+            <span className="absolute inline-flex h-full w-full rounded-full bg-(--accent-text) opacity-45 motion-safe:animate-ping"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-(--accent-text)"></span>
           </span>
           {detail.statusLabel}
         </div>
       </div>
 
       <div className="space-y-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-(--accent-text)">
           Applications
         </p>
-        <h3 className="text-xl font-geist font-black text-[var(--text-heading)]">
+        <h3 className="text-xl font-geist font-black text-(--text-heading)">
           Apply to {hackathon.title}
         </h3>
-        <p className="text-sm text-[var(--text-secondary)]">
+        <p className="text-sm text-(--text-secondary)">
           Deadline: {detail.applicationDeadline}
         </p>
         <div className="flex gap-3">
           <Button
-            className="!px-5 !py-3 !rounded-xl !text-sm"
+            className="px-5! py-3! rounded-xl! text-sm!"
             onClick={() => {
               if (isOnline) {
                 navigate(`${basePath}/${hackathon.id}/application`);
@@ -53,7 +53,7 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
           </Button>
           <Button
             variant="outline"
-            className="!px-5 !py-3 !rounded-xl !text-sm"
+            className="px-5! py-3! rounded-xl! text-sm!"
           >
             Share
           </Button>
@@ -61,21 +61,21 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
       </div>
 
       {activeTab !== "prizes" && (
-        <div className="rounded-2xl border border-[var(--accent-border)] bg-gradient-to-br from-indigo-500/20 via-transparent to-cyan-500/20 p-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
+        <div className="rounded-2xl border border-(--accent-border) bg-gradient-to-br from-indigo-500/20 via-transparent to-cyan-500/20 p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-(--accent-text)">
             Prize pool
           </p>
           <div className="mt-2 flex items-end gap-2">
-            <p className="text-3xl leading-none font-geist font-black tracking-tight text-[var(--text-heading)]">
+            <p className="text-3xl leading-none font-geist font-black tracking-tight text-(--text-heading)">
               {prizePool.amount}
             </p>
             {prizePool.label ? (
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[var(--text-secondary)] pb-0.5">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-(--text-secondary) pb-0.5">
                 {prizePool.label}
               </p>
             ) : null}
           </div>
-          <p className="text-xs text-[var(--text-secondary)] mt-2">
+          <p className="text-xs text-(--text-secondary) mt-2">
             Paid across multiple tracks and sponsor awards.
           </p>
         </div>
@@ -90,17 +90,17 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
         ].map((item) => (
           <div
             key={item.label}
-            className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-3"
+            className="rounded-xl border border-(--border-default) bg-(--bg-input) px-3 py-3"
           >
-            <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)]">
+            <p className="text-[10px] uppercase tracking-widest text-(--text-tertiary)">
               {item.label}
             </p>
-            <p className="text-[var(--text-primary)] mt-1">{item.value}</p>
+            <p className="text-(--text-primary) mt-1">{item.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-4 text-xs font-bold text-[var(--text-secondary)]">
+      <div className="grid grid-cols-2 gap-4 text-xs font-bold text-(--text-secondary)">
         {[
           { label: "Status", value: hackathon.status },
           { label: "Mode", value: detail.mode },
@@ -109,23 +109,23 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
         ].map((item) => (
           <div
             key={item.label}
-            className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-3"
+            className="rounded-xl border border-(--border-default) bg-(--bg-input) px-3 py-3"
           >
-            <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)]">
+            <p className="text-[10px] uppercase tracking-widest text-(--text-tertiary)">
               {item.label}
             </p>
-            <p className="text-[var(--text-primary)] mt-1">{item.value}</p>
+            <p className="text-(--text-primary) mt-1">{item.value}</p>
           </div>
         ))}
       </div>
 
       <div className="space-y-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-tertiary)]">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-(--text-tertiary)">
           Contact
         </p>
         <a
           href={`mailto:${detail.contactEmail}`}
-          className="text-sm font-bold text-[var(--accent-text)] hover:text-[var(--accent-text-soft)]"
+          className="text-sm font-bold text-(--accent-text) hover:text-(--accent-text-soft)"
         >
           {detail.contactEmail}
         </a>
@@ -134,7 +134,7 @@ const HackathonInfoCard: React.FC<HackathonInfoCardProps> = ({
             <a
               key={social.label}
               href={social.href}
-              className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] bg-[var(--bg-input)] border border-[var(--border-default)] px-3 py-1.5 rounded-full hover:text-[var(--text-heading)]"
+              className="text-[10px] font-black uppercase tracking-widest text-(--text-secondary) bg-(--bg-input) border border-(--border-default) px-3 py-1.5 rounded-full hover:text-(--text-heading)"
               rel="noreferrer"
               target="_blank"
             >

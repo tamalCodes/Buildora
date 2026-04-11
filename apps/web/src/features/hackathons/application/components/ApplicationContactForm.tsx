@@ -22,7 +22,7 @@ const ApplicationContactForm: React.FC<ApplicationContactFormProps> = ({
         ))}
       </div>
       <div className="flex justify-end">
-        <Button className="!px-6 !py-2.5 !rounded-xl">Save</Button>
+        <Button className="px-6! py-2.5! rounded-xl!">Save</Button>
       </div>
     </div>
   );
