@@ -3,7 +3,7 @@ import type { ProjectTeamProps } from "@/features/projects/constants/interfaces"
 
 const ProjectTeam: React.FC<ProjectTeamProps> = ({ team }) => {
   return (
-    <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6">
+    <section className="rounded-4xl border border-white/10 bg-white/5 p-6">
       <div className="flex items-center justify-between">
         <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
           Core team

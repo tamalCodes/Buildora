@@ -10,7 +10,7 @@ const toneStyles: Record<ProjectLink["tone"], string> = {
 
 const ProjectLinks: React.FC<ProjectLinksProps> = ({ links }) => {
   return (
-    <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 space-y-4">
+    <section className="rounded-4xl border border-white/10 bg-white/5 p-6 space-y-4">
       <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
         Links
       </p>

@@ -10,7 +10,7 @@ const ProjectProfile: React.FC<ProjectProfileProps> = ({ details }) => {
   ];
 
   return (
-    <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6">
+    <section className="rounded-4xl border border-white/10 bg-white/5 p-6">
       <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
         Project details
       </p>

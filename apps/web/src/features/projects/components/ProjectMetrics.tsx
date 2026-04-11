@@ -47,7 +47,7 @@ const ProjectMetrics: React.FC<ProjectMetricsProps> = ({
         {highlights.map((item) => (
           <div
             key={item.title}
-            className="rounded-[2rem] border border-white/10 bg-white/5 p-6"
+            className="rounded-4xl border border-white/10 bg-white/5 p-6"
           >
             <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-300">
               {item.metric}

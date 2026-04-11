@@ -43,12 +43,12 @@ const ProjectHero: React.FC<ProjectHeroProps> = ({ project, details }) => {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button className="!px-6 !py-3 !rounded-xl !text-sm">
+              <Button className="px-6! py-3! rounded-xl! text-sm!">
                 Follow project
               </Button>
               <Button
                 variant="outline"
-                className="!px-6 !py-3 !rounded-xl !text-sm"
+                className="px-6! py-3! rounded-xl! text-sm!"
               >
                 Request demo
               </Button>
@@ -60,7 +60,7 @@ const ProjectHero: React.FC<ProjectHeroProps> = ({ project, details }) => {
           </div>
 
           <div className="lg:col-span-5 space-y-6">
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6">
+            <div className="rounded-4xl border border-white/10 bg-white/5 p-6">
               <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">
                 Project pulse
               </p>
