@@ -30,22 +30,22 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
   rank,
   activeSort,
 }) => (
-  <div className="flex flex-col lg:flex-row lg:items-center gap-4 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 sm:px-5 py-4">
+  <div className="flex flex-col lg:flex-row lg:items-center gap-4 rounded-2xl border border-(--border-default) bg-(--bg-surface) px-4 sm:px-5 py-4">
     <div className="flex items-center gap-4 min-w-0">
-      <div className="w-10 h-10 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] text-[var(--text-heading)] flex items-center justify-center text-sm font-black shrink-0">
+      <div className="w-10 h-10 rounded-xl border border-(--border-default) bg-(--bg-input) text-(--text-heading) flex items-center justify-center text-sm font-black shrink-0">
         #{rank}
       </div>
       <div className="flex items-center gap-3 min-w-0">
         <img
           src={builder.avatarUrl}
           alt={builder.name}
-          className="w-11 h-11 rounded-xl border border-[var(--border-default)] object-cover shrink-0"
+          className="w-11 h-11 rounded-xl border border-(--border-default) object-cover shrink-0"
         />
         <div className="min-w-0">
-          <p className="text-sm font-bold text-[var(--text-heading)] truncate">
+          <p className="text-sm font-bold text-(--text-heading) truncate">
             {builder.name}
           </p>
-          <p className="text-xs text-[var(--text-tertiary)]">{builder.handle}</p>
+          <p className="text-xs text-(--text-tertiary)">{builder.handle}</p>
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
     <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 lg:ml-auto">
       <span
         aria-label={`${builder.stats[activeSort]} ${METRIC_LABELS[activeSort]}`}
-        className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-default)] bg-[var(--bg-elevated)] px-3 py-2 text-xs font-semibold text-[var(--text-heading)]"
+        className="inline-flex w-fit items-center gap-2 rounded-full border border-(--border-default) bg-(--bg-elevated) px-3 py-2 text-xs font-semibold text-(--text-heading)"
       >
         <span
           className="h-1.5 w-1.5 rounded-full"
@@ -64,7 +64,7 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
           {METRIC_LABELS[activeSort]}
         </span>
       </span>
-      <p className="text-xs text-[var(--text-tertiary)]">
+      <p className="text-xs text-(--text-tertiary)">
         {SECONDARY_KEYS[activeSort].map((metric, index) => (
           <React.Fragment key={metric}>
             {index > 0 ? " · " : null}
@@ -76,7 +76,7 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
 
     <Link
       to={`/builders/${builder.id}`}
-      className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] hover:text-[var(--accent-text-soft)] lg:ml-6"
+      className="text-xs font-black uppercase tracking-widest text-(--accent-text) hover:text-(--accent-text-soft) lg:ml-6"
     >
       View profile
     </Link>
@@ -100,11 +100,11 @@ const BuildersLeaderboard: React.FC<BuildersLeaderboardProps> = ({
 
   return (
     <section className="space-y-4 scroll-mt-24" id="builders-leaderboard">
-      <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 sm:px-5 py-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
+      <div className="rounded-2xl border border-(--border-default) bg-(--bg-surface) px-4 sm:px-5 py-3">
+        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-(--accent-text)">
           Trending now
         </p>
-        <p className="mt-1 text-sm font-semibold text-[var(--text-secondary)]">
+        <p className="mt-1 text-sm font-semibold text-(--text-secondary)">
           {activeSortOption.label}
         </p>
       </div>

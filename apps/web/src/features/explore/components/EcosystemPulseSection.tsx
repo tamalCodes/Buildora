@@ -3,15 +3,15 @@ import { PULSE_STATS } from "@/features/explore/constants/constants";
 
 const EcosystemPulseSection: React.FC = () => (
   <section
-    className="rounded-[2.5rem] border border-[var(--border-default)] bg-[var(--bg-input)] px-8 py-6 scroll-mt-24"
+    className="rounded-[2.5rem] border border-(--border-default) bg-(--bg-input) px-8 py-6 scroll-mt-24"
     id="explore-pulse"
   >
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
       <div>
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-(--accent-text)">
           Ecosystem pulse
         </p>
-        <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-xl">
+        <p className="text-sm text-(--text-secondary) mt-2 max-w-xl">
           A quick snapshot of activity across the Buildora network.
         </p>
       </div>
@@ -19,12 +19,12 @@ const EcosystemPulseSection: React.FC = () => (
         {PULSE_STATS.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-3"
+            className="rounded-2xl border border-(--border-default) bg-(--bg-input) px-4 py-3"
           >
-            <p className="text-2xl font-geist font-black text-[var(--text-heading)]">
+            <p className="text-2xl font-geist font-black text-(--text-heading)">
               {stat.value}
             </p>
-            <p className="text-[10px] uppercase tracking-widest text-[var(--text-tertiary)] font-bold">
+            <p className="text-[10px] uppercase tracking-widest text-(--text-tertiary) font-bold">
               {stat.label}
             </p>
           </div>

@@ -7,21 +7,21 @@ const ExploreShowcaseSection: React.FC<ExploreShowcaseSectionProps> = ({
   onCta,
 }) => (
   <section
-    className="rounded-[2.5rem] border border-[var(--accent-border)] bg-gradient-to-r from-[var(--accent-bg-soft)] via-transparent to-cyan-500/10 p-10 scroll-mt-24"
+    className="rounded-[2.5rem] border border-(--accent-border) bg-gradient-to-r from-(--accent-bg-soft) via-transparent to-cyan-500/10 p-10 scroll-mt-24"
     id="explore-showcase"
   >
     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
       <div>
       
-        <h3 className="text-3xl font-geist font-black text-[var(--text-heading)] mt-3">
+        <h3 className="text-3xl font-geist font-black text-(--text-heading) mt-3">
           Tell the community what you are building.
         </h3>
-        <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-2xl">
+        <p className="text-sm text-(--text-secondary) mt-2 max-w-2xl">
           Share your project, highlight your team, and attract collaborators in
           minutes.
         </p>
         {showcaseIntent ? (
-          <p className="text-xs text-[var(--text-secondary)] mt-4">
+          <p className="text-xs text-(--text-secondary) mt-4">
             Ready to {showcaseIntent === "create" ? "create" : "explore"}? We
             will open the next step here.
           </p>
@@ -29,7 +29,7 @@ const ExploreShowcaseSection: React.FC<ExploreShowcaseSectionProps> = ({
       </div>
       <div className="flex items-center gap-3">
         <Button
-          className="!px-6 !py-3 !rounded-xl"
+          className="px-6! py-3! rounded-xl!"
           onClick={() =>
             onCta({
               type: "showcase",
@@ -41,7 +41,7 @@ const ExploreShowcaseSection: React.FC<ExploreShowcaseSectionProps> = ({
         </Button>
         <Button
           variant="outline"
-          className="!px-6 !py-3 !rounded-xl"
+          className="px-6! py-3! rounded-xl!"
           onClick={() =>
             onCta({
               type: "showcase",

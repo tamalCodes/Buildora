@@ -23,38 +23,38 @@ const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
         <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6">
           <div className="relative shrink-0">
             <div className="absolute -inset-2 rounded-[2.1rem] bg-indigo-500/25 blur-xl"></div>
-            <div className="absolute -inset-0.5 rounded-[2rem] border border-indigo-400/30"></div>
+            <div className="absolute -inset-0.5 rounded-4xl border border-indigo-400/30"></div>
             <img
               src={profile.avatarUrl}
               alt={profile.name}
-              className="relative w-28 h-28 rounded-[2rem] border border-[var(--border-default)] object-cover"
+              className="relative w-28 h-28 rounded-4xl border border-(--border-default) object-cover"
             />
           </div>
 
           <div className="space-y-3">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent-text)]">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-(--accent-text)">
               Builder profile
             </p>
             <div>
-              <h1 className="text-4xl lg:text-5xl font-geist font-black text-[var(--text-heading)] tracking-tight">
+              <h1 className="text-4xl lg:text-5xl font-geist font-black text-(--text-heading) tracking-tight">
                 {profile.name}
               </h1>
-              <p className="mt-1 text-sm text-[var(--text-tertiary)]">
+              <p className="mt-1 text-sm text-(--text-tertiary)">
                 {profile.handle}
               </p>
-              <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-[var(--text-secondary)]">
+              <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-(--text-secondary)">
                 <MapPin size={14} />
                 {profile.location}
               </p>
             </div>
-            <p className="text-sm font-semibold text-[var(--text-primary)]">
+            <p className="text-sm font-semibold text-(--text-primary)">
               {profile.role}
             </p>
           </div>
         </div>
 
         {profile.headline ? (
-          <p className="max-w-3xl text-base text-[var(--text-secondary)] leading-relaxed">
+          <p className="max-w-3xl text-base text-(--text-secondary) leading-relaxed">
             {profile.headline}
           </p>
         ) : null}
@@ -63,7 +63,7 @@ const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
           {rolePills.map((item) => (
             <span
               key={item}
-              className="inline-flex items-center rounded-full border border-[var(--border-default)] bg-[var(--bg-input)] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-[var(--text-secondary)]"
+              className="inline-flex items-center rounded-full border border-(--border-default) bg-(--bg-input) px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-(--text-secondary)"
             >
               {item}
             </span>
@@ -74,7 +74,7 @@ const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
           {profile.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--accent-text)] bg-[var(--accent-bg-soft)] border border-[var(--accent-border)] px-3 py-1.5 rounded-full"
+              className="text-[10px] font-black uppercase tracking-[0.18em] text-(--accent-text) bg-(--accent-bg-soft) border border-(--accent-border) px-3 py-1.5 rounded-full"
             >
               {tag}
             </span>
@@ -83,10 +83,10 @@ const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
       </div>
 
       <div className="lg:col-span-4 lg:pl-4">
-        <div className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--bg-surface)] p-5 sm:p-6 space-y-5">
+        <div className="rounded-4xl border border-(--border-default) bg-(--bg-surface) p-5 sm:p-6 space-y-5">
           <div className="flex flex-wrap items-center gap-3">
-            <Button className="!px-5 !py-2.5 !rounded-xl">Follow</Button>
-            <Button variant="secondary" className="!px-5 !py-2.5 !rounded-xl">
+            <Button className="px-5! py-2.5! rounded-xl!">Follow</Button>
+            <Button variant="secondary" className="px-5! py-2.5! rounded-xl!">
               Message
             </Button>
           </div>
@@ -100,7 +100,7 @@ const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="h-10 w-10 rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] text-[var(--text-secondary)] flex items-center justify-center hover:border-[var(--accent-border)] hover:text-[var(--text-heading)] transition"
+                  className="h-10 w-10 rounded-xl border border-(--border-default) bg-(--bg-input) text-(--text-secondary) flex items-center justify-center hover:border-(--accent-border) hover:text-(--text-heading) transition"
                   aria-label={link.label}
                 >
                   <SocialIcon
@@ -111,12 +111,12 @@ const BuilderProfileHero: React.FC<BuilderProfileHeroProps> = ({ profile }) => {
               ))}
           </div>
 
-          <div className="rounded-xl border border-[var(--border-default)] bg-[var(--bg-input)] px-4 py-3 space-y-2">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+          <div className="rounded-xl border border-(--border-default) bg-(--bg-input) px-4 py-3 space-y-2">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-(--text-tertiary)">
               Best known for
             </p>
             {profile.highlights.slice(0, 2).map((item) => (
-              <p key={item} className="text-sm text-[var(--text-secondary)]">
+              <p key={item} className="text-sm text-(--text-secondary)">
                 {item}
               </p>
             ))}
