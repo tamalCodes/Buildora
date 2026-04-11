@@ -8,7 +8,7 @@
 - **Database**: Supabase (PostgreSQL + Auth)
 - **Validation**: Zod 4 (shared schemas across frontend & backend)
 - **Data Fetching**: TanStack React Query 5
-- **Styling**: Tailwind CSS (CDN) with glassmorphism/neon design tokens
+- **Styling**: Tailwind CSS v4 (local via Vite plugin) with glassmorphism/neon design tokens
 - **Testing**: Vitest + Testing Library
 - **Icons**: Lucide React, React Icons
 
@@ -104,6 +104,16 @@ packages/
 ## Important Notes
 
 - No ESLint/Prettier config — follows IDE defaults
-- Tailwind loaded via CDN (not bundled)
+- Tailwind is bundled locally via `@tailwindcss/vite` + `@import "tailwindcss"` in app CSS
+- A `tailwind.config.*` file is optional in Tailwind v4; default setup is CSS-first
 - No Docker or CI/CD pipelines yet
 - Single developer project — only one contributor
+
+## Tailwind Migration Memory (2026-04-12)
+
+- Goal: move from CDN Tailwind to local Tailwind v4 for production-safe builds and IntelliSense hover/tooltips.
+- Steps:
+  1. Install `tailwindcss` and `@tailwindcss/vite` in `apps/web`.
+  2. Enable `tailwindcss()` plugin in `apps/web/vite.config.ts`.
+  3. Add `apps/web/src/styles.css` with `@import "tailwindcss";` and import it in `apps/web/src/index.tsx`.
+  4. Remove CDN script from `apps/web/index.html` and keep existing inline token/theme CSS.

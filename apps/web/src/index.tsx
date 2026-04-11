@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import { ThemeProvider } from './shared/components/ThemeProvider';
+import './styles.css';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
