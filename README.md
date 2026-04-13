@@ -19,6 +19,11 @@ Copy the example files and fill in your Supabase values:
 - `apps/api/.env.example` -> `apps/api/.env`
 - `apps/web/.env.example` -> `apps/web/.env`
 
+Frontend maintenance banner toggle:
+
+- `VITE_MAINTENANCE_MODE=true` shows the maintenance banner.
+- Set `VITE_MAINTENANCE_MODE=false` to hide it.
+
 ## Run locally
 
 Install dependencies once at the repo root:

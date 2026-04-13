@@ -25,7 +25,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ user, onSignOut }) => {
         <div className="absolute bottom-0 left-1/3 h-120 w-120 rounded-full bg-rose-500 blur-[160px]"></div>
       </div>
 
-      <main className="max-w-350 mx-auto px-6 lg:px-12 pt-32 pb-24 space-y-24">
+      <main className="mx-auto max-w-305 space-y-16 px-3 pb-20 pt-24 sm:space-y-24 sm:px-5 sm:pb-24 lg:px-8 lg:pt-28">
         <ExploreHeroSection onCta={handleCta} />
         <FeaturedProjectsSection projects={FEATURED_PROJECTS} onCta={handleCta} />
         <EcosystemPulseSection />

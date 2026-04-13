@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@keyframes cta-arrow-idle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+.cta-arrow-idle {
+  animation: cta-arrow-idle 1.55s ease-in-out infinite;
+}
+
+.group:hover .cta-arrow-idle,
+.group:active .cta-arrow-idle {
+  animation-play-state: paused;
+}

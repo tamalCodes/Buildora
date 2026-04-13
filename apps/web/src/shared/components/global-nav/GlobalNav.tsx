@@ -70,7 +70,7 @@ const GlobalNav: React.FC<GlobalNavProps> = ({ user, onSignOut }) => {
   }, [isUserMenuOpen]);
 
   return (
-    <nav className="fixed left-0 right-0 top-12 z-50 h-16 border-b border-(--border-subtle) bg-(--nav-bg) backdrop-blur-xl flex items-center px-6 lg:px-10 justify-between">
+    <nav className="fixed left-0 right-0 top-[var(--maintenance-banner-offset)] z-50 h-16 border-b border-(--border-subtle) bg-(--nav-bg) backdrop-blur-xl flex items-center px-6 lg:px-10 justify-between">
       <div className="flex items-center gap-8">
         <Link
           className="flex items-center"

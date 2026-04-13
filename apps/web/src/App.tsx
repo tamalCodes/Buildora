@@ -1,6 +1,3 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { AuthService } from "./services/authService";
 import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
 import Footer from "@shared/components/Footer";
@@ -8,37 +5,57 @@ import MaintenanceBanner from "@shared/components/MaintenanceBanner";
 import ScrollToTop from "@shared/components/ScrollToTop";
 import GlobalSearchModal from "@shared/components/search/GlobalSearchModal";
 import { SearchOverlayProvider } from "@shared/components/search/SearchOverlayContext";
+import React, { Suspense, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { createGuestRoutes } from "./routes/guestRoutes";
 import { createPrivateRoutes } from "./routes/privateRoutes";
 import { createPublicRoutes } from "./routes/publicRoutes";
 import RouteErrorBoundary from "./routes/RouteErrorBoundary";
-import { RouteErrorFallback, RouteLoadingFallback } from "./routes/RouteFallbacks";
+import {
+  RouteErrorFallback,
+  RouteLoadingFallback,
+} from "./routes/RouteFallbacks";
+import { AuthService } from "./services/authService";
 
 type AppRoutesProps = {
   routes: Array<{ path: string; element: React.ReactNode }>;
   isAuthenticated: boolean;
 };
 
+const MAINTENANCE_MODE_ENABLED =
+  import.meta.env.VITE_MAINTENANCE_MODE !== "false";
+
 const AppRoutes: React.FC<AppRoutesProps> = ({ routes, isAuthenticated }) => {
   const location = useLocation();
   const hideFooterForGuests = new Set(["/", "/explore", "/auth", "/login"]);
   const shouldHideFooter =
     !isAuthenticated && hideFooterForGuests.has(location.pathname);
+  const maintenanceBannerOffset = MAINTENANCE_MODE_ENABLED ? "3rem" : "0px";
 
   return (
-    <>
-      <MaintenanceBanner />
+    <div
+      style={
+        {
+          "--maintenance-banner-offset": maintenanceBannerOffset,
+        } as React.CSSProperties
+      }
+    >
+      {MAINTENANCE_MODE_ENABLED && <MaintenanceBanner />}
       <Suspense fallback={<RouteLoadingFallback />}>
         <RouteErrorBoundary fallback={<RouteErrorFallback />}>
           <Routes>
             {routes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.element} />
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
             ))}
           </Routes>
         </RouteErrorBoundary>
       </Suspense>
       {!shouldHideFooter && <Footer />}
-    </>
+    </div>
   );
 };
 
