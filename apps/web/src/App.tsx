@@ -1,7 +1,6 @@
 import { User } from "@buildora/shared";
 import { CustomToastProvider } from "@shared/components/CustomToast";
 import Footer from "@shared/components/Footer";
-import MaintenanceBanner from "@shared/components/MaintenanceBanner";
 import ScrollToTop from "@shared/components/ScrollToTop";
 import GlobalSearchModal from "@shared/components/search/GlobalSearchModal";
 import { SearchOverlayProvider } from "@shared/components/search/SearchOverlayContext";
@@ -22,25 +21,20 @@ type AppRoutesProps = {
   isAuthenticated: boolean;
 };
 
-const MAINTENANCE_MODE_ENABLED =
-  import.meta.env.VITE_MAINTENANCE_MODE !== "false";
-
 const AppRoutes: React.FC<AppRoutesProps> = ({ routes, isAuthenticated }) => {
   const location = useLocation();
   const hideFooterForGuests = new Set(["/", "/explore", "/auth", "/login"]);
   const shouldHideFooter =
     !isAuthenticated && hideFooterForGuests.has(location.pathname);
-  const maintenanceBannerOffset = MAINTENANCE_MODE_ENABLED ? "3rem" : "0px";
 
   return (
     <div
       style={
         {
-          "--maintenance-banner-offset": maintenanceBannerOffset,
+          "--maintenance-banner-offset": "0px",
         } as React.CSSProperties
       }
     >
-      {MAINTENANCE_MODE_ENABLED && <MaintenanceBanner />}
       <Suspense fallback={<RouteLoadingFallback />}>
         <RouteErrorBoundary fallback={<RouteErrorFallback />}>
           <Routes>

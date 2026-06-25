@@ -169,13 +169,13 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
               <Button
                 variant="secondary"
                 className="w-full h-13 text-base"
                 icon={
                   <svg
-                    className="w-5 h-5 text-indigo-400"
+                    className="w-5 h-5 text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -183,10 +183,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                   </svg>
                 }
               >
-                Continue with GitHub
+                GitHub
               </Button>
               <Button
-                variant="outline"
+                variant="secondary"
                 className="w-full h-13 text-base"
                 icon={
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -209,7 +209,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                   </svg>
                 }
               >
-                Continue with Google
+                Google
               </Button>
             </div>
 
