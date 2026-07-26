@@ -159,12 +159,21 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
       <div className="animate-in fade-in duration-700">
         {step === AuthStep.IDENTIFY ? (
           <div className="space-y-6 sm:space-y-8">
-            <div className="space-y-2">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-400">
+                  Secure sign in
+                </span>
+              </div>
               <h1 className="text-3xl sm:text-4xl font-geist font-black tracking-tight text-(--text-heading)">
-                <span className="sm:hidden">Sign in</span>
+                <span className="sm:hidden">Welcome back</span>
                 <span className="hidden sm:inline">Welcome back</span>
               </h1>
-              <p className="hidden sm:block text-base text-(--text-secondary)">
+              <p className="text-base text-(--text-secondary)">
                 Sign in to your account
               </p>
             </div>
@@ -175,7 +184,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                 className="w-full h-13 text-base"
                 icon={
                   <svg
-                    className="w-5 h-5 text-white"
+                    className="w-5 h-5 text-(--text-primary)"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -219,7 +228,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                   <div className="w-full border-t border-(--border-subtle)"></div>
                 </div>
                 <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-[0.2em] text-(--text-tertiary)">
-                  <span className="bg-(--bg-page) px-3">or</span>
+                  <span className="bg-white dark:bg-(--bg-page) px-3">or</span>
                 </div>
               </div>
               <Input
@@ -244,6 +253,24 @@ const AuthForm: React.FC<AuthFormProps> = ({ onLoginSuccess }) => {
                 Continue
               </Button>
             </form>
+
+            <p className="text-center text-xs text-(--text-tertiary)">
+              By continuing you agree to our{" "}
+              <a
+                href="/terms"
+                className="font-semibold text-indigo-500 hover:text-indigo-400"
+              >
+                Terms
+              </a>{" "}
+              &amp;{" "}
+              <a
+                href="/privacy"
+                className="font-semibold text-indigo-500 hover:text-indigo-400"
+              >
+                Privacy
+              </a>
+              .
+            </p>
           </div>
         ) : (
           <form
